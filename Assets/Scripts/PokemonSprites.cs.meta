@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 1c88b44369835264587b5db3845685e6
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - bulbasaurSprite: {fileID: 2800000, guid: 591c8ec1ff5f4d84d9d4a660e54a2c18, type: 3}
+  - ivysaurSprite: {fileID: 2800000, guid: 540d7e45a3cd2f04abf57de718f4f677, type: 3}
+  - venusaurSprite: {fileID: 2800000, guid: 49651cbbeb2128b478c3a73aec4e410f, type: 3}
+  - charmanderSprite: {fileID: 2800000, guid: c5ca5c9eed825ce48a2b1200686771e1, type: 3}
+  - charmeleonSprite: {fileID: 2800000, guid: 6c4dba57117755349ba1fbd2b08e84d8, type: 3}
+  - charizardSprite: {fileID: 2800000, guid: 9ebdc968edca7c04c9a58686f0630565, type: 3}
+  - squirtleSprite: {fileID: 2800000, guid: a088d94e1c2ed7941ad0f6cb3459f725, type: 3}
+  - wartortleSprite: {fileID: 2800000, guid: 025d41f563ce7b64bbcd93932c98f790, type: 3}
+  - blastoiseSprite: {fileID: 2800000, guid: 9b8225ad2f654d04c97286d1023151df, type: 3}
+  - pikachuSprite: {fileID: 2800000, guid: 63473f0aac153c94e82550d2911e3b61, type: 3}
+  - raichuSprite: {fileID: 2800000, guid: 77fe8d3364eb52d4297c39a8b9d93391, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 

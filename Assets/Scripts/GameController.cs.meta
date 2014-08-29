@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 5ca6a4310207bb24480523dfff6f53d2
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - gui: {instanceID: 0}
+  - cameraController: {instanceID: 0}
+  - playerPrefab: {fileID: 100000, guid: 58936db90fd9da445bdb80657f02efe5, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
