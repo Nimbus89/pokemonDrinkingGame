@@ -4,8 +4,6 @@ using System.Collections;
 public class ZubatScript : BasicModalTileController
 {
 
-	private int roll;
-
 	override protected string getModalMessage(){
 		return "Zubats, they're everywhere! Take a drink!";
 	}

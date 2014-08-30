@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour {
 	public CallbackDelegate callback;
 	
 	private DicerollController roller;
-	private int currentRoll;
 	private int badges = 0;
 	
 	
@@ -121,6 +120,10 @@ public class PlayerController : MonoBehaviour {
             currentTileNumber += direction;
             yield return StartCoroutine(animatedMoveToPos(gameController.getFreeSpace(currentTileNumber)));
             yield return StartCoroutine(Wait(moveWaitTime));
+            if (gameController.getCurrentTile() is ImmediateMessageTileController) {
+                ImmediateMessageTileController tc = gameController.getCurrentTile() as ImmediateMessageTileController;
+                yield return tc.showImmediatedMessage();
+            }
         }
         currentTileNumber += direction;
         yield return StartCoroutine(animatedMoveToPos(gameController.getFreeSpace(currentTileNumber)));

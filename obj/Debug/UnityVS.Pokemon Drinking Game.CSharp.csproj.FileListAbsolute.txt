@@ -1,0 +1,9 @@
+C:\Users\Paul\Documents\Pokemon Drinking Game\Temp\UnityVS_bin\Debug\Assembly-CSharp.dll
+C:\Users\Paul\Documents\Pokemon Drinking Game\Temp\UnityVS_bin\Debug\Assembly-CSharp.pdb
+C:\Users\Paul\Documents\Pokemon Drinking Game\Temp\UnityVS_bin\Debug\UnityEditor.dll
+C:\Users\Paul\Documents\Pokemon Drinking Game\Temp\UnityVS_bin\Debug\UnityEngine.dll
+C:\Users\Paul\Documents\Pokemon Drinking Game\Temp\UnityVS_bin\Debug\UnityEngine.xml
+C:\Users\Paul\Documents\Pokemon Drinking Game\Temp\UnityVS_bin\Debug\UnityEditor.xml
+C:\Users\Paul\Documents\Pokemon Drinking Game\obj\Debug\UnityVS.Pokemon Drinking Game.CSharp.csprojResolveAssemblyReference.cache
+C:\Users\Paul\Documents\Pokemon Drinking Game\obj\Debug\Assembly-CSharp.dll
+C:\Users\Paul\Documents\Pokemon Drinking Game\obj\Debug\Assembly-CSharp.pdb

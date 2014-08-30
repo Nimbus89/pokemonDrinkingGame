@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum GUIState {DISPLAYING_MODAL, DISPLAYING_BUTTON, DISPLAYING_NUMBER_BUTTONS, NONE};
+public enum GUIState { DISPLAYING_MODAL, DISPLAYING_BUTTON, DISPLAYING_NUMBER_BUTTONS, NONE, DISPLAYING_MODAL_2 };
 
 public class GUIController : MonoBehaviour {
 
@@ -21,6 +21,7 @@ public class GUIController : MonoBehaviour {
 	private static int NUMBER_BUTTON_HEIGHT = 100;
 	private static int NUMBER_BUTTON_VERTICAL_MARGIN = (Screen.height - (NUMBER_BUTTON_HEIGHT * 2))/2;
 	private static int NUMBER_BUTTON_HORIZONTAL_MARGIN = (Screen.width - (NUMBER_BUTTON_WIDTH * 3))/2;
+    private bool finsihedCoroutine = true;
 
 	void Awake (){
 		ModalTextStyle.fontSize = 40;
@@ -33,6 +34,9 @@ public class GUIController : MonoBehaviour {
 			case(GUIState.DISPLAYING_MODAL):
 				GUI.ModalWindow(1, ModalWindowPosition, drawBasicModal, "");
 				break;
+            case (GUIState.DISPLAYING_MODAL_2):
+                GUI.ModalWindow(1, ModalWindowPosition, drawBasicModal2, "");
+                break;
 			case(GUIState.DISPLAYING_BUTTON):
 				if(GUI.Button(StandardButtonPosition, buttonText)){
 					finsihed();
@@ -57,6 +61,16 @@ public class GUIController : MonoBehaviour {
 		callback = cb;
 		state = GUIState.DISPLAYING_BUTTON;
 	}
+
+    public IEnumerator displayBasicModal2(string text)
+    {
+        basicModalText = text;
+        state = GUIState.DISPLAYING_MODAL_2;
+        this.finsihedCoroutine = false;
+        while (!finsihedCoroutine) {
+            yield return 0;
+        }
+    }
 	
 	public void displaySixNumberButtons(DicerollCallbackDelegate cb){
 		numberCallback = cb;
@@ -68,12 +82,27 @@ public class GUIController : MonoBehaviour {
 		callback();
 	}
 
+    private void finished2()
+    {
+        state = GUIState.NONE;
+        finsihedCoroutine = true;
+    }
+
 	private void drawBasicModal(int windowID){
 		GUI.Box (new Rect(0, 0, ModalWindowPosition.width, ModalWindowPosition.height), basicModalText, ModalTextStyle);
 		if(GUI.Button(ModalButton1Position, "OK")){
 			finsihed();
 		}
 	}
+
+    private void drawBasicModal2(int windowID)
+    {
+        GUI.Box(new Rect(0, 0, ModalWindowPosition.width, ModalWindowPosition.height), basicModalText, ModalTextStyle);
+        if (GUI.Button(ModalButton1Position, "OK"))
+        {
+            finished2();
+        }
+    }
 	
 	private void drawNumberButtons(){
 		if(GUI.Button(new Rect(NUMBER_BUTTON_HORIZONTAL_MARGIN + NUMBER_BUTTON_WIDTH*0, NUMBER_BUTTON_VERTICAL_MARGIN, NUMBER_BUTTON_WIDTH, NUMBER_BUTTON_HEIGHT), "1")){
