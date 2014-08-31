@@ -29,6 +29,15 @@ public class PlayerController : MonoBehaviour {
     private int extraTurns = 0;
     private int turnsToSkip = 0;
     private string turnSkipMessage;
+    private bool hasMagikarp;
+
+    public void getMagikarp() {
+        hasMagikarp = true;
+    }
+
+    public bool landedOnMagikarp(){
+        return hasMagikarp;
+    }
 
     public void getExtraTurns(int turns) {
         extraTurns += turns;
@@ -41,6 +50,7 @@ public class PlayerController : MonoBehaviour {
     }
 
 	void Start(){
+        hasMagikarp = false;
 		roller = new DicerollController(gameController);
 		currentStartOfTurnEffects = new Stack<AftereffectController>();
 		startOfTurnEffects = new List<AftereffectController>();
@@ -122,7 +132,7 @@ public class PlayerController : MonoBehaviour {
             yield return StartCoroutine(Wait(moveWaitTime));
             if (gameController.getCurrentTile() is ImmediateMessageTileController) {
                 ImmediateMessageTileController tc = gameController.getCurrentTile() as ImmediateMessageTileController;
-                yield return tc.showImmediatedMessage();
+                yield return StartCoroutine(tc.showImmediatedMessage());
             }
         }
         currentTileNumber += direction;

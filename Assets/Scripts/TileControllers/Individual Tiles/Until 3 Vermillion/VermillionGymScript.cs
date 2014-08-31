@@ -3,6 +3,9 @@ using System.Collections;
 
 public class VermillionGymScript : DicerollTileController
 {
+
+    public override bool IS_GOLD { get { return true; } }
+
 	protected override string initialModalText(){
 		return "You challenge Gym Leader Surge!";
 	}

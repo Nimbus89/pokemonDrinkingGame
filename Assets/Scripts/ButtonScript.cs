@@ -23,12 +23,10 @@ public abstract class ButtonScript : MonoBehaviour {
 	
 	protected virtual void Highlight(){
 		GetComponent<TextMesh>().color = Color.yellow;
-		Debug.Log ("highlight");
 	}
 	
 	protected virtual void Unhighlight(){
 		GetComponent<TextMesh>().color = startingColor;
-		Debug.Log ("unhighlight");
 	}
 	
 	protected abstract void DoButtonAction();

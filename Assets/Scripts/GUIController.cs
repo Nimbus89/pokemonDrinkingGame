@@ -5,10 +5,10 @@ public enum GUIState { DISPLAYING_MODAL, DISPLAYING_BUTTON, DISPLAYING_NUMBER_BU
 
 public class GUIController : MonoBehaviour {
 
-	private static Rect ModalWindowPosition = new Rect(50, 50, Screen.width - 100, Screen.height - 100);
-	private static Rect ModalButton1Position = new Rect(20, 150, 100, 50);
+    private Rect ModalWindowPosition;
+    private Rect ModalButton1Position;
 	private GUIStyle ModalTextStyle = new GUIStyle();
-	private static Rect StandardButtonPosition = new Rect(50, Screen.height - 50, Screen.width - 100, 50);
+	private Rect BottomOfScreenButtonPosition = new Rect(50, Screen.height - 50, Screen.width - 100, 50);
 	
 	private string basicModalText = "";
 	private string buttonText = "";
@@ -17,17 +17,29 @@ public class GUIController : MonoBehaviour {
 	
 	private GUIState state = GUIState.NONE;
 
-	private static int NUMBER_BUTTON_WIDTH = 100;
-	private static int NUMBER_BUTTON_HEIGHT = 100;
-	private static int NUMBER_BUTTON_VERTICAL_MARGIN = (Screen.height - (NUMBER_BUTTON_HEIGHT * 2))/2;
-	private static int NUMBER_BUTTON_HORIZONTAL_MARGIN = (Screen.width - (NUMBER_BUTTON_WIDTH * 3))/2;
+	private int numberButtonWidth;
+	private int numberButtonHeight;
+	private int numberButtonVerticalMargin;
+	private int numberButtonHorizontalMargin;
     private bool finsihedCoroutine = true;
 
 	void Awake (){
 		ModalTextStyle.fontSize = 40;
 		ModalTextStyle.wordWrap = true;
 		ModalTextStyle.normal.textColor = Color.white;
+        setupGuiPositions();
 	}
+
+    void setupGuiPositions() {
+
+        ModalWindowPosition = new Rect(50, 50, Screen.width - 100, Screen.height - 100);
+        ModalButton1Position = new Rect(ModalWindowPosition.width - 125, ModalWindowPosition.height - 75, 100, 50);
+
+	    numberButtonWidth = 100;
+	    numberButtonHeight = 100;
+	    numberButtonVerticalMargin = (Screen.height - (numberButtonHeight * 2))/2;
+	    numberButtonHorizontalMargin = (Screen.width - (numberButtonWidth * 3))/2;
+    }
 	
 	void OnGUI(){
 		switch(state){
@@ -38,7 +50,7 @@ public class GUIController : MonoBehaviour {
                 GUI.ModalWindow(1, ModalWindowPosition, drawBasicModal2, "");
                 break;
 			case(GUIState.DISPLAYING_BUTTON):
-				if(GUI.Button(StandardButtonPosition, buttonText)){
+				if(GUI.Button(BottomOfScreenButtonPosition, buttonText)){
 					finsihed();
 				}
 				break;
@@ -105,27 +117,27 @@ public class GUIController : MonoBehaviour {
     }
 	
 	private void drawNumberButtons(){
-		if(GUI.Button(new Rect(NUMBER_BUTTON_HORIZONTAL_MARGIN + NUMBER_BUTTON_WIDTH*0, NUMBER_BUTTON_VERTICAL_MARGIN, NUMBER_BUTTON_WIDTH, NUMBER_BUTTON_HEIGHT), "1")){
+		if(GUI.Button(new Rect(numberButtonHorizontalMargin + numberButtonWidth*0, numberButtonVerticalMargin, numberButtonWidth, numberButtonHeight), "1")){
 			state = GUIState.NONE;
 			numberCallback(1);
 		}
-		if(GUI.Button(new Rect(NUMBER_BUTTON_HORIZONTAL_MARGIN + NUMBER_BUTTON_WIDTH*1, NUMBER_BUTTON_VERTICAL_MARGIN, NUMBER_BUTTON_WIDTH, NUMBER_BUTTON_HEIGHT), "2")){
+		if(GUI.Button(new Rect(numberButtonHorizontalMargin + numberButtonWidth*1, numberButtonVerticalMargin, numberButtonWidth, numberButtonHeight), "2")){
 			state = GUIState.NONE;
 			numberCallback(2);
 		}
-		if(GUI.Button(new Rect(NUMBER_BUTTON_HORIZONTAL_MARGIN + NUMBER_BUTTON_WIDTH*2, NUMBER_BUTTON_VERTICAL_MARGIN, NUMBER_BUTTON_WIDTH, NUMBER_BUTTON_HEIGHT), "3")){
+		if(GUI.Button(new Rect(numberButtonHorizontalMargin + numberButtonWidth*2, numberButtonVerticalMargin, numberButtonWidth, numberButtonHeight), "3")){
 			state = GUIState.NONE;
 			numberCallback(3);
 		}
-		if(GUI.Button(new Rect(NUMBER_BUTTON_HORIZONTAL_MARGIN + NUMBER_BUTTON_WIDTH*0, NUMBER_BUTTON_VERTICAL_MARGIN + NUMBER_BUTTON_HEIGHT, NUMBER_BUTTON_WIDTH, NUMBER_BUTTON_HEIGHT), "4")){
+		if(GUI.Button(new Rect(numberButtonHorizontalMargin + numberButtonWidth*0, numberButtonVerticalMargin + numberButtonHeight, numberButtonWidth, numberButtonHeight), "4")){
 			state = GUIState.NONE;
 			numberCallback(4);
 		}
-		if(GUI.Button(new Rect(NUMBER_BUTTON_HORIZONTAL_MARGIN + NUMBER_BUTTON_WIDTH*1, NUMBER_BUTTON_VERTICAL_MARGIN + NUMBER_BUTTON_HEIGHT, NUMBER_BUTTON_WIDTH, NUMBER_BUTTON_HEIGHT), "5")){
+		if(GUI.Button(new Rect(numberButtonHorizontalMargin + numberButtonWidth*1, numberButtonVerticalMargin + numberButtonHeight, numberButtonWidth, numberButtonHeight), "5")){
 			state = GUIState.NONE;
 			numberCallback(5);
 		}
-		if(GUI.Button(new Rect(NUMBER_BUTTON_HORIZONTAL_MARGIN + NUMBER_BUTTON_WIDTH*2, NUMBER_BUTTON_VERTICAL_MARGIN + NUMBER_BUTTON_HEIGHT, NUMBER_BUTTON_WIDTH, NUMBER_BUTTON_HEIGHT), "6")){
+		if(GUI.Button(new Rect(numberButtonHorizontalMargin + numberButtonWidth*2, numberButtonVerticalMargin + numberButtonHeight, numberButtonWidth, numberButtonHeight), "6")){
 			state = GUIState.NONE;
 			numberCallback(6);
 		}
