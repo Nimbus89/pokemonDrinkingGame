@@ -30,6 +30,7 @@ public class GameController : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+        MusicManager.Instance.playPaletteTownMusic();
 		Pokemon[] starters = PlayerSetupController.starters;
         if (starters == null || starters.Length == 0) {
             starters = new Pokemon[] { Pokemon.charmander };

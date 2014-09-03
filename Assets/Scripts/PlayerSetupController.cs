@@ -12,6 +12,10 @@ public class PlayerSetupController : MonoBehaviour {
 	public static Pokemon[] starters;
 	private int pokemonChosen = 0;
 
+    void Start() {
+        MusicManager.Instance.playSpeechMusic();
+    }
+
 	void OnGUI(){
 		if(playersCount == 0){
 			playerNumberSelectButtons();
@@ -45,6 +49,7 @@ public class PlayerSetupController : MonoBehaviour {
 	}
 	
 	void selectPlayerNumber(int number){
+        SFXManager.Instance.playBeep();
 		playersCount = number;
 		starters = new Pokemon[number];
 	}
@@ -65,6 +70,7 @@ public class PlayerSetupController : MonoBehaviour {
 	}
 	
 	void choosePokemon(Pokemon pokemon){
+        SFXManager.Instance.playBeep();
 		starters[pokemonChosen] = pokemon;
 		pokemonChosen ++;
 	}

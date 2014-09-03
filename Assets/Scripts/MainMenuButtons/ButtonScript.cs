@@ -3,10 +3,10 @@ using System.Collections;
 
 public abstract class ButtonScript : MonoBehaviour {
 
-	Color startingColor;
+    public SpriteRenderer cursor;
 
 	void Start(){
-		startingColor = GetComponent<TextMesh>().color;
+        Unhighlight();
 	}
 
 	void OnMouseEnter () {
@@ -22,17 +22,15 @@ public abstract class ButtonScript : MonoBehaviour {
 	}
 	
 	protected virtual void Highlight(){
-		GetComponent<TextMesh>().color = Color.yellow;
+        cursor.enabled = true;
 	}
 	
 	protected virtual void Unhighlight(){
-		GetComponent<TextMesh>().color = startingColor;
+        cursor.enabled = false;
 	}
-	
-	protected abstract void DoButtonAction();
-	
-	void Update(){
-	
-	}
+
+    protected virtual void DoButtonAction() {
+        SFXManager.Instance.playBeep();
+    }
 	
 }

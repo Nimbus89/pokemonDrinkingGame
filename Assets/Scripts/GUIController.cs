@@ -5,9 +5,9 @@ public enum GUIState { DISPLAYING_MODAL, DISPLAYING_BUTTON, DISPLAYING_NUMBER_BU
 
 public class GUIController : MonoBehaviour {
 
+    public GUISkin skin;
+
     private Rect ModalWindowPosition;
-    private Rect ModalButton1Position;
-	private GUIStyle ModalTextStyle = new GUIStyle();
 	private Rect BottomOfScreenButtonPosition = new Rect(50, Screen.height - 50, Screen.width - 100, 50);
 	
 	private string basicModalText = "";
@@ -22,26 +22,32 @@ public class GUIController : MonoBehaviour {
 	private int numberButtonVerticalMargin;
 	private int numberButtonHorizontalMargin;
     private bool finsihedCoroutine = true;
+    private bool hasClicked = true;
 
 	void Awake (){
-		ModalTextStyle.fontSize = 40;
-		ModalTextStyle.wordWrap = true;
-		ModalTextStyle.normal.textColor = Color.white;
         setupGuiPositions();
 	}
 
+    void Update() {
+        if (Input.GetMouseButtonDown(0))
+        {
+            hasClicked = true;
+        }
+    }
+
     void setupGuiPositions() {
 
-        ModalWindowPosition = new Rect(50, 50, Screen.width - 100, Screen.height - 100);
-        ModalButton1Position = new Rect(ModalWindowPosition.width - 125, ModalWindowPosition.height - 75, 100, 50);
+        ModalWindowPosition = new Rect(0, Screen.height - 100, Screen.width, 100);
 
 	    numberButtonWidth = 100;
 	    numberButtonHeight = 100;
 	    numberButtonVerticalMargin = (Screen.height - (numberButtonHeight * 2))/2;
 	    numberButtonHorizontalMargin = (Screen.width - (numberButtonWidth * 3))/2;
     }
-	
-	void OnGUI(){
+
+    void OnGUI()
+    {
+        GUI.skin = skin;
 		switch(state){
 			case(GUIState.DISPLAYING_MODAL):
 				GUI.ModalWindow(1, ModalWindowPosition, drawBasicModal, "");
@@ -90,27 +96,31 @@ public class GUIController : MonoBehaviour {
 	}
 	
 	private void finsihed(){
+        hasClicked = false;
 		state = GUIState.NONE;
+        SFXManager.Instance.playBeep();
 		callback();
 	}
 
     private void finished2()
     {
+        hasClicked = false;
         state = GUIState.NONE;
+        SFXManager.Instance.playBeep();
         finsihedCoroutine = true;
     }
 
 	private void drawBasicModal(int windowID){
-		GUI.Box (new Rect(0, 0, ModalWindowPosition.width, ModalWindowPosition.height), basicModalText, ModalTextStyle);
-		if(GUI.Button(ModalButton1Position, "OK")){
+		GUI.Box (new Rect(0, 0, ModalWindowPosition.width, ModalWindowPosition.height), basicModalText);
+		if(hasClicked){
 			finsihed();
 		}
 	}
 
     private void drawBasicModal2(int windowID)
     {
-        GUI.Box(new Rect(0, 0, ModalWindowPosition.width, ModalWindowPosition.height), basicModalText, ModalTextStyle);
-        if (GUI.Button(ModalButton1Position, "OK"))
+        GUI.Box(new Rect(0, 0, ModalWindowPosition.width, ModalWindowPosition.height), basicModalText);
+        if (hasClicked)
         {
             finished2();
         }
