@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum GUIState { DISPLAYING_MODAL, DISPLAYING_BUTTON, DISPLAYING_NUMBER_BUTTONS, NONE, DISPLAYING_MODAL_2 };
+public enum GUIState { DISPLAYING_MODAL, DISPLAYING_BUTTON, DISPLAYING_NUMBER_BUTTONS, NONE, DISPLAYING_MODAL_2, SHOWING_DIALOG };
 
 public class GUIController : MonoBehaviour {
 
     public GUISkin skin;
+
+    public DialogManager dm;
 
     private Rect ModalWindowPosition;
 	private Rect BottomOfScreenButtonPosition = new Rect(50, Screen.height - 50, Screen.width - 100, 50);
@@ -82,12 +84,8 @@ public class GUIController : MonoBehaviour {
 
     public IEnumerator displayBasicModal2(string text)
     {
-        basicModalText = text;
-        state = GUIState.DISPLAYING_MODAL_2;
-        this.finsihedCoroutine = false;
-        while (!finsihedCoroutine) {
-            yield return 0;
-        }
+
+        yield return StartCoroutine(dm.showDialog(text));
     }
 	
 	public void displaySixNumberButtons(DicerollCallbackDelegate cb){
