@@ -7,6 +7,7 @@ public class PokemonSelectorManager : MonoBehaviour {
 
     public GUISkin skin;
 
+    private static int BUTTON_INTERNAL_MARGIN = 30;
     private static int BUTTON_WIDTH = 100;
     private static int BUTTON_HEIGHT = 100;
     private int BUTTON_VERTICAL_MARGIN;
@@ -22,7 +23,7 @@ public class PokemonSelectorManager : MonoBehaviour {
     public void Awake()
     {
         BUTTON_VERTICAL_MARGIN = (Screen.height - (BUTTON_HEIGHT)) / 2;
-        BUTTON_HORIZONTAL_MARGIN = (Screen.width - (BUTTON_WIDTH * 3)) / 2;
+        BUTTON_HORIZONTAL_MARGIN = (Screen.width - (BUTTON_WIDTH * 3)) / 2 - BUTTON_INTERNAL_MARGIN;
         this.enabled = false;
         if (instance != null && instance != this)
         {
@@ -53,18 +54,15 @@ public class PokemonSelectorManager : MonoBehaviour {
 
     public void OnGUI()
     {
-        //GUI.skin = skin;
-        if (GUI.Button(new Rect(BUTTON_HORIZONTAL_MARGIN + BUTTON_WIDTH * 0, BUTTON_VERTICAL_MARGIN, BUTTON_WIDTH, BUTTON_HEIGHT), PokemonSprites.getTexture(Pokemon.bulbasaur)))
-        {
-            choosePokemon(Pokemon.bulbasaur);
-        }
-        if (GUI.Button(new Rect(BUTTON_HORIZONTAL_MARGIN + BUTTON_WIDTH * 1, BUTTON_VERTICAL_MARGIN, BUTTON_WIDTH, BUTTON_HEIGHT), PokemonSprites.getTexture(Pokemon.charmander)))
-        {
-            choosePokemon(Pokemon.charmander);
-        }
-        if (GUI.Button(new Rect(BUTTON_HORIZONTAL_MARGIN + BUTTON_WIDTH * 2, BUTTON_VERTICAL_MARGIN, BUTTON_WIDTH, BUTTON_HEIGHT), PokemonSprites.getTexture(Pokemon.squirtle)))
-        {
-            choosePokemon(Pokemon.squirtle);
+        GUI.skin = skin;
+
+        Pokemon[] mons = new Pokemon[] { Pokemon.bulbasaur, Pokemon.charmander, Pokemon.squirtle };
+
+        for (int i = 0; i < 3; i++) {
+            if (GUI.Button(new Rect(BUTTON_HORIZONTAL_MARGIN + (BUTTON_WIDTH + BUTTON_INTERNAL_MARGIN) * i, BUTTON_VERTICAL_MARGIN, BUTTON_WIDTH, BUTTON_HEIGHT), PokemonSprites.getTexture(mons[i])))
+            {
+                choosePokemon(mons[i]);
+            }
         }
     }
 }

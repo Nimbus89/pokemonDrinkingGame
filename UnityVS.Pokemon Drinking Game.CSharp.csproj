@@ -57,6 +57,7 @@
     <Compile Include="Assets\Scripts\DicerollController.cs" />
     <Compile Include="Assets\Scripts\GUI\DialogManager.cs" />
     <Compile Include="Assets\Scripts\GUI\GUIController.cs" />
+    <Compile Include="Assets\Scripts\GUI\NumberButtonsManager.cs" />
     <Compile Include="Assets\Scripts\GUI\PokemonSelectorManager.cs" />
     <Compile Include="Assets\Scripts\GUI\StringUtils.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />

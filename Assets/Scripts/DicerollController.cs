@@ -22,14 +22,14 @@ public class DicerollController {
 	
 	private void handleDiceRoll(){
 		if(realMode){
-            GUIController.Instance.displaySixNumberButtons(reactToRoll);
+            GUIController.Instance.DisplayDialogThenNumberPicker("What did you roll?", reactToRoll);
 		} else {
 			displayRollButton();
 		}
 	}
 	
 	private void displayRollButton(){
-        GUIController.Instance.displayBasicButton("Roll Dice", afterButtonPressed);
+        GUIController.Instance.DisplayBasicButton("Roll Dice", afterButtonPressed);
 	}
 	
 	private void afterButtonPressed(){

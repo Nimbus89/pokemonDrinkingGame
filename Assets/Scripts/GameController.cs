@@ -44,7 +44,7 @@ public class GameController : MonoBehaviour {
 			}
 			count++;
 		}
-        GUIController.Instance.displayBasicButton("Start Game", startGame);
+        GUIController.Instance.DisplayBasicButton("Start Game", startGame);
 	}
 
     void setupPlayers(Pokemon[] starters)

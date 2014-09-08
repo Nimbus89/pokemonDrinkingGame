@@ -10,15 +10,15 @@ public class PlayerSetupController : MonoBehaviour {
 
     void Start() {
         MusicManager.Instance.playSpeechMusic();
-        GUIController.Instance.DisplayBasicModals(new string[]{
-            //"Hello there! Welcome to the world of POKeMON!",
-            //"My name is OAK! People call me the POKeMON PROF!",
-            //"This world is inhabited by creatures called POKeMON!",
-            //"Blah blah blah alcohol. Blah blah blah adventure awaits.",
+        GUIController.Instance.DisplayBasicDialogs(new string[]{
+            "Hello there! Welcome to the world of POKeMON!",
+            "My name is OAK! People call me the POKeMON PROF!",
+            "This world is inhabited by creatures called POKeMON!",
+            "Blah blah blah alcohol. Blah blah blah adventure awaits.",
             "First, how many of you are there?"
         }, () => {
             oakSprite.renderer.enabled = false;
-            GUIController.Instance.displaySixNumberButtons(selectPlayerNumber);
+            GUIController.Instance.DisplaySixNumberButtons(selectPlayerNumber);
         });
     }
 
@@ -40,7 +40,7 @@ public class PlayerSetupController : MonoBehaviour {
         }
 
         oakSprite.renderer.enabled = true;
-        GUIController.Instance.DisplayBasicModals(new string[]{
+        GUIController.Instance.DisplayBasicDialogs(new string[]{
             "Blah blah adventure."
         }, () =>
         {

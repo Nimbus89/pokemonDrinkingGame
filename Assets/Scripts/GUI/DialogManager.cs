@@ -156,7 +156,7 @@ public class DialogManager : MonoBehaviour {
 
     public void OnGUI(){
         GUI.skin = skin;
-        GUI.ModalWindow(1, ModalWindowPosition, drawDialogBox, "");
+        GUI.Window(1, ModalWindowPosition, drawDialogBox, "");
     }
 
     private void drawDialogBox(int windowID)
