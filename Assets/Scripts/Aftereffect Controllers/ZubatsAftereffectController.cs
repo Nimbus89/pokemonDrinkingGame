@@ -15,9 +15,9 @@ public class ZubatAftereffectController : AftereffectController
 	private void reactToDiceRoll(int rollResult){
 		roll = rollResult;
 		if(rollResult < 3){
-			gui.displayBasicModal("You couldn't escape!", player.endTurn);
+            GUIController.Instance.DisplayBasicModal("You couldn't escape!", player.endTurn);
 		} else {
-			gui.displayBasicModal("You escaped!", escape);
+            GUIController.Instance.DisplayBasicModal("You escaped!", escape);
 		}
 	}
 	

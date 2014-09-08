@@ -4,9 +4,9 @@ using System.Collections;
 public class MusicManager : MonoBehaviour
 {
 
-    private static AudioClip titleMusic2 = Resources.Load<AudioClip>("sounds/titleMusic2");
-    private static AudioClip profSpeechMusic = Resources.Load<AudioClip>("sounds/profSpeechMusic");
-    private static AudioClip paletteTownMusic = Resources.Load<AudioClip>("sounds/paletteTownMusic");
+    private static AudioClip titleMusic2;
+    private static AudioClip profSpeechMusic;
+    private static AudioClip paletteTownMusic;
     private static MusicManager instance = null;
 
     private AudioSource source;
@@ -18,6 +18,11 @@ public class MusicManager : MonoBehaviour
 
     void Awake()
     {
+
+        titleMusic2 = Resources.Load<AudioClip>("sounds/titleMusic2");
+        profSpeechMusic = Resources.Load<AudioClip>("sounds/profSpeechMusic");
+        paletteTownMusic = Resources.Load<AudioClip>("sounds/paletteTownMusic");
+
         if (instance != null && instance != this)
         {
             Destroy(this.gameObject);

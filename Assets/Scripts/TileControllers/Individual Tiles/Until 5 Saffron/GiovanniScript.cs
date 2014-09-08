@@ -13,11 +13,11 @@ public class GiovanniScript : DicerollTileController
     {
         if (rollResult < 4)
         {
-            gui.displayBasicModal("Give " + rollResult + " drinks.", returnControlToPlayer);
+            GUIController.Instance.DisplayBasicModal("Give " + rollResult + " drinks.", returnControlToPlayer);
         }
         else
         {
-            gui.displayBasicModal("Take " + rollResult + " drinks.", returnControlToPlayer);
+            GUIController.Instance.DisplayBasicModal("Take " + rollResult + " drinks.", returnControlToPlayer);
         }
 
     }

@@ -1,45 +1,47 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum GUIState { DISPLAYING_MODAL, DISPLAYING_BUTTON, DISPLAYING_NUMBER_BUTTONS, NONE, DISPLAYING_MODAL_2, SHOWING_DIALOG };
+public enum GUIState { DISPLAYING_BUTTON, DISPLAYING_NUMBER_BUTTONS, NONE};
 
 public class GUIController : MonoBehaviour {
 
+    public static GUIController instance;
+    public static GUIController Instance
+    {
+        get { return instance; }
+    }
+
     public GUISkin skin;
 
-    public DialogManager dm;
-
-    private Rect ModalWindowPosition;
 	private Rect BottomOfScreenButtonPosition = new Rect(50, Screen.height - 50, Screen.width - 100, 50);
 	
-	private string basicModalText = "";
 	private string buttonText = "";
 	private CallbackDelegate callback;
 	private DicerollCallbackDelegate numberCallback;
-	
-	private GUIState state = GUIState.NONE;
+
+    private GUIState state;
 
 	private int numberButtonWidth;
 	private int numberButtonHeight;
 	private int numberButtonVerticalMargin;
 	private int numberButtonHorizontalMargin;
-    private bool finsihedCoroutine = true;
-    private bool hasClicked = true;
 
 	void Awake (){
+        state = GUIState.NONE;
         setupGuiPositions();
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            instance = this;
+        }
+        DontDestroyOnLoad(this.gameObject);
 	}
 
-    void Update() {
-        if (Input.GetMouseButtonDown(0))
-        {
-            hasClicked = true;
-        }
-    }
-
     void setupGuiPositions() {
-
-        ModalWindowPosition = new Rect(0, Screen.height - 100, Screen.width, 100);
 
 	    numberButtonWidth = 100;
 	    numberButtonHeight = 100;
@@ -51,12 +53,6 @@ public class GUIController : MonoBehaviour {
     {
         GUI.skin = skin;
 		switch(state){
-			case(GUIState.DISPLAYING_MODAL):
-				GUI.ModalWindow(1, ModalWindowPosition, drawBasicModal, "");
-				break;
-            case (GUIState.DISPLAYING_MODAL_2):
-                GUI.ModalWindow(1, ModalWindowPosition, drawBasicModal2, "");
-                break;
 			case(GUIState.DISPLAYING_BUTTON):
 				if(GUI.Button(BottomOfScreenButtonPosition, buttonText)){
 					finsihed();
@@ -70,22 +66,43 @@ public class GUIController : MonoBehaviour {
 		}
 	}
 	
-	public void displayBasicModal(string text, CallbackDelegate cb){
-		basicModalText = text;
-		callback = cb;
-		state = GUIState.DISPLAYING_MODAL;
-	}
-	
 	public void displayBasicButton(string text, CallbackDelegate cb){
 		buttonText = text;
 		callback = cb;
 		state = GUIState.DISPLAYING_BUTTON;
 	}
 
-    public IEnumerator displayBasicModal2(string text)
-    {
+    public IEnumerator DisplayDialogThenStarterPicker(string text, PokemonCallbackDelegate cb) {
+        yield return StartCoroutine(DialogManager.Instance.showDialog(text, false));
+        yield return StartCoroutine(PokemonSelectorManager.Instance.ShowButtons(cb));
+    }
 
-        yield return StartCoroutine(dm.showDialog(text));
+    public IEnumerator DisplayBasicModal(string text)
+    {
+        return DialogManager.Instance.showDialog(text);
+    }
+
+    public void DisplayBasicModals(string[] texts, CallbackDelegate cb)
+    {
+        StartCoroutine(displayBasicModals(texts, cb));
+    }
+
+    private IEnumerator displayBasicModals(string[] texts, CallbackDelegate cb)
+    {
+        foreach(string text in texts){
+            yield return StartCoroutine(DialogManager.Instance.showDialog(text));
+        }
+        cb();
+    }
+
+    public void DisplayBasicModal (string text, CallbackDelegate cb) {
+        StartCoroutine(displayBasicModal(text, cb));
+    }
+
+    private IEnumerator displayBasicModal(string text, CallbackDelegate cb)
+    {
+        yield return StartCoroutine(DialogManager.Instance.showDialog(text));
+        cb();
     }
 	
 	public void displaySixNumberButtons(DicerollCallbackDelegate cb){
@@ -94,7 +111,6 @@ public class GUIController : MonoBehaviour {
 	}
 	
 	private void finsihed(){
-        hasClicked = false;
 		state = GUIState.NONE;
         SFXManager.Instance.playBeep();
 		callback();
@@ -102,28 +118,10 @@ public class GUIController : MonoBehaviour {
 
     private void finished2()
     {
-        hasClicked = false;
         state = GUIState.NONE;
         SFXManager.Instance.playBeep();
-        finsihedCoroutine = true;
     }
 
-	private void drawBasicModal(int windowID){
-		GUI.Box (new Rect(0, 0, ModalWindowPosition.width, ModalWindowPosition.height), basicModalText);
-		if(hasClicked){
-			finsihed();
-		}
-	}
-
-    private void drawBasicModal2(int windowID)
-    {
-        GUI.Box(new Rect(0, 0, ModalWindowPosition.width, ModalWindowPosition.height), basicModalText);
-        if (hasClicked)
-        {
-            finished2();
-        }
-    }
-	
 	private void drawNumberButtons(){
 		if(GUI.Button(new Rect(numberButtonHorizontalMargin + numberButtonWidth*0, numberButtonVerticalMargin, numberButtonWidth, numberButtonHeight), "1")){
 			state = GUIState.NONE;

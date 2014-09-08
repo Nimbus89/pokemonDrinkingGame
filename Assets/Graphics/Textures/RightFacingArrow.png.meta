@@ -1,8 +1,9 @@
 fileFormatVersion: 2
-guid: 211fc7ee6ae20974a9a1d186a10b5ad0
+guid: 592c569d639a453449398114fa8f8a2b
 TextureImporter:
   fileIDToRecycleName:
-    21300000: 2973-1
+    21300000: PliTCVB
+    21300002: RightFacingArrow
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -25,10 +26,10 @@ TextureImporter:
   textureFormat: -1
   maxTextureSize: 1024
   textureSettings:
-    filterMode: -1
-    aniso: -1
+    filterMode: 0
+    aniso: 1
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50

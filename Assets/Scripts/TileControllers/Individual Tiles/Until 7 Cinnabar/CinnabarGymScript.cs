@@ -25,7 +25,7 @@ public class CinnabarGymScript : DicerollTileController
             evensRolled++;
             roller.doDiceRoll(reactToDiceRoll);
         } else {
-            gui.displayBasicModal("Take " + evensRolled * 2 + " drinks.", returnControlToPlayer);
+            GUIController.Instance.DisplayBasicModal("Take " + evensRolled * 2 + " drinks.", returnControlToPlayer);
         }
        
     }

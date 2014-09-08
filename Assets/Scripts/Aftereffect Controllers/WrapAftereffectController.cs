@@ -14,7 +14,7 @@ public class WrapAftereffectController : AftereffectController
 		if(duration == 0){
 			player.startOfTurnEffects.Remove(this);
 		}
-		gui.displayBasicModal("Wrap deals damage! Take a drink!", player.handleNextStartOfTurnEffect);
+        GUIController.Instance.DisplayBasicModal("Wrap deals damage! Take a drink!", player.handleNextStartOfTurnEffect);
 	}
 }
 

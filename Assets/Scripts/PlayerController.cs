@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour {
    
 	public int currentTileNumber;
 	public GameController gameController;
-	public GUIController gui;
 	public bool stringShotted = false;
 	public int playerNumber;
 	public Pokemon pokemon;
@@ -60,8 +59,7 @@ public class PlayerController : MonoBehaviour {
 	public void setup(GameController controller, int playerNumber, Pokemon pokemon){
 		gameController = controller;
         currentTileNumber = gameController.startingTileNumber;
-		gui = gameController.gui;
-		pokeController = new PokemonController(pokemon, gui, this);
+        pokeController = new PokemonController(pokemon, GUIController.Instance, this);
 		this.playerNumber = playerNumber;
         this.transform.position = this.gameController.getFreeSpace(currentTileNumber);
 	}
@@ -71,7 +69,7 @@ public class PlayerController : MonoBehaviour {
         if (turnsToSkip > 0)
         {
             turnsToSkip--;
-            gui.displayBasicModal(turnSkipMessage, endTurn);
+            GUIController.Instance.DisplayBasicModal(turnSkipMessage, endTurn);
         }
         else {
             announceTurn();
@@ -79,11 +77,11 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	private void announceTurn(){
-		gui.displayBasicModal(getAnnounceTurnMessage(), handleStartOfTurnAfterEffects);
+        GUIController.Instance.DisplayBasicModal(getAnnounceTurnMessage(), handleStartOfTurnAfterEffects);
 	}
 	
 	public string getAnnounceTurnMessage(){
-		return "Player " + playerNumber + "'s Turn";
+		return "Player " + playerNumber + "'s Turn.";
 	}
 	
 	public void handleStartOfTurnAfterEffects(){
@@ -113,30 +111,28 @@ public class PlayerController : MonoBehaviour {
 	public void move(int rollResult){
 		int spacesToMove = modifyRoll(rollResult);
 		if(!gameController.isPassingGoldSquare(currentTileNumber, currentTileNumber + spacesToMove, badges)){
-			goToTile(currentTileNumber + spacesToMove);
+			GoToTile(currentTileNumber + spacesToMove);
 		} else {
-			goToTile (gameController.getNextGoldSquare(currentTileNumber));
+			GoToTile (gameController.getNextGoldSquare(currentTileNumber));
 		}
 	}
 
-    public void goToTile(int tileNum){
-        StartCoroutine(crGoToTile(tileNum));
+    public void GoToTile(int tileNum){
+        StartCoroutine(goToTile(tileNum));
     }
 
-    private IEnumerator crGoToTile(int tileNum) {
+    private IEnumerator goToTile(int tileNum) {
         int tilesToMove = Mathf.Abs(currentTileNumber - tileNum);
         int direction = (currentTileNumber - tileNum) < 0 ? 1 : -1;
-        for (int i = 0; i < tilesToMove - 1; i ++) {
+        for (int i = 0; i < tilesToMove; i ++) {
             currentTileNumber += direction;
             yield return StartCoroutine(animatedMoveToPos(gameController.getFreeSpace(currentTileNumber)));
-            yield return StartCoroutine(Wait(moveWaitTime));
+            yield return new WaitForSeconds(moveWaitTime);
             if (gameController.getCurrentTile() is ImmediateMessageTileController) {
                 ImmediateMessageTileController tc = gameController.getCurrentTile() as ImmediateMessageTileController;
                 yield return StartCoroutine(tc.showImmediatedMessage());
             }
         }
-        currentTileNumber += direction;
-        yield return StartCoroutine(animatedMoveToPos(gameController.getFreeSpace(currentTileNumber)));
         gameController.getCurrentTile().applyRules();
     }
     private IEnumerator animatedMoveToPos(Vector3 target)

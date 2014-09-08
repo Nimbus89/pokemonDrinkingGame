@@ -10,6 +10,6 @@ public class SSAnneScript : DicerollTileController {
 	protected override void reactToDiceRoll(int rollResult){
 		PlayerController player = gameController.getCurrentPlayer();
 		player.rollReplaceAfterEffect = new CruisingAftereffectController(player, gameController, rollResult);
-		gui.displayBasicModal("For " + rollResult + " turns, you must dirnk at the start of your turn.", returnControlToPlayer);
+        GUIController.Instance.DisplayBasicModal("For " + rollResult + " turns, you must dirnk at the start of your turn.", returnControlToPlayer);
 	}
 }

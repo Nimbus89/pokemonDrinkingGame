@@ -58,9 +58,9 @@ public class PokemonController {
 				break;
 		}
 		if(success){
-			gui.displayBasicModal("Your " + oldPokemonName + " evolved into a " + Helpers.Titlize(pokemon.ToString()) + ".", callback);
+            gui.DisplayBasicModal("Your " + oldPokemonName + " evolved into a " + Helpers.Titlize(pokemon.ToString()) + ".", callback);
 		} else {
-			gui.displayBasicModal("Your pokemon is fully evolved!", callback);
+            gui.DisplayBasicModal("Your pokemon is fully evolved!", callback);
 		}
 	}
 

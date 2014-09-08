@@ -4,7 +4,7 @@ using System.Collections;
 public class SFXManager : MonoBehaviour
 {
 
-    private static AudioClip ButtonPressBeep = Resources.Load<AudioClip>("sounds/ButtonPressBeep");
+    private static AudioClip ButtonPressBeep;
     private static SFXManager instance = null;
 
     private AudioSource source;
@@ -15,6 +15,9 @@ public class SFXManager : MonoBehaviour
     }
     void Awake()
     {
+
+        ButtonPressBeep = Resources.Load<AudioClip>("sounds/ButtonPressBeep");
+
         if (instance != null && instance != this)
         {
             Destroy(this.gameObject);

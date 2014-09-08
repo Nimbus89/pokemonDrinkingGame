@@ -28,17 +28,17 @@ public class CeladonGymScript : DicerollTileController {
 
     private void megaDrain()
     {
-        gui.displayBasicModal("Mega Drain! Finish your drink!", returnControlToPlayer);
+        GUIController.Instance.DisplayBasicModal("Mega Drain! Finish your drink!", returnControlToPlayer);
     }
 
     private void vineWhip()
     {
-        gui.displayBasicModal("Vine Whip! Take 2 drinks, give 2 drinks.", returnControlToPlayer);
+        GUIController.Instance.DisplayBasicModal("Vine Whip! Take 2 drinks, give 2 drinks.", returnControlToPlayer);
     }
 
     private void stunSpore()
     {
         gameController.getCurrentPlayer().skipTurns(1, "You are stunned! Miss a turn.");
-        gui.displayBasicModal("Stun Spore! You lose a turn.", returnControlToPlayer);
+        GUIController.Instance.DisplayBasicModal("Stun Spore! You lose a turn.", returnControlToPlayer);
     }
 }

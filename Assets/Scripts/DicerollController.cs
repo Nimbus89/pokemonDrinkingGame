@@ -3,18 +3,16 @@ using UnityEngine;
 public class DicerollController {
 	
 	private int result;
-	private GUIController gui;
 	private DicerollCallbackDelegate callback;
 	private bool realMode;
 	
 	public DicerollController(GameController game){
-		this.gui = game.gui;
 		this.realMode = game.realMode;
 	}
 	
 	public void doDiceRollWithMessage(string message, DicerollCallbackDelegate cb){
 		callback = cb;
-		gui.displayBasicModal(message, handleDiceRoll);
+        GUIController.Instance.DisplayBasicModal(message, handleDiceRoll);
 	}
 	
 	public void doDiceRoll(DicerollCallbackDelegate cb){
@@ -24,14 +22,14 @@ public class DicerollController {
 	
 	private void handleDiceRoll(){
 		if(realMode){
-			gui.displaySixNumberButtons(reactToRoll);
+            GUIController.Instance.displaySixNumberButtons(reactToRoll);
 		} else {
 			displayRollButton();
 		}
 	}
 	
 	private void displayRollButton(){
-		gui.displayBasicButton("Roll Dice", afterButtonPressed);
+        GUIController.Instance.displayBasicButton("Roll Dice", afterButtonPressed);
 	}
 	
 	private void afterButtonPressed(){
@@ -41,7 +39,7 @@ public class DicerollController {
 	
 	private void reactToRoll(int result){
 		this.result = result;
-		gui.displayBasicModal("Your rolled a " + result + "!", afterMessage);
+        GUIController.Instance.DisplayBasicModal("Your rolled a " + result + "!", afterMessage);
 	}
 	
 	private void afterMessage(){

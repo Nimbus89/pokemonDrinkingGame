@@ -9,7 +9,7 @@ public class GayScript : DicerollTileController {
 	
 	protected override void reactToDiceRoll(int rollResult){
 		int drinks = Mathf.CeilToInt(rollResult/2);
-		gui.displayBasicModal("Give " + drinks + " drinks, take " + drinks + " drinks.", returnControlToPlayer);
+        GUIController.Instance.DisplayBasicModal("Give " + drinks + " drinks, take " + drinks + " drinks.", returnControlToPlayer);
 	}
 	
 }

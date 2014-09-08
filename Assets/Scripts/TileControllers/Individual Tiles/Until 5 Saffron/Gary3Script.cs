@@ -11,7 +11,7 @@ public class Gary3Script : DicerollTileController
 
     protected override void reactToDiceRoll(int rollResult)
     {
-        gui.displayBasicModal("Take " + rollResult + " drinks.", returnControlToPlayer);
+        GUIController.Instance.DisplayBasicModal("Take " + rollResult + " drinks.", returnControlToPlayer);
     }
 
 }

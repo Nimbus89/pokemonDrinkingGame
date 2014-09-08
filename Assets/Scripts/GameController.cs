@@ -18,7 +18,6 @@ public class GameController : MonoBehaviour {
 
     
     private static List<int> goldSquares;
-	public GUIController gui;
 	public TileController[] squares;
 	public CameraController cameraController;
 	public PlayerController[] players;
@@ -45,7 +44,7 @@ public class GameController : MonoBehaviour {
 			}
 			count++;
 		}
-		gui.displayBasicButton("Start Game", startGame);
+        GUIController.Instance.displayBasicButton("Start Game", startGame);
 	}
 
     void setupPlayers(Pokemon[] starters)

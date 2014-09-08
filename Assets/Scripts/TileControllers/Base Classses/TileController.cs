@@ -7,13 +7,10 @@ public abstract class TileController : MonoBehaviour {
 
 	protected GameController gameController;
 	
-	protected GUIController gui;
-	
 	protected DicerollController roller;
 	
 	public void setup(GameController controller){
 		gameController = controller;
-		gui = gameController.gui;
 		roller = new DicerollController(gameController);
 	}
 	

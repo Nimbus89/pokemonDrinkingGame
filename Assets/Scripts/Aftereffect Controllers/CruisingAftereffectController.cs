@@ -19,7 +19,7 @@ public class CruisingAftereffectController : AftereffectController
 	}
 	
 	private void reactToRoll(int result){
-		gui.displayBasicModal("The cruise has a full bar! Take " + result + " drinks.", player.endTurn);
+        GUIController.Instance.DisplayBasicModal("The cruise has a full bar! Take " + result + " drinks.", player.endTurn);
 	}
 }
 

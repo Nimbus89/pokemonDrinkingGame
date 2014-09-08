@@ -4,7 +4,7 @@ using System.Collections;
 public abstract class BasicModalTileController : TileController {
 
 	override protected void doRules(){
-		gui.displayBasicModal(getModalMessage(), afterModal);
+        GUIController.Instance.DisplayBasicModal(getModalMessage(), afterModal);
 	}
 	
 	abstract protected string getModalMessage();
