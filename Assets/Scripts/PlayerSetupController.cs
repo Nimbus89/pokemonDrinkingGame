@@ -19,7 +19,7 @@ public class PlayerSetupController : MonoBehaviour {
         }, () => {
             oakSprite.renderer.enabled = false;
             GUIController.Instance.DisplaySixNumberButtons(selectPlayerNumber);
-        });
+        }, false);
     }
 
 	void selectPlayerNumber(int numberOfPlayers){

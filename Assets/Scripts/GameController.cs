@@ -113,6 +113,16 @@ public class GameController : MonoBehaviour {
 		}
 		return 0;
 	}
+
+    public void endGame() {
+        GUIController.Instance.DisplayBasicModal("Player " + currentPlayerNumber + " wins!", () => {
+            Application.LoadLevel(0);
+        });
+    }
+
+    public int lastTileNum() {
+        return this.squares.Length - 1;
+    }
 	
 	
 }

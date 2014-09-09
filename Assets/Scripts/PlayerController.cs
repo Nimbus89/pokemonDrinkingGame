@@ -122,6 +122,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     private IEnumerator goToTile(int tileNum) {
+        if (tileNum > gameController.lastTileNum()) {
+            tileNum = gameController.lastTileNum();
+        }
         int tilesToMove = Mathf.Abs(currentTileNumber - tileNum);
         int direction = (currentTileNumber - tileNum) < 0 ? 1 : -1;
         for (int i = 0; i < tilesToMove; i ++) {

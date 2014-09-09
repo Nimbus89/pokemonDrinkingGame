@@ -71,9 +71,9 @@ public class GUIController : MonoBehaviour {
         return DialogManager.Instance.showDialog(text);
     }
 
-    public void DisplayBasicDialogs(string[] texts, CallbackDelegate cb)
+    public void DisplayBasicDialogs(string[] texts, CallbackDelegate cb, bool hideAfter = true)
     {
-        StartCoroutine(displayBasicDialogs(texts, cb));
+        StartCoroutine(displayBasicDialogs(texts, cb, hideAfter));
     }
 
 	void Awake (){
@@ -104,10 +104,10 @@ public class GUIController : MonoBehaviour {
 		}
 	}
 
-    private IEnumerator displayBasicDialogs(string[] texts, CallbackDelegate cb)
+    private IEnumerator displayBasicDialogs(string[] texts, CallbackDelegate cb, bool hideAfter = true)
     {
         foreach(string text in texts){
-            yield return StartCoroutine(DialogManager.Instance.showDialog(text));
+            yield return StartCoroutine(DialogManager.Instance.showDialog(text, hideAfter));
         }
         cb();
     }
