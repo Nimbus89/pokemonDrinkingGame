@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class DicerollController {
 	
-	private int result;
 	private DicerollCallbackDelegate callback;
 	private bool realMode;
 	
@@ -22,28 +21,13 @@ public class DicerollController {
 	
 	private void handleDiceRoll(){
 		if(realMode){
-            GUIController.Instance.DisplayDialogThenNumberPicker("What did you roll?", reactToRoll);
+            GUIController.Instance.DisplayDialogThenNumberPicker("What did you roll?", callback);
 		} else {
-			displayRollButton();
+            doRandomRoll();
 		}
 	}
-	
-	private void displayRollButton(){
-        GUIController.Instance.DisplayBasicButton("Roll Dice", afterButtonPressed);
-	}
-	
-	private void afterButtonPressed(){
-		int result = Random.Range(1, 6);
-		reactToRoll(result);
-	}
-	
-	private void reactToRoll(int result){
-		this.result = result;
-        GUIController.Instance.DisplayBasicModal("Your rolled a " + result + "!", afterMessage);
-	}
-	
-	private void afterMessage(){
-		callback(result);
-	}
 
+    private void doRandomRoll() {
+        GUIController.Instance.DoSingleDiceRoll("You rolled a \b!", callback);
+    }
 }

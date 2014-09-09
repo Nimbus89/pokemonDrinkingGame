@@ -20,6 +20,13 @@ public class GUIController : MonoBehaviour {
 
     private GUIState state;
 
+    public void DoSingleDiceRoll(string text, DicerollCallbackDelegate cb) {
+        StartCoroutine(DialogManager.Instance.showDialog(text, true, (int[] results) =>
+        {
+            cb(results[0]);
+        }));
+    }
+
     public void DisplaySixNumberButtons(DicerollCallbackDelegate cb)
     {
         StartCoroutine(NumberButtonsManager.Instance.ShowButtons(cb));

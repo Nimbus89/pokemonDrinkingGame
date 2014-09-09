@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class DialogManager : MonoBehaviour {
 
@@ -27,6 +28,10 @@ public class DialogManager : MonoBehaviour {
     private bool pausedForInput = false;
     private bool arrowVisible = false;
 
+    private List<int> rollResults;
+
+    private static char DICEROLL_CHAR = '\b';
+
     public static DialogManager Instance
     {
         get { return instance; }
@@ -48,8 +53,9 @@ public class DialogManager : MonoBehaviour {
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public IEnumerator showDialog(string text, bool hideAfter = true)
+    public IEnumerator showDialog(string text, bool hideAfter = true, MultiDicerollCallbackDelegate cb = null)
     {
+        rollResults = new List<int>();
         clearLines();
         this.enabled = true;
         currentDialogLines = StringUtils.splitIntoLines(text, lineLength);
@@ -67,6 +73,9 @@ public class DialogManager : MonoBehaviour {
         if (hideAfter)
         {
             this.enabled = false;
+        }
+        if (cb != null) {
+            cb(rollResults.ToArray());
         }
     }
 
@@ -88,22 +97,62 @@ public class DialogManager : MonoBehaviour {
     }
 
     IEnumerator animateTopLine(string line) {
-        int i = 0;
-        while (i < line.Length)
-        {
-            currentTopLine += line[i++];
-            yield return new WaitForSeconds(getWaitTime());
-        }
+        return animateLine(line, true);
     }
 
     IEnumerator animateBottomLine(string line)
     {
+        return animateLine(line, false);
+    }
+
+    IEnumerator animateLine(string line, bool top)
+    {
         int i = 0;
         while (i < line.Length)
         {
-            currentBottomLine += line[i++];
+            if (line[i] == DICEROLL_CHAR) {
+                yield return StartCoroutine(doDiceRoll(top));
+            }
+            addToLine(top, line[i++]);
             yield return new WaitForSeconds(getWaitTime());
         }
+    }
+
+    void addToLine(bool top, char character) {
+        if (top)
+        {
+            currentTopLine += character;
+        }
+        else
+        {
+            currentBottomLine += character;
+        }
+    }
+
+    void removeLastCharOfLine(bool top)
+    {
+        if (top)
+        {
+            currentTopLine = currentTopLine.Remove(currentTopLine.Length - 1);
+        }
+        else
+        {
+            currentBottomLine = currentBottomLine.Remove(currentTopLine.Length - 1);
+        }
+    }
+
+    IEnumerator doDiceRoll(bool top) {
+        int result = Random.Range(1, 6);
+        addToLine(top, result.ToString()[0]);
+        pausedForInput = true;
+        while (pausedForInput) {
+            result = Random.Range(1, 6);
+            removeLastCharOfLine(top);
+            addToLine(top, result.ToString()[0]);
+            yield return 0;
+        }
+        rollResults.Add(result);
+        SFXManager.Instance.playBeep();
     }
 
     IEnumerator pauseForInput()
