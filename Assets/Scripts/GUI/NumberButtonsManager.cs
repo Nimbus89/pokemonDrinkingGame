@@ -59,7 +59,7 @@ public class NumberButtonsManager : MonoBehaviour {
         GUI.skin = skin;
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 3; j++) {
-                int buttonNumber = (i + 1) * (j + 1);
+                int buttonNumber = (i * 3) + (j + 1);
                 
                 Rect position = new Rect(numberButtonHorizontalMargin + ((numberButtonWidth + numberButtonInternalMargin) * j),
                     numberButtonVerticalMargin + ((numberButtonHeight + numberButtonInternalMargin) * i), numberButtonWidth, numberButtonHeight);

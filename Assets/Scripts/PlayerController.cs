@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
 	public Pokemon pokemon;
 	public PokemonController pokeController;
 	public CallbackDelegate callback;
+    public int legendaryBirds;
 	
 	private DicerollController roller;
 	private int badges = 0;
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour {
     }
 
 	void Start(){
+        legendaryBirds = 0;
         hasMagikarp = false;
 		roller = new DicerollController(gameController);
 		currentStartOfTurnEffects = new Stack<AftereffectController>();
