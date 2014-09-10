@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PokemonSelectorManager : MonoBehaviour {
+public class PokemonSelectorManager : MonoBehaviour
+{
 
     private static PokemonSelectorManager instance;
 

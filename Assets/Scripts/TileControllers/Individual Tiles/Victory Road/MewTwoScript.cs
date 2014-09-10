@@ -4,6 +4,8 @@ using System.Collections;
 public class MewTwoScript : BasicModalTileController
 {
 
+    public override bool IS_GOLD { get { return true; } }
+
     protected override string getModalMessage()
     {
         return "Throw that Master Ball and catch the most powerful POKeMON ever created! All other players toast to your glory! You are now a POKeMON master!";

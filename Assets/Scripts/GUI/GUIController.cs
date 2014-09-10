@@ -54,6 +54,22 @@ public class GUIController : MonoBehaviour {
     }
 
 
+
+    public void DisplayDialogThenYesNoButtons(string text, BooleanCallbackDelegate cb)
+    {
+        StartCoroutine(displayDialogThenYesNoButtons(text, cb));
+    }
+    private IEnumerator displayDialogThenYesNoButtons(string text, BooleanCallbackDelegate cb)
+    {
+        yield return StartCoroutine(DialogManager.Instance.showDialog(text, false));
+        yield return StartCoroutine( YesNoButtonManager.Instance.ShowButtons((bool result) =>
+        {
+            DialogManager.Instance.enabled = false;
+            cb(result);
+        }));
+    }
+
+
     public void DisplayDialogThenNumberPicker(string text, DicerollCallbackDelegate cb) {
         StartCoroutine(displayDialogThenNumberPicker(text, cb));
     }
