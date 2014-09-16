@@ -31,10 +31,12 @@ public class GameController : MonoBehaviour {
 	void Start () {
         MusicManager.Instance.playPaletteTownMusic();
 		Pokemon[] starters = PlayerSetupController.starters;
+        string[] playerNames = PlayerSetupController.playerNames;
         if (starters == null || starters.Length == 0) {
             starters = new Pokemon[] { Pokemon.charmander };
+            playerNames = new string[] { "Player X" };
         }
-        setupPlayers(starters);
+        setupPlayers(starters, playerNames);
 		goldSquares = new List<int>();
 		int count = 0;
 		foreach(TileController tile in squares){
@@ -47,14 +49,14 @@ public class GameController : MonoBehaviour {
         GUIController.Instance.DisplayBasicButton("Start Game", startGame);
 	}
 
-    void setupPlayers(Pokemon[] starters)
+    void setupPlayers(Pokemon[] starters, string[] playerNames)
     {
         players = new PlayerController[starters.Length];
         for (int i = 0; i < starters.Length; i++)
         {
             GameObject playerObj = (GameObject)Instantiate(playerPrefab);
             PlayerController player = playerObj.GetComponent<PlayerController>();
-            player.setup(this, i + 1, starters[i]);
+            player.setup(this, i + 1, starters[i], playerNames[i]);
             players[i] = player;
         }
     }
@@ -115,7 +117,7 @@ public class GameController : MonoBehaviour {
 	}
 
     public void endGame() {
-        GUIController.Instance.DisplayBasicModal("Player " + currentPlayerNumber + " wins!", () => {
+        GUIController.Instance.DisplayBasicModal(getCurrentPlayer().getName() + " wins!", () => {
             Application.LoadLevel(0);
         });
     }

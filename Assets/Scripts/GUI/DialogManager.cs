@@ -14,7 +14,7 @@ public class DialogManager : MonoBehaviour {
     private int topLineOffset = 30;
     private int bottomLineOffset = 60;
     private int lineLength = 28;
-    private float characterWait = 0.03F;
+    private float characterWait = 0.02F;
     private int skipMultiplier = 4;
     private int scrollAnimationOffset = 0;
     private int arrowBlinkSpeed = 40;

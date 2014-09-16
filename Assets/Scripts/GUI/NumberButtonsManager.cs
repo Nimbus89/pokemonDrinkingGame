@@ -3,8 +3,6 @@ using System.Collections;
 
 public class NumberButtonsManager : MonoBehaviour {
 
-    public GUISkin skin;
-
     private int numberButtonInternalMargin;
     private int numberButtonWidth;
     private int numberButtonHeight;
@@ -56,7 +54,7 @@ public class NumberButtonsManager : MonoBehaviour {
     }
 
     public void OnGUI() {
-        GUI.skin = skin;
+        GUI.skin = GUIController.Instance.skin;
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 3; j++) {
                 int buttonNumber = (i * 3) + (j + 1);
