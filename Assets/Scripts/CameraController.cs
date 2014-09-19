@@ -3,6 +3,27 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour {
 
+
+    public static CameraController Instance
+    {
+        get { return instance; }
+    }
+
+    private static CameraController instance;
+
+    void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            instance = this;
+        }
+    }
+
 	public static float READ_TILE_SIZE = 3;
 	public static float READ_RULES_SIZE = 6;
 	public static float DEFAULT_SIZE = 8;

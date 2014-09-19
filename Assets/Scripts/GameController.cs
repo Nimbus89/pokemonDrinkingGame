@@ -19,7 +19,6 @@ public class GameController : MonoBehaviour {
     
     private static List<int> goldSquares;
 	public TileController[] squares;
-	public CameraController cameraController;
 	public PlayerController[] players;
 	
 	public int currentPlayerNumber;
@@ -67,7 +66,7 @@ public class GameController : MonoBehaviour {
 	}
 	
 	void startTurn(){
-		cameraController.FocusOnPlayer(getCurrentPlayer());
+		CameraController.Instance.FocusOnPlayer(getCurrentPlayer());
 		getCurrentPlayer().takeTurn(nextPlayer);
 	}
 	

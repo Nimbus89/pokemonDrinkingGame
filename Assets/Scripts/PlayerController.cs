@@ -125,11 +125,15 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+    public void MoveBack(int spaces, CallbackDelegate cb) {
+        StartCoroutine(goToTile(this.currentTileNumber - spaces, false, cb));
+    }
+
     public void GoToTile(int tileNum){
         StartCoroutine(goToTile(tileNum));
     }
 
-    private IEnumerator goToTile(int tileNum) {
+    private IEnumerator goToTile(int tileNum, bool applyRules = true, CallbackDelegate cb = null) {
         if (tileNum > gameController.lastTileNum()) {
             tileNum = gameController.lastTileNum();
         }
@@ -141,10 +145,17 @@ public class PlayerController : MonoBehaviour {
             yield return new WaitForSeconds(moveWaitTime);
             if (gameController.getCurrentTile() is ImmediateMessageTileController) {
                 ImmediateMessageTileController tc = gameController.getCurrentTile() as ImmediateMessageTileController;
-                yield return StartCoroutine(tc.showImmediatedMessage());
+                if (direction == 1) {
+                    yield return StartCoroutine(tc.showImmediatedMessage());
+                }
             }
         }
-        gameController.getCurrentTile().applyRules();
+        if (applyRules)
+        {
+            gameController.getCurrentTile().applyRules();
+        } else {
+            cb();
+        }
     }
     private IEnumerator animatedMoveToPos(Vector3 target)
     {
