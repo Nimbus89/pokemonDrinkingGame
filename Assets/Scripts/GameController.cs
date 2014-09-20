@@ -14,11 +14,7 @@ public class GameController : MonoBehaviour {
 
 
 
-
-
-    
-    private static List<int> goldSquares;
-	public TileController[] squares;
+    public TileController[] squares;
 	public PlayerController[] players;
 	
 	public int currentPlayerNumber;
@@ -36,13 +32,9 @@ public class GameController : MonoBehaviour {
             playerNames = new string[] { "Player X" };
         }
         setupPlayers(starters, playerNames);
-		goldSquares = new List<int>();
 		int count = 0;
 		foreach(TileController tile in squares){
-			tile.setup(this);
-			if(tile.IS_GOLD){
-				goldSquares.Add(count);
-			}
+			tile.setup(this, count);
 			count++;
 		}
         GUIController.Instance.DisplayBasicButton("Start Game", startGame);
@@ -74,10 +66,6 @@ public class GameController : MonoBehaviour {
 		return players[currentPlayerNumber-1];
 	}
 	
-	public TileController getCurrentTile(){
-		return squares[getCurrentPlayer().currentTileNumber];
-	}
-	
 	public Vector3 getFreeSpace(int tileNumber){
 		Vector3 squarePosition = squares[tileNumber].transform.position;
 		return squarePosition;
@@ -96,24 +84,6 @@ public class GameController : MonoBehaviour {
 		return squares[result];
 		
 	}
-	
-	public bool isPassingGoldSquare(int oldTileNum, int newTileNum, int skipable){
-		for(int i = skipable; i < goldSquares.Count; i++){
-			if(oldTileNum < goldSquares[i] && newTileNum > goldSquares[i]){
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	public int getNextGoldSquare(int oldTileNum){
-		for(int i = 0; i < goldSquares.Count; i++){
-			if(oldTileNum < goldSquares[i]){
-				return goldSquares[i];
-			}
-		}
-		return 0;
-	}
 
     public void endGame() {
         GUIController.Instance.DisplayBasicModal(getCurrentPlayer().getName() + " wins!", () => {
@@ -123,6 +93,21 @@ public class GameController : MonoBehaviour {
 
     public int lastTileNum() {
         return this.squares.Length - 1;
+    }
+
+    public PlayerController[] GetPlayersOnTile(int tileNum) { 
+        List<PlayerController> playersOnTile = new List<PlayerController>();
+        foreach(PlayerController player in players){
+            if (player.currentTileNumber == tileNum) {
+                playersOnTile.Add(player);
+            }
+        }
+
+        return playersOnTile.ToArray();
+    }
+
+    public TileController GetTileByNum(int tileNum) {
+        return this.squares[tileNum];
     }
 	
 	

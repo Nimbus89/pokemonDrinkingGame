@@ -8,10 +8,13 @@ public abstract class TileController : MonoBehaviour {
 	protected GameController gameController;
 	
 	protected DicerollController roller;
+
+    protected int myTileNum;
 	
-	public void setup(GameController controller){
+	public void setup(GameController controller, int tileNum){
 		gameController = controller;
 		roller = new DicerollController(gameController);
+        this.myTileNum = tileNum;
 	}
 	
 	public void applyRules(){
@@ -23,4 +26,8 @@ public abstract class TileController : MonoBehaviour {
 	protected void returnControlToPlayer(){
 		gameController.getCurrentPlayer().endTurn();
 	}
+
+    public PlayerController[] GetPlayersOnMe() {
+        return gameController.GetPlayersOnTile(myTileNum);
+    }
 }

@@ -17,8 +17,6 @@ public class PlayerController : MonoBehaviour {
     public int legendaryBirds;
 	
 	private DicerollController roller;
-	private int badges = 0;
-	
 	
 	public List<AftereffectController> startOfTurnEffects;
 	public Stack<AftereffectController> currentStartOfTurnEffects;
@@ -31,6 +29,7 @@ public class PlayerController : MonoBehaviour {
     private string turnSkipMessage;
     private bool hasMagikarp;
     private string name;
+    private HashSet<TileController> visitedTiles;
 
     public string getName() {
         return this.name;
@@ -55,6 +54,7 @@ public class PlayerController : MonoBehaviour {
     }
 
 	void Start(){
+        visitedTiles = new HashSet<TileController>();
         legendaryBirds = 0;
         hasMagikarp = false;
 		roller = new DicerollController(gameController);
@@ -118,11 +118,7 @@ public class PlayerController : MonoBehaviour {
 	
 	public void move(int rollResult){
 		int spacesToMove = modifyRoll(rollResult);
-		if(!gameController.isPassingGoldSquare(currentTileNumber, currentTileNumber + spacesToMove, badges)){
-			GoToTile(currentTileNumber + spacesToMove);
-		} else {
-			GoToTile (gameController.getNextGoldSquare(currentTileNumber));
-		}
+		GoToTile(currentTileNumber + spacesToMove);
 	}
 
     public void MoveBack(int spaces, CallbackDelegate cb) {
@@ -143,20 +139,29 @@ public class PlayerController : MonoBehaviour {
             currentTileNumber += direction;
             yield return StartCoroutine(animatedMoveToPos(gameController.getFreeSpace(currentTileNumber)));
             yield return new WaitForSeconds(moveWaitTime);
-            if (gameController.getCurrentTile() is ImmediateMessageTileController) {
-                ImmediateMessageTileController tc = gameController.getCurrentTile() as ImmediateMessageTileController;
+            if (getCurrentTile() is ImmediateMessageTileController) {
+                ImmediateMessageTileController tc = getCurrentTile() as ImmediateMessageTileController;
                 if (direction == 1) {
                     yield return StartCoroutine(tc.showImmediatedMessage());
                 }
             }
+            if (getCurrentTile().IS_GOLD && !visitedTiles.Contains(getCurrentTile())) {
+                break;
+            }
         }
         if (applyRules)
         {
-            gameController.getCurrentTile().applyRules();
+            visitedTiles.Add(getCurrentTile());
+            getCurrentTile().applyRules();
         } else {
             cb();
         }
     }
+
+    private TileController getCurrentTile() {
+        return gameController.GetTileByNum(this.currentTileNumber);
+    }
+
     private IEnumerator animatedMoveToPos(Vector3 target)
     {
         while (transform.position != target)

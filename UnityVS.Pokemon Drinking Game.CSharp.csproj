@@ -109,6 +109,7 @@
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 4 Celadon\CuboneScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 4 Celadon\EeveeScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 4 Celadon\GaryScript2.cs" />
+    <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 4 Celadon\GhostScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 4 Celadon\HaunterScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 4 Celadon\MagikarpScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 4 Celadon\PokemonTowerScript.cs" />
