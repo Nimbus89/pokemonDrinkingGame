@@ -10,6 +10,8 @@ public abstract class TileController : MonoBehaviour {
 	protected DicerollController roller;
 
     protected int myTileNum;
+
+    protected PlayerController currentPlayer;
 	
 	public void setup(GameController controller, int tileNum){
 		gameController = controller;
@@ -17,14 +19,15 @@ public abstract class TileController : MonoBehaviour {
         this.myTileNum = tileNum;
 	}
 	
-	public void applyRules(){
+	public void applyRules(PlayerController player){
+        currentPlayer = player;
 		doRules();
 	}
 	
 	protected abstract void doRules();
 	
 	protected void returnControlToPlayer(){
-		gameController.getCurrentPlayer().endTurn();
+        currentPlayer.endTurn();
 	}
 
     public PlayerController[] GetPlayersOnMe() {

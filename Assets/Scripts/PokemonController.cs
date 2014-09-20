@@ -30,38 +30,60 @@ public class PokemonController {
 	public void Evolve(CallbackDelegate cb){
 		string oldPokemonName = Helpers.Titlize(pokemon.ToString());
 		callback = cb;
-		bool success = true;
+        int level = 0;
 		switch(pokemon){
 			case Pokemon.bulbasaur:
 				pokemon = Pokemon.ivysaur;
+                level = 1;
 				break;
 			case Pokemon.ivysaur:
 				pokemon = Pokemon.venusaur;
+                level = 2;
 				break;
 			case Pokemon.charmander:
 				pokemon = Pokemon.charmeleon;
+                level = 1;
 				break;
 			case Pokemon.charmeleon:
 				pokemon = Pokemon.charizard;
+                level = 2;
 				break;
 			case Pokemon.squirtle:
 				pokemon = Pokemon.wartortle;
+                level = 1;
 				break;
 			case Pokemon.wartortle:
 				pokemon = Pokemon.blastoise;
+                level = 2;
 				break;
 			case Pokemon.pikachu:
 				pokemon = Pokemon.raichu;
+                level = 1;
 				break;
 			default:
-				success = false;
+                level = 0;
 				break;
 		}
-		if(success){
-            gui.DisplayBasicModal("Your " + oldPokemonName + " evolved into a " + Helpers.Titlize(pokemon.ToString()) + ".", callback);
-		} else {
-            gui.DisplayBasicModal("Your pokemon is fully evolved!", callback);
+		if(level == 1)
+        {
+            gui.DisplayBasicDialogs(new string[]{
+                "Your " + oldPokemonName + " evolved into a " + Helpers.Titlize(pokemon.ToString()) + ".",
+                "Everybody drinks. Anyone with a starter weak to yours drinks 2."
+            }, callback);
 		}
+        else if (level == 2)
+        {
+            gui.DisplayBasicDialogs(new string[]{
+                "Your " + oldPokemonName + " evolved into a " + Helpers.Titlize(pokemon.ToString()) + ".",
+                "Your POKeMON is fully evolved! Everybody drinks twice. Anyone with a starter weak to yours drinks 4."
+            }, callback);
+        }
+        else if (level == 0) 
+        {
+            gui.DisplayBasicModal("Your POKeMON can't evolve any further. Sadly drink 3.", callback);
+        }
+
+        refreshSprite();
 	}
 
 }

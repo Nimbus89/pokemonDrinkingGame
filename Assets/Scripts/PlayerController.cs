@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour {
         if (applyRules)
         {
             visitedTiles.Add(getCurrentTile());
-            getCurrentTile().applyRules();
+            getCurrentTile().applyRules(this);
         } else {
             cb();
         }
@@ -200,4 +200,8 @@ public class PlayerController : MonoBehaviour {
 	public void stringShotMe(){
 		stringShotted = true;
 	}
+
+    public void EvolveStarter(CallbackDelegate cb) {
+        pokeController.Evolve(cb);
+    }
 }

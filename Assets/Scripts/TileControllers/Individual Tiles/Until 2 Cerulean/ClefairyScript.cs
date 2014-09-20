@@ -8,7 +8,7 @@ public class ClefairyScript : BasicModalTileController {
 	}
 	
 	override protected void afterModal(){
-		gameController.getRandomTile().applyRules();
+		gameController.getRandomTile().applyRules(currentPlayer);
 	}
 	
 }

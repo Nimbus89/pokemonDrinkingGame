@@ -83,6 +83,7 @@
     <Compile Include="Assets\Scripts\TileControllers\Base Classses\IAftereffectTileController.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Base Classses\ImmediateMessageTileController.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Base Classses\TileController.cs" />
+    <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\EvolutionScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\UnimplementedTileScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 1 Pewter\BeedrillScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 1 Pewter\CaterpieScript.cs" />
