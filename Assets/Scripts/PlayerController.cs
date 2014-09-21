@@ -93,6 +93,7 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	public void handleStartOfTurnAfterEffects(){
+        currentStartOfTurnEffects = new Stack<AftereffectController>();
 		foreach(AftereffectController effect in startOfTurnEffects){
 			currentStartOfTurnEffects.Push (effect);
 		}

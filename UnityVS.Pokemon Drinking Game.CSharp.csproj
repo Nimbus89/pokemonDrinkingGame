@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Aftereffect Controllers\AftereffectController.cs" />
     <Compile Include="Assets\Scripts\Aftereffect Controllers\ChampionGaryAftereffectController.cs" />
+    <Compile Include="Assets\Scripts\Aftereffect Controllers\ConfusedAftereffectController.cs" />
     <Compile Include="Assets\Scripts\Aftereffect Controllers\CruisingAftereffectController.cs" />
     <Compile Include="Assets\Scripts\Aftereffect Controllers\DoOverAftereffectController.cs" />
     <Compile Include="Assets\Scripts\Aftereffect Controllers\WrapAftereffectController.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Assets\Scripts\TileControllers\Base Classses\DicerollTileController.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Base Classses\IAftereffectTileController.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Base Classses\ImmediateMessageTileController.cs" />
+    <Compile Include="Assets\Scripts\TileControllers\Base Classses\PickPlayerTileController.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Base Classses\TileController.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\EvolutionScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\UnimplementedTileScript.cs" />
@@ -118,14 +120,17 @@
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 4 Celadon\SnorlaxScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 5 Saffron\Gary3Script.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 5 Saffron\GiovanniScript.cs" />
+    <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 5 Saffron\LaprasScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 5 Saffron\MagnetonScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 5 Saffron\PorygonScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 5 Saffron\PsyduckScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 5 Saffron\SaffronGymScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 5 Saffron\SilphCoScript.cs" />
+    <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 5 Saffron\TeamRocketScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 6 Fuschia\DittoScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 6 Fuschia\DoduoScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 6 Fuschia\EeveeloutionScript.cs" />
+    <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 6 Fuschia\FightingGymScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 6 Fuschia\FuschiaGymScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 6 Fuschia\KrabbyScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 7 Cinnabar\CinnabarGymScript.cs" />

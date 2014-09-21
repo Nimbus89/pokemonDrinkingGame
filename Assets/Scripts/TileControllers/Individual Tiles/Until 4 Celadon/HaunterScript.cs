@@ -1,27 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HaunterScript : TileController
+public class HaunterScript : PickPlayerTileController
 {
-    protected override void doRules()
+
+    protected override string initialModalText()
     {
+        return "Haunter used Dream Eater! Devour someone else's dreams by moving them back 6 spaces.";
+    }
 
-        GUIController.Instance.DisplayBasicDialogs(new string[] { "Haunter used Dream Eater! Devour someone else's dreams by moving them back 6 spaces." }, () =>
+    protected override PlayerController[] playersToPickFrom()
+    {
+        return gameController.players;
+    }
+
+    protected override void reactToPlayerPicked(PlayerController player)
+    {
+        DialogManager.Instance.enabled = false;
+        CameraController.Instance.FocusOnPlayer(player);
+        player.MoveBack(6, () =>
         {
-
-            StartCoroutine(PlayerPickerManager.Instance.ShowButtons((PlayerController player) =>
-            {
-                DialogManager.Instance.enabled = false;
-                CameraController.Instance.FocusOnPlayer(player);
-                player.MoveBack(6, () =>
-                {
-                    CameraController.Instance.FocusOnPlayer(gameController.getCurrentPlayer());
-                    returnControlToPlayer();
-                });
-            }, gameController.players));
-
-        }, false);
-
-
+            CameraController.Instance.FocusOnPlayer(gameController.getCurrentPlayer());
+            returnControlToPlayer();
+        });
     }
 }
