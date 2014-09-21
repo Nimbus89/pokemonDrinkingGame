@@ -146,10 +146,14 @@
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 7 Cinnabar\SeakingScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 8 Viridian\FossilScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 8 Viridian\MagmarScript.cs" />
+    <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 8 Viridian\MissingNoScript.cs" />
+    <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 8 Viridian\PersianScript.cs" />
+    <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 8 Viridian\PokeballScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 8 Viridian\ViridianGymScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Victory Road\ChampGaryTileController.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Victory Road\DragoniteScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Victory Road\EliteFourScript.cs" />
+    <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Victory Road\FearowScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Victory Road\GravelerScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Victory Road\GyaradosScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Victory Road\LegendaryBirdsScript.cs" />

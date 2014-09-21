@@ -109,7 +109,14 @@ public class GameController : MonoBehaviour {
     public TileController GetTileByNum(int tileNum) {
         return this.squares[tileNum];
     }
-	
+
+    public PlayerController getPreviousPlayer() {
+        int previousPlayerIndex = currentPlayerNumber - 2;
+        if (previousPlayerIndex < 0) {
+            previousPlayerIndex = players.Length - 1;
+        }
+        return players[previousPlayerIndex];
+    }
 	
 }
 

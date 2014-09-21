@@ -138,6 +138,11 @@ public class PlayerController : MonoBehaviour {
         StartCoroutine(goToTile(this.currentTileNumber - spaces, false, cb));
     }
 
+    public void MoveTo(int tileNum, CallbackDelegate cb)
+    {
+        StartCoroutine(goToTile(tileNum, false, cb));
+    }
+
     public void GoToTile(int tileNum){
         StartCoroutine(goToTile(tileNum));
     }
@@ -152,15 +157,19 @@ public class PlayerController : MonoBehaviour {
             currentTileNumber += direction;
             yield return StartCoroutine(animatedMoveToPos(gameController.getFreeSpace(currentTileNumber)));
             yield return new WaitForSeconds(moveWaitTime);
-            if (getCurrentTile() is ImmediateMessageTileController) {
-                ImmediateMessageTileController tc = getCurrentTile() as ImmediateMessageTileController;
-                if (direction == 1) {
+            if (direction == 1)
+            {
+                if (getCurrentTile() is ImmediateMessageTileController)
+                {
+                    ImmediateMessageTileController tc = getCurrentTile() as ImmediateMessageTileController;
                     yield return StartCoroutine(tc.showImmediatedMessage());
                 }
+                if (getCurrentTile().IS_GOLD && !visitedTiles.Contains(getCurrentTile()))
+                {
+                    break;
+                }
             }
-            if (getCurrentTile().IS_GOLD && !visitedTiles.Contains(getCurrentTile())) {
-                break;
-            }
+
         }
         if (applyRules)
         {
@@ -171,7 +180,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private TileController getCurrentTile() {
+    public TileController getCurrentTile() {
         return gameController.GetTileByNum(this.currentTileNumber);
     }
 
