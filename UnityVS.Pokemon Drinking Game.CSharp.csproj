@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\TileControllers\Base Classses\IAftereffectTileController.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Base Classses\ImmediateMessageTileController.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Base Classses\PickPlayerTileController.cs" />
+    <Compile Include="Assets\Scripts\TileControllers\Base Classses\StartOfTurnEffectTileController.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Base Classses\TileController.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\EvolutionScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\UnimplementedTileScript.cs" />
@@ -127,12 +128,17 @@
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 5 Saffron\SaffronGymScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 5 Saffron\SilphCoScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 5 Saffron\TeamRocketScript.cs" />
+    <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 6 Fuschia\ChanseyScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 6 Fuschia\DittoScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 6 Fuschia\DoduoScript.cs" />
+    <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 6 Fuschia\DratiniScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 6 Fuschia\EeveeloutionScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 6 Fuschia\FightingGymScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 6 Fuschia\FuschiaGymScript.cs" />
+    <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 6 Fuschia\KangaskhanScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 6 Fuschia\KrabbyScript.cs" />
+    <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 6 Fuschia\SafariZoneScript.cs" />
+    <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 6 Fuschia\TaurusScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 7 Cinnabar\CinnabarGymScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 7 Cinnabar\DewgongScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Until 7 Cinnabar\ElectabuzzScript.cs" />

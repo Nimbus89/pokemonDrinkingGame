@@ -28,11 +28,11 @@ public class PlayerController : MonoBehaviour {
     private int turnsToSkip = 0;
     private string turnSkipMessage;
     private bool hasMagikarp;
-    private string name;
+    private string playerName;
     private HashSet<TileController> visitedTiles;
 
     public string getName() {
-        return this.name;
+        return this.playerName;
     }
 
     public void getMagikarp() {
@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour {
         pokeController = new PokemonController(pokemon, GUIController.Instance, this);
 		this.playerNumber = playerNumber;
         this.transform.position = this.gameController.getFreeSpace(currentTileNumber);
-        this.name = name;
+        this.playerName = name;
 	}
 	
 	public void takeTurn(CallbackDelegate cb){
@@ -85,11 +85,23 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	private void announceTurn(){
-        GUIController.Instance.DisplayBasicModal(getAnnounceTurnMessage(), handleStartOfTurnAfterEffects);
+        GUIController.Instance.DisplayBasicModal(getAnnounceTurnMessage(), checkForStartOfTurnEffectTile);
 	}
-	
+
+    private void checkForStartOfTurnEffectTile() {
+        if (getCurrentTile() is StartOfTurnEffectTileController)
+        {
+            StartOfTurnEffectTileController controller = getCurrentTile() as StartOfTurnEffectTileController;
+            controller.doStartOfTurnRules(this, handleStartOfTurnAfterEffects);
+        }
+        else 
+        {
+            handleStartOfTurnAfterEffects();
+        }
+    }
+
 	public string getAnnounceTurnMessage(){
-		return name + "'s Turn.";
+		return playerName + "'s Turn.";
 	}
 	
 	public void handleStartOfTurnAfterEffects(){
