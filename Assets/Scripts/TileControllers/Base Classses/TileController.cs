@@ -21,7 +21,15 @@ public abstract class TileController : MonoBehaviour {
 	
 	public void applyRules(PlayerController player){
         currentPlayer = player;
-		doRules();
+        TypedTileScript typedTileScript = this.GetComponent<TypedTileScript>();
+        if (typedTileScript != null)
+        {
+            typedTileScript.ApplyTypeRules(player.GetPokemonType(), doRules);
+        }
+        else 
+        {
+            doRules();
+        }
 	}
 	
 	protected abstract void doRules();

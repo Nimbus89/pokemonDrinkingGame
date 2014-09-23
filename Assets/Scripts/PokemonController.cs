@@ -9,13 +9,19 @@ public class PokemonController {
 	private CallbackDelegate callback;
 	private GUIController gui;
 	private PlayerController player;
+    private PokemonType type;
 	
 	public PokemonController(Pokemon starter, GUIController gui, PlayerController player){
+        type = GetType(starter);
 		this.gui = gui;
 		this.player = player;
 		pokemon = starter;
 		refreshSprite();
 	}
+
+    public PokemonType GetPokemonType() {
+        return this.type;
+    }
 	
 	public void refreshSprite(){
 		sprite = PokemonSprites.getSprite(pokemon);
@@ -24,6 +30,7 @@ public class PokemonController {
 	
 	public void becomePikachi(){
 		pokemon = Pokemon.pikachu;
+        type = new ElectricType();
 		refreshSprite();
 	}
 	
@@ -85,5 +92,24 @@ public class PokemonController {
 
         refreshSprite();
 	}
+
+    public static PokemonType GetType(Pokemon pokemon) {
+        switch (pokemon) { 
+            case Pokemon.squirtle:
+            case Pokemon.wartortle:
+            case Pokemon.blastoise:
+                return new WaterType();
+            case Pokemon.charmander:
+            case Pokemon.charmeleon:
+            case Pokemon.charizard:
+                return new FireType();
+            case Pokemon.bulbasaur:
+            case Pokemon.ivysaur:
+            case Pokemon.venusaur:
+                return new GrassType();
+            default:
+                return new ElectricType();
+        }
+    }
 
 }

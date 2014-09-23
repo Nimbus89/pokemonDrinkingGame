@@ -158,6 +158,17 @@
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Victory Road\GyaradosScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Victory Road\LegendaryBirdsScript.cs" />
     <Compile Include="Assets\Scripts\TileControllers\Individual Tiles\Victory Road\MewTwoScript.cs" />
+    <Compile Include="Assets\Scripts\Types\ElectricType.cs" />
+    <Compile Include="Assets\Scripts\Types\FireType.cs" />
+    <Compile Include="Assets\Scripts\Types\GrassType.cs" />
+    <Compile Include="Assets\Scripts\Types\TypedTiles\BlueTile.cs" />
+    <Compile Include="Assets\Scripts\Types\TypedTiles\GreenTile.cs" />
+    <Compile Include="Assets\Scripts\Types\TypedTiles\PinkTile.cs" />
+    <Compile Include="Assets\Scripts\Types\TypedTiles\PokemonType.cs" />
+    <Compile Include="Assets\Scripts\Types\TypedTiles\RedTile.cs" />
+    <Compile Include="Assets\Scripts\Types\TypedTiles\TypedTileScript.cs" />
+    <Compile Include="Assets\Scripts\Types\TypedTiles\YellowTile.cs" />
+    <Compile Include="Assets\Scripts\Types\WaterType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>

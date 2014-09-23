@@ -226,4 +226,8 @@ public class PlayerController : MonoBehaviour {
     public void EvolveStarter(CallbackDelegate cb) {
         pokeController.Evolve(cb);
     }
+
+    public PokemonType GetPokemonType() {
+        return this.pokeController.GetPokemonType();
+    }
 }
