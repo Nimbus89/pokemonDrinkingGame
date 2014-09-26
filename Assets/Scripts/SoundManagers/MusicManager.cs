@@ -8,12 +8,19 @@ public class MusicManager : MonoBehaviour
     private static AudioClip profSpeechMusic;
     private static AudioClip paletteTownMusic;
     private static MusicManager instance = null;
+    private static float fadeSpeed = 1.3f;
 
     private AudioSource source;
 
     public static MusicManager Instance
     {
         get { return instance; }
+    }
+
+    void Update() {
+        if (Input.GetKeyDown("m")) {
+            ToggleMute();
+        }
     }
 
     void Awake()
@@ -48,9 +55,33 @@ public class MusicManager : MonoBehaviour
         source.Play();
     }
 
-    public void playPaletteTownMusic()
+    public void PlayTileMusic(AudioClip tileMusic) {
+        if (tileMusic != source.clip) {
+            StartCoroutine(fadeToTrack(tileMusic));
+        }
+    }
+
+    public void ToggleMute() {
+        source.mute = !source.mute;
+    }
+
+    public IEnumerator fadeToTrack(AudioClip track)
     {
-        source.clip = paletteTownMusic;
+        while (source.volume > 0.1) {
+            source.volume -= fadeSpeed * Time.deltaTime;
+            Debug.Log(source.volume);
+            yield return 0;
+        }
+        source.clip = track;
+        source.time = Random.Range(0, track.length);
         source.Play();
+        Debug.Log(source.volume);
+        while (source.volume < 0.9)
+        {
+            Debug.Log(source.volume);
+            source.volume += fadeSpeed * Time.deltaTime;
+            yield return 0;
+        }
+        
     }
 }

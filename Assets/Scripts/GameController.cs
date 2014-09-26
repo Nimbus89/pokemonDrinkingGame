@@ -24,7 +24,6 @@ public class GameController : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-        MusicManager.Instance.playPaletteTownMusic();
 		Pokemon[] starters = PlayerSetupController.starters;
         string[] playerNames = PlayerSetupController.playerNames;
         if (starters == null || starters.Length == 0) {
@@ -59,6 +58,7 @@ public class GameController : MonoBehaviour {
 	
 	void startTurn(){
 		CameraController.Instance.FocusOnPlayer(getCurrentPlayer());
+        getCurrentPlayer().getCurrentTile().PlayMyMusic();
 		getCurrentPlayer().takeTurn(nextPlayer);
 	}
 	
