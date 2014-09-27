@@ -10,7 +10,7 @@ public class ZubatAftereffectController : AftereffectController
 
 	public override void applyEffect(){
 
-		roller.doDiceRollWithMessage("Zubats, they... they're everywhere! Roll more than 2 to escape!", reactToDiceRoll);
+        roller.doNormalDiceRollWithMessage("Zubats, they... they're everywhere! Roll more than 2 to escape!", reactToDiceRoll);
 
 	}
 	

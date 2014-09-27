@@ -11,7 +11,7 @@ public class ConfusedAftereffectController : AftereffectController
 	
 	public override void applyEffect(){
 
-        roller.doDiceRollWithMessage("Your POKeMON is confused! Roll a die.", (int result) =>
+        roller.doNormalDiceRollWithMessage("Your POKeMON is confused! Roll a die.", (int result) =>
 
         {
             if (result >= 4)
