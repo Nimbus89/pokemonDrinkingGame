@@ -15,7 +15,7 @@ public class PokeballScript : TileController
                      }
                      else 
                      {
-                         GUIController.Instance.DisplayBasicModal("Badass, you caught it! Everybody dirnks in celebration!", returnControlToPlayer);
+                         GUIController.Instance.DisplayBasicModal("Badass, you caught it! Everybody drinks in celebration!", returnControlToPlayer);
                      }
                  });
              }

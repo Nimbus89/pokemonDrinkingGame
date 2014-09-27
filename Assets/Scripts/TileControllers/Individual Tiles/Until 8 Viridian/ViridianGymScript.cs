@@ -8,6 +8,6 @@ public class ViridianGymScript : BasicModalTileController
 
     protected override string getModalMessage()
     {
-        return "First, take a drink. Then, if you're a guy, guys rink 3. If you're a girl, girls drink 3.";
+        return "First, take a drink. Then, if you're a guy, guys drink 3. If you're a girl, girls drink 3.";
     }
 }

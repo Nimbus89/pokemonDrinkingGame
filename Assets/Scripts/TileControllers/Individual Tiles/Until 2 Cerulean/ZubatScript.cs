@@ -5,7 +5,7 @@ public class ZubatScript : BasicModalTileController
 {
 
 	override protected string getModalMessage(){
-		return "Zubats, they're everywhere! Take a drink!";
+		return "Zubats, they... they're everywhere! Take a drink!";
 	}
 	
 	override protected void afterModal(){

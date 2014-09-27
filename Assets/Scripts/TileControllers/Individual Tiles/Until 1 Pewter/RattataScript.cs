@@ -4,7 +4,7 @@ using System.Collections;
 public class RattataScript : BasicModalTileController {
 
 	override protected string getModalMessage(){
-		return "Take off your shoes and socks";
+		return "A swarm of Rattata appears! They devour your shoes and socks. For the remainder of the game, play without them.";
 	}
 
 }

@@ -5,6 +5,6 @@ public class DoduoScript : BasicModalTileController
 {
     protected override string getModalMessage()
     {
-        return "Doduo used Double-Edge! You give 4 dirnks, but you also drink 2.";
+        return "Doduo used Double-Edge! Give four drinks, but take two in recoil!.";
     }
 }

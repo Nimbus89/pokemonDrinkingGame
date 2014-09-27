@@ -4,7 +4,7 @@ using System.Collections;
 public class CaterpieScript : BasicModalTileController {
 
 	override protected string getModalMessage(){
-		return "Everyone else moves half for one turn.";
+		return "Caterpie used String Shot! Until your next turn, every player moves half of thier dice roll.";
 	}
 	
 	override protected void afterModal(){

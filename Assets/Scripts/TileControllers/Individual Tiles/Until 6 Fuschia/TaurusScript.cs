@@ -14,6 +14,6 @@ public class TaurusScript : BasicModalTileController, StartOfTurnEffectTileContr
 
     protected override string getModalMessage()
     {
-        return "A wild Taurus appeared... byt instantly fled. Drink 2 for not being quick enough.";
+        return "A wild Taurus appeared... but instantly fled. Drink 2 for not being quick enough.";
     }
 }

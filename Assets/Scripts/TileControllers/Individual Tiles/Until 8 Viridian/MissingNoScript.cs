@@ -38,7 +38,7 @@ public class MissingNoScript : TileController {
     }
 
     private void lose() {
-        GUIController.Instance.DisplayBasicModal("Fuck! Your save file is corrupted. Better start a new file. Go back to Pallette Town! And drink the whole way there!", () => {
+        GUIController.Instance.DisplayBasicModal("Fuck! Your save file is corrupted. Better start a new file. Go back to Pallett Town! And drink the whole way there!", () => {
             currentPlayer.MoveTo(0, returnControlToPlayer); 
         });
     }

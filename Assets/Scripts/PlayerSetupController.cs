@@ -15,8 +15,9 @@ public class PlayerSetupController : MonoBehaviour {
             "Hello there! Welcome to the world of POKeMON!",
             "My name is OAK! People call me the POKeMON PROF!",
             "This world is inhabited by creatures called POKeMON!",
-            "Blah blah blah alcohol. Blah blah blah adventure awaits.",
-            "First, how many of you are there?"
+            "For some people, POKeMON are pets, others use them for fights",
+            "Myself... I like to use POKeMON as an opportunity to get wasted.",
+            "First of all, how many of you are there?"
         }, () => {
             oakSprite.renderer.enabled = false;
             GUIController.Instance.DisplaySixNumberButtons(selectPlayerNumber);
@@ -46,7 +47,8 @@ public class PlayerSetupController : MonoBehaviour {
 
         oakSprite.renderer.enabled = true;
         GUIController.Instance.DisplayBasicDialogs(new string[]{
-            "Blah blah adventure."
+            "A world full of beer goggles and foggy memories awaits.",
+            "Let's go!"
         }, () =>
         {
             Application.LoadLevel(2);

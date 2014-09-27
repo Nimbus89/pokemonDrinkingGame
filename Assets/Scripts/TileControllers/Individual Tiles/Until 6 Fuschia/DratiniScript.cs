@@ -10,7 +10,7 @@ public class DratiniScript : DicerollTileController, StartOfTurnEffectTileContro
 
     protected override string initialModalText()
     {
-        return "Gone fishin'... a wild Dratini appeared! Roll a 1 to catch it!";
+        return "... Oh! A bite! A wild Dratini appeared! Roll a 1 to catch it!";
     }
 
     protected override void reactToDiceRoll(int rollResult)

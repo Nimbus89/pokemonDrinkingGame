@@ -12,7 +12,7 @@ public class SilphCoScript : ImmediateMessageTileController
     }
 
     public override string getImmediateMessage() {
-        return "You've infiltrated the headquarters of the infamous Team Rocket! You will need all your courage to make it to their leader. Drink an extra 2 eveery turn to calm your nerves.";
+        return "You've infiltrated the headquarters of the infamous Team Rocket! You will need all your courage to make it to their leader. Drink an extra 2 every turn to calm your nerves.";
     }
 
     public bool IsPlayerInZone() {

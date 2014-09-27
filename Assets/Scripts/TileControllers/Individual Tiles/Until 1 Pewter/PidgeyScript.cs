@@ -4,7 +4,7 @@ using System.Collections;
 public class PidgeyScript : BasicModalTileController {
 
 	override protected string getModalMessage(){
-		return "Give 1 Drink, take an extra turn.";
+		return "Pidgey used Quick Attack! Use that quickness to give one drink and take an extra turn.";
 	}
 	
 	override protected void afterModal(){
