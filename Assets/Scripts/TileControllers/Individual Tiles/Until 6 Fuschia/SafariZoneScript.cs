@@ -11,7 +11,7 @@ public class SafariZoneScript : BasicModalTileController, StartOfTurnEffectTileC
 
     public void doSafariRules(PlayerController player, CallbackDelegate cb)
     {
-        roller.doDiceRollWithMessage("You encounter a wild POKeMON in the Safari Zone! Quick, roll a die!", (int result) => {
+        roller.doNormalDiceRollWithMessage("You encounter a wild POKeMON in the Safari Zone! Quick, roll a die!", (int result) => {
             if (result < 3) 
             {
                 GUIController.Instance.DisplayBasicModal("You throw bait. Give 1 drink to someone. Now roll to move.", cb);

@@ -6,7 +6,6 @@ public class MusicManager : MonoBehaviour
 
     private static AudioClip titleMusic2;
     private static AudioClip profSpeechMusic;
-    private static AudioClip paletteTownMusic;
     private static MusicManager instance = null;
     private static float fadeSpeed = 1.3f;
 
@@ -28,7 +27,6 @@ public class MusicManager : MonoBehaviour
 
         titleMusic2 = Resources.Load<AudioClip>("sounds/titleMusic2");
         profSpeechMusic = Resources.Load<AudioClip>("sounds/profSpeechMusic");
-        paletteTownMusic = Resources.Load<AudioClip>("sounds/paletteTownMusic");
 
         if (instance != null && instance != this)
         {
@@ -69,16 +67,13 @@ public class MusicManager : MonoBehaviour
     {
         while (source.volume > 0.1) {
             source.volume -= fadeSpeed * Time.deltaTime;
-            Debug.Log(source.volume);
             yield return 0;
         }
         source.clip = track;
         source.time = Random.Range(0, track.length);
         source.Play();
-        Debug.Log(source.volume);
         while (source.volume < 0.9)
         {
-            Debug.Log(source.volume);
             source.volume += fadeSpeed * Time.deltaTime;
             yield return 0;
         }

@@ -8,7 +8,7 @@ public class PokeballScript : TileController
          GUIController.Instance.DisplayDialogThenYesNoButtons("Is your favourite POKeMON on the board?", (bool result) => {
              if (result)
              {
-                 roller.doDiceRollWithMessage("Awesome, throw a POKeBALL and roll a die.", (int rollResult) => {
+                 roller.doNormalDiceRollWithMessage("Awesome, throw a POKeBALL and roll a die.", (int rollResult) => {
                      if (rollResult < 4)
                      {
                          GUIController.Instance.DisplayBasicModal("Damn, should've used an Ultra Ball. It burst out. Drink 3.", returnControlToPlayer);

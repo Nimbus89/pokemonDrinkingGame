@@ -15,7 +15,7 @@ public class CruisingAftereffectController : AftereffectController
 		if(duration == 0){
             player.rollReplaceAfterEffect = null;
 		}
-		roller.doDiceRollWithMessage("You're on a cruise! Can't move this turn. Roll a die.", reactToRoll);
+		roller.doNormalDiceRollWithMessage("You're on a cruise! Can't move this turn. Roll a die.", reactToRoll);
 	}
 	
 	private void reactToRoll(int result){

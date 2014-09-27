@@ -6,7 +6,10 @@ public class PlayerController : MonoBehaviour {
 
     public static float moveWaitTime = 0.3f;
     public static int moveSpeed = 20;
-   
+
+    const string WINNER_MESSAGE = "{0} wins! {1} drinks 2.";
+    const string DRAW_MESSAGE = "It's a tie. Both players drink 1.";
+
 	public int currentTileNumber;
 	public GameController gameController;
 	public bool stringShotted = false;
@@ -123,7 +126,7 @@ public class PlayerController : MonoBehaviour {
 	
 	public void roll(){
 		if(rollReplaceAfterEffect == null){
-			roller.doDiceRoll(move);
+			roller.doNormalDiceRoll(move);
 		} else {
 			rollReplaceAfterEffect.applyEffect();
 		}
@@ -171,12 +174,71 @@ public class PlayerController : MonoBehaviour {
             }
 
         }
+        foreach (PlayerController otherPlayer in getCurrentTile().GetPlayersOnMe()) {
+            if (otherPlayer != this) {
+                yield return StartCoroutine(doBattle(otherPlayer));
+            }
+        }
         if (applyRules)
         {
             visitedTiles.Add(getCurrentTile());
             getCurrentTile().applyRules(this);
         } else {
             cb();
+        }
+    }
+
+    private IEnumerator doBattle(PlayerController otherPlayer)
+    {
+        yield return StartCoroutine(GUIController.Instance.DisplayBasicDialog(
+            string.Format("{0} challenges {1} to a trainer battle!", this.playerName, otherPlayer.playerName)));
+
+        if (this.GetPokemonType().IsWeakTo(otherPlayer.GetPokemonType()))
+        {
+            yield return StartCoroutine(doLopsidedBattle(otherPlayer, this));
+        }
+        else if (otherPlayer.GetPokemonType().IsWeakTo(this.GetPokemonType())) 
+        {
+            yield return StartCoroutine(doLopsidedBattle(this, otherPlayer));
+        }
+        else 
+        {
+            yield return StartCoroutine(doEvenBattle(this, otherPlayer));
+        }
+    }
+
+    private IEnumerator doLopsidedBattle(PlayerController strongPlayer, PlayerController weakPlayer) { 
+        return doEvenBattle(strongPlayer, weakPlayer);
+    }
+
+    private IEnumerator doEvenBattle(PlayerController player1, PlayerController player2)
+    {
+        bool finished = false;
+        roller.doBattleRoll(player1.playerName, (int player1Roll) =>
+        {
+            roller.doBattleRoll(player2.playerName, (int player2Roll) =>
+            {
+                string resultMessage;
+                if (player1Roll > player2Roll)
+                {
+                    resultMessage = string.Format(WINNER_MESSAGE, player1.playerName, player2.playerName);
+                }
+                else if (player2Roll > player1Roll) 
+                {
+                    resultMessage = string.Format(WINNER_MESSAGE, player2.playerName, player1.playerName);
+                }
+                else
+                {
+                    resultMessage = DRAW_MESSAGE;
+                }
+                GUIController.Instance.DisplayBasicModal(resultMessage, () =>
+                {
+                    finished = true;
+                });
+            });
+        });
+        while (!finished) {
+            yield return 0;
         }
     }
 

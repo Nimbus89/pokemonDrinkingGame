@@ -27,6 +27,14 @@ public class GUIController : MonoBehaviour {
         }));
     }
 
+    public IEnumerator DoMultiDiceRoll(string text, MultiDicerollCallbackDelegate cb)
+    {
+        yield return StartCoroutine(DialogManager.Instance.showDialog(text, true, (int[] results) =>
+        {
+            cb(results);
+        }));
+    }
+
     public void DisplaySixNumberButtons(DicerollCallbackDelegate cb)
     {
         StartCoroutine(NumberButtonsManager.Instance.ShowButtons(cb));
@@ -53,8 +61,6 @@ public class GUIController : MonoBehaviour {
         }));
     }
 
-
-
     public void DisplayDialogThenYesNoButtons(string text, BooleanCallbackDelegate cb)
     {
         StartCoroutine(displayDialogThenYesNoButtons(text, cb));
@@ -68,7 +74,6 @@ public class GUIController : MonoBehaviour {
             cb(result);
         }));
     }
-
 
     public void DisplayDialogThenNumberPicker(string text, DicerollCallbackDelegate cb) {
         StartCoroutine(displayDialogThenNumberPicker(text, cb));

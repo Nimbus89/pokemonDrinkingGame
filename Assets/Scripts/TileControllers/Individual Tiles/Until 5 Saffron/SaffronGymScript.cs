@@ -9,7 +9,7 @@ public class SaffronGymScript : TileController {
     {
         PlayerController player = gameController.getCurrentPlayer();
         GUIController.Instance.DisplayDialogThenNumberPicker("Use your psychic powers to choose a number!", (int numberPicked) => {
-            roller.doDiceRollWithMessage("Now roll a die!", (int numberRolled) =>
+            roller.doNormalDiceRollWithMessage("Now roll a die!", (int numberRolled) =>
             {
                 if (numberRolled == numberPicked)
                 {

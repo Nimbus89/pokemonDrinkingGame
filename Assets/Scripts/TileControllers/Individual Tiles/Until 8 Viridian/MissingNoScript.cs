@@ -12,7 +12,7 @@ public class MissingNoScript : TileController {
     }
 
     private void takeChance() {
-        roller.doDiceRollWithMessage("Roll to protect your save file! You have " + chances + " rolls.", (int result) =>
+        roller.doNormalDiceRollWithMessage("Roll to protect your save file! You have " + chances + " rolls.", (int result) =>
         {
             if (result < 5)
             {

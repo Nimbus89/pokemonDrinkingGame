@@ -4,7 +4,7 @@ using System.Collections;
 public abstract class DicerollTileController : TileController {
 	
 	protected override void doRules(){
-		roller.doDiceRollWithMessage(initialModalText(), reactToDiceRoll);
+		roller.doNormalDiceRollWithMessage(initialModalText(), reactToDiceRoll);
 	}
 	
 	protected abstract string initialModalText();

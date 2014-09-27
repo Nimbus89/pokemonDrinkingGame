@@ -23,7 +23,7 @@ public class CinnabarGymScript : DicerollTileController
     {
         if((rollResult % 2) == 0){
             evensRolled++;
-            roller.doDiceRoll(reactToDiceRoll);
+            roller.doNormalDiceRoll(reactToDiceRoll);
         } else {
             GUIController.Instance.DisplayBasicModal("Take " + evensRolled * 2 + " drinks.", returnControlToPlayer);
         }
