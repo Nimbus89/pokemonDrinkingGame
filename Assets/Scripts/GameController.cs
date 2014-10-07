@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour {
 		Pokemon[] starters = PlayerSetupController.starters;
         string[] playerNames = PlayerSetupController.playerNames;
         if (starters == null || starters.Length == 0) {
-            starters = new Pokemon[] { Pokemon.charmander };
+            starters = new Pokemon[] { Pokemon.charizard };
             playerNames = new string[] { "Player X" };
         }
         setupPlayers(starters, playerNames);

@@ -3,6 +3,8 @@ using System.Collections;
 
 public class PokemonSprites {
 
+    private const int POKE_SPRITE_PIXELS_TO_UNITS = 35;
+
 	public static  Texture2D bulbasaurSprite = Resources.Load<Texture2D>("pokemon/1");
 	public static  Texture2D ivysaurSprite = Resources.Load<Texture2D>("pokemon/2");
 	public static  Texture2D venusaurSprite = Resources.Load<Texture2D>("pokemon/3");
@@ -46,7 +48,7 @@ public class PokemonSprites {
 	
 	public static Sprite getSprite(Pokemon pokemon){
 		Texture2D pokeTexture2D = getTexture(pokemon);
-		Sprite pokeSprite = Sprite.Create(pokeTexture2D, new Rect(0,0,pokeTexture2D.width,pokeTexture2D.height), new Vector2(0.5f,0.5f));
+        Sprite pokeSprite = Sprite.Create(pokeTexture2D, new Rect(0, 0, pokeTexture2D.width, pokeTexture2D.height), new Vector2(0.5f, 0.5f), POKE_SPRITE_PIXELS_TO_UNITS);
 		return pokeSprite;
 	}
 
