@@ -4,6 +4,8 @@ using System.Collections;
 public class LegendaryBirdsScript : DicerollTileController
 {
 
+    public virtual bool CAN_BE_COPIED { get { return false; } }
+
     public override bool IS_GOLD { get { return true; } }
 
     protected override string initialModalText()

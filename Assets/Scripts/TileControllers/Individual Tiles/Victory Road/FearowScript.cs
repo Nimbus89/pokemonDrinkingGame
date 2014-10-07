@@ -4,6 +4,8 @@ using System.Collections;
 public class FearowScript : BasicModalTileController {
 
 
+    public virtual bool CAN_BE_COPIED { get { return false; } }
+
     protected override string getModalMessage()
     {
         return "Fearow used Mirrow Move!";
@@ -13,11 +15,12 @@ public class FearowScript : BasicModalTileController {
     {
         PlayerController previousPlayer = gameController.getPreviousPlayer();
         TileController tile = previousPlayer.getCurrentTile();
-        if (tile is FearowScript)
+        if (!tile.CAN_BE_COPIED)
         {
-            GUIController.Instance.DisplayBasicModal("But it failed!", returnControlToPlayer);
+            GUIController.Instance.DisplayBasicModal("But it failed! Take 3 drinks instead.", returnControlToPlayer);
         }
-        else {
+        else 
+        {
             tile.applyRules(currentPlayer);
         }
     }

@@ -5,6 +5,7 @@ public class EliteFourScript : DicerollTileController
 {
 
     public override bool IS_GOLD { get { return true; } }
+    public virtual bool CAN_BE_COPIED { get { return false; } }
 
     protected override string initialModalText()
     {

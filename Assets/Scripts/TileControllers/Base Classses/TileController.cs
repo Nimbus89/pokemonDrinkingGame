@@ -7,6 +7,8 @@ public abstract class TileController : MonoBehaviour {
 
 	public virtual bool IS_GOLD { get {return false; }}
 
+    public virtual bool CAN_BE_COPIED { get { return true; } }
+
 	protected GameController gameController;
 	
 	protected DicerollController roller;
