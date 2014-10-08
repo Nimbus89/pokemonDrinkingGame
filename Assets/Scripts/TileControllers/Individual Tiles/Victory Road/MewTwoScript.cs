@@ -4,7 +4,7 @@ using System.Collections;
 public class MewTwoScript : BasicModalTileController
 {
 
-    public virtual bool CAN_BE_COPIED { get { return false; } }
+    public override bool CAN_BE_COPIED { get { return false; } }
 
     public override bool IS_GOLD { get { return true; } }
 

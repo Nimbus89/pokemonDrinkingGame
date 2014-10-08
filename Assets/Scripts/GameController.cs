@@ -26,16 +26,17 @@ public class GameController : MonoBehaviour {
 	void Start () {
 		Pokemon[] starters = PlayerSetupController.starters;
         string[] playerNames = PlayerSetupController.playerNames;
+        int count = 0;
+        foreach (TileController tile in squares)
+        {
+            tile.setup(this, count);
+            count++;
+        }
         if (starters == null || starters.Length == 0) {
-            starters = new Pokemon[] { Pokemon.charizard };
-            playerNames = new string[] { "Player X" };
+            starters = new Pokemon[] { Pokemon.charmander, Pokemon.charmander, Pokemon.charmander, Pokemon.charmander, Pokemon.charmander };
+            playerNames = new string[] { "Player X", "Player X", "Player X", "Player X", "Player X" };
         }
         setupPlayers(starters, playerNames);
-		int count = 0;
-		foreach(TileController tile in squares){
-			tile.setup(this, count);
-			count++;
-		}
         GUIController.Instance.DisplayBasicButton("Start Game", startGame);
 	}
 
@@ -64,11 +65,6 @@ public class GameController : MonoBehaviour {
 	
 	public PlayerController getCurrentPlayer(){
 		return players[currentPlayerNumber-1];
-	}
-	
-	public Vector3 getFreeSpace(int tileNumber){
-		Vector3 squarePosition = squares[tileNumber].transform.position;
-		return squarePosition;
 	}
 	
 	void nextPlayer(){
@@ -116,6 +112,10 @@ public class GameController : MonoBehaviour {
             previousPlayerIndex = players.Length - 1;
         }
         return players[previousPlayerIndex];
+    }
+
+    public int GetNumberOfPlayers() {
+        return this.players.Length;
     }
 	
 }

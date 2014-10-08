@@ -6,7 +6,7 @@ public class ChampGaryTileController : TileController
 
     public override bool IS_GOLD { get { return true; } }
 
-    public virtual bool CAN_BE_COPIED { get { return false; } }
+    public override bool CAN_BE_COPIED { get { return false; } }
 
     protected override void doRules()
     {

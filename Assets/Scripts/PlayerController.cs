@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour {
         currentTileNumber = gameController.startingTileNumber;
         pokeController = new PokemonController(pokemon, GUIController.Instance, this);
 		this.playerNumber = playerNumber;
-        this.transform.position = this.gameController.getFreeSpace(currentTileNumber);
+        this.transform.position = this.gameController.GetTileByNum(currentTileNumber).getPlayerPosition(this.playerNumber);
         this.playerName = name;
 	}
 	
@@ -158,7 +158,7 @@ public class PlayerController : MonoBehaviour {
         int direction = (currentTileNumber - tileNum) < 0 ? 1 : -1;
         for (int i = 0; i < tilesToMove; i ++) {
             currentTileNumber += direction;
-            yield return StartCoroutine(animatedMoveToPos(gameController.getFreeSpace(currentTileNumber)));
+            yield return StartCoroutine(animatedMoveToPos(getCurrentTile().getPlayerPosition(this.playerNumber)));
             yield return new WaitForSeconds(moveWaitTime);
             if (direction == 1)
             {

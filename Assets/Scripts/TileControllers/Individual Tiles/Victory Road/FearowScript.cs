@@ -4,7 +4,7 @@ using System.Collections;
 public class FearowScript : BasicModalTileController {
 
 
-    public virtual bool CAN_BE_COPIED { get { return false; } }
+    public override bool CAN_BE_COPIED { get { return false; } }
 
     protected override string getModalMessage()
     {

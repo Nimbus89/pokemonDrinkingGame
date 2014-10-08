@@ -52,4 +52,21 @@ public abstract class TileController : MonoBehaviour {
     public PlayerController[] GetPlayersOnMe() {
         return gameController.GetPlayersOnTile(myTileNum);
     }
+
+    public Vector3 getPlayerPosition(int playerNumber){
+
+        float angle = (360 / (float)(gameController.GetNumberOfPlayers())) * (float)(playerNumber - 1);
+        angle = angle + 90f;
+        angle = (Mathf.PI / 180f) * angle;
+        float radius = 1.3f;
+        float xPos = getPosition().x;
+        xPos += radius * Mathf.Cos(angle);
+        float yPos = getPosition().y;
+        yPos += radius * Mathf.Sin(angle);
+        return new Vector3(xPos, yPos, getPosition().z);
+    }
+
+    private Vector3 getPosition() {
+        return this.transform.position;
+    } 
 }
