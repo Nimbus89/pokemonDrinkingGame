@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerNameInputManager : MonoBehaviour {
+public class PlayerNameInputManager : BaseGUIManager
+{
 
     public static PlayerNameInputManager Instance
     {
@@ -50,8 +51,8 @@ public class PlayerNameInputManager : MonoBehaviour {
     }
 
     public void OnGUI() {
-        GUI.skin = GUIController.Instance.skin;
-        currentText = GUI.TextField(new Rect(0, 0, Screen.width, 50), currentText);
+        base.OnGUI();
+        currentText = GUI.TextField(new Rect(0, 0, virtualWidth, 50), currentText);
     }
 
 

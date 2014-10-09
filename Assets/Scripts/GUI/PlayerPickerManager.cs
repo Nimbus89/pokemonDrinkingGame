@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerPickerManager : MonoBehaviour {
+public class PlayerPickerManager : BaseGUIManager
+{
 
     private int scrollAreaMargins = 50;
     private int scrollAreaLeft;
     private int scrollAreaTop;
-    private int scrollAreaWidth;
-    private int scrollAreaHeight;
+    private float scrollAreaWidth;
+    private float scrollAreaHeight;
     private int buttonHeight = 100;
     private PlayerController[] players;
     private Vector2 scrollPosition = Vector2.zero;
@@ -25,8 +26,8 @@ public class PlayerPickerManager : MonoBehaviour {
 
     scrollAreaLeft = scrollAreaMargins;
     scrollAreaTop = scrollAreaMargins;
-    scrollAreaWidth = Screen.width - scrollAreaMargins * 2;
-    scrollAreaHeight = Screen.height - (scrollAreaMargins * 2 + 100);
+    scrollAreaWidth = virtualWidth - scrollAreaMargins * 2;
+    scrollAreaHeight = virtualHeight - (scrollAreaMargins * 2 + 100);
 
         this.enabled = false;
         if (instance != null && instance != this)
@@ -55,7 +56,7 @@ public class PlayerPickerManager : MonoBehaviour {
     
     void OnGUI()
     {
-        GUI.skin = GUIController.Instance.skin;
+        base.OnGUI();
         int numPlayers = players.Length;
         scrollPosition = GUI.BeginScrollView(new Rect(scrollAreaLeft, scrollAreaTop, scrollAreaWidth, scrollAreaHeight), scrollPosition, new Rect(0, 0, 100, buttonHeight * numPlayers));
 

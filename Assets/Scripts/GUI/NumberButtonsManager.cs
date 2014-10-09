@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NumberButtonsManager : MonoBehaviour {
+public class NumberButtonsManager : BaseGUIManager
+{
 
     private int numberButtonInternalMargin;
     private int numberButtonWidth;
     private int numberButtonHeight;
-    private int numberButtonVerticalMargin;
-    private int numberButtonHorizontalMargin;
+    private float numberButtonVerticalMargin;
+    private float numberButtonHorizontalMargin;
     private DicerollCallbackDelegate callback;
 
     public static NumberButtonsManager Instance
@@ -33,8 +34,8 @@ public class NumberButtonsManager : MonoBehaviour {
         numberButtonInternalMargin = 10;
 	    numberButtonWidth = 100;
 	    numberButtonHeight = 100;
-        numberButtonVerticalMargin = ((Screen.height-100) - (numberButtonHeight * 2)) / 2 - numberButtonInternalMargin/2;
-        numberButtonHorizontalMargin = (Screen.width - (numberButtonWidth * 3)) / 2 - numberButtonInternalMargin;
+        numberButtonVerticalMargin = ((virtualHeight-100) - (numberButtonHeight * 2)) / 2 - numberButtonInternalMargin/2;
+        numberButtonHorizontalMargin = (virtualWidth - (numberButtonWidth * 3)) / 2 - numberButtonInternalMargin;
     }
 
     public IEnumerator ShowButtons(DicerollCallbackDelegate cb)
@@ -54,7 +55,7 @@ public class NumberButtonsManager : MonoBehaviour {
     }
 
     public void OnGUI() {
-        GUI.skin = GUIController.Instance.skin;
+        base.OnGUI();
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 3; j++) {
                 int buttonNumber = (i * 3) + (j + 1);

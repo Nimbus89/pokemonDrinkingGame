@@ -2,11 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class DialogManager : MonoBehaviour {
+public class DialogManager : BaseGUIManager
+{
 
     private static DialogManager instance;
-
-    public GUISkin skin;
 
     public static Texture2D downArrowImage;
 
@@ -23,7 +22,7 @@ public class DialogManager : MonoBehaviour {
     string currentBottomLine;
     string[] currentDialogLines;
 
-    private Rect ModalWindowPosition = new Rect(0, Screen.height - 100, Screen.width, 100);
+    private Rect ModalWindowPosition = new Rect(0, virtualHeight - 100, virtualWidth, 100);
 
     private bool pausedForInput = false;
     private bool arrowVisible = false;
@@ -203,8 +202,8 @@ public class DialogManager : MonoBehaviour {
         }
     }
 
-    public void OnGUI(){
-        GUI.skin = skin;
+    override public void OnGUI(){
+        base.OnGUI();
         GUI.Window(1, ModalWindowPosition, drawDialogBox, "");
     }
 

@@ -3,7 +3,8 @@ using System.Collections;
 
 public enum GUIState { DISPLAYING_BUTTON, NONE};
 
-public class GUIController : MonoBehaviour {
+public class GUIController : BaseGUIManager
+{
 
     public static GUIController Instance{
         get { return instance; }
@@ -13,7 +14,7 @@ public class GUIController : MonoBehaviour {
 
     public GUISkin skin;
 
-	private Rect BottomOfScreenButtonPosition = new Rect(50, Screen.height - 50, Screen.width - 100, 50);
+	private Rect BottomOfScreenButtonPosition = new Rect(50, virtualHeight - 50, virtualWidth - 100, 50);
 	
 	private string buttonText = "";
 	private CallbackDelegate callback;
@@ -113,7 +114,7 @@ public class GUIController : MonoBehaviour {
 
     void OnGUI()
     {
-        GUI.skin = skin;
+        base.OnGUI();
 		switch(state){
 			case(GUIState.DISPLAYING_BUTTON):
 				if(GUI.Button(BottomOfScreenButtonPosition, buttonText)){
