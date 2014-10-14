@@ -13,7 +13,7 @@ public class SaffronGymScript : TileController {
             {
                 if (numberRolled == numberPicked)
                 {
-                    GUIController.Instance.DisplayBasicModal("You guessed correctly! Must be those psychic powers. Take an extra turn!", () =>
+                    GUIController.Instance.DisplayDialog("You guessed correctly! Must be those psychic powers. Take an extra turn!", () =>
                     {
                         player.getExtraTurns(1);
                         returnControlToPlayer();
@@ -21,7 +21,7 @@ public class SaffronGymScript : TileController {
                 }
                 else 
                 {
-                    GUIController.Instance.DisplayBasicModal("Too bad! I guess you must be a fighting type. Take 2 drinks.", () =>
+                    GUIController.Instance.DisplayDialog("Too bad! I guess you must be a fighting type. Take 2 drinks.", () =>
                     {
                         returnControlToPlayer();
                     });

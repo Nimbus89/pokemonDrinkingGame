@@ -11,7 +11,7 @@ public class PlayerSetupController : MonoBehaviour {
 
     void Start() {
         MusicManager.Instance.playSpeechMusic();
-        GUIController.Instance.DisplayBasicDialogs(new string[]{
+        GUIController.Instance.DisplayBasicSkippableDialogs(new string[]{
             "Hello there! Welcome to the world of POKeMON!",
             "My name is OAK! People call me the POKeMON PROF!",
             "This world is inhabited by creatures called POKeMON!",
@@ -36,7 +36,7 @@ public class PlayerSetupController : MonoBehaviour {
         while (pokemonChosen < playersCount) {
             int playerNumber = pokemonChosen + 1;
             PlayerNameInputManager.Instance.Show("Player " + playerNumber);
-            yield return StartCoroutine(GUIController.Instance.DisplayDialogThenStarterPicker("Player " + playerNumber + ", choose your POKeMON!", (Pokemon starter) =>
+            yield return StartCoroutine(GUIController.Instance.DisplayDialogThenStarterPicker_CR("Player " + playerNumber + ", choose your POKeMON!", (Pokemon starter) =>
             {
                 starters[pokemonChosen] = starter;
                 playerNames[pokemonChosen] = PlayerNameInputManager.Instance.Finsihed();
@@ -46,7 +46,7 @@ public class PlayerSetupController : MonoBehaviour {
         }
 
         oakSprite.renderer.enabled = true;
-        GUIController.Instance.DisplayBasicDialogs(new string[]{
+        GUIController.Instance.DisplayBasicSkippableDialogs(new string[]{
             "A world full of beer goggles and foggy memories awaits.",
             "Let's go!"
         }, () =>

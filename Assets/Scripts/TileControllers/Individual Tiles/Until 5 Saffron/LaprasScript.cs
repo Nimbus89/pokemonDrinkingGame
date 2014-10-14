@@ -17,6 +17,6 @@ public class LaprasScript : PickPlayerTileController
     protected override void reactToPlayerPicked(PlayerController player)
     {
         player.startOfTurnEffects.Add(new ConfusedAftereffectController(player, gameController));
-        GUIController.Instance.DisplayBasicModal(player.getName() + " is now confused!", returnControlToPlayer);
+        GUIController.Instance.DisplayDialog(player.getName() + " is now confused!", returnControlToPlayer);
     }
 }

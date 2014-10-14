@@ -17,11 +17,11 @@ public class DratiniScript : DicerollTileController, StartOfTurnEffectTileContro
     {
         if (rollResult == 1)
         {
-            GUIController.Instance.DisplayBasicModal("You caught a Dratini!", returnControlToPlayer);
+            GUIController.Instance.DisplayDialog("You caught a Dratini!", returnControlToPlayer);
         }
         else 
         {
-            GUIController.Instance.DisplayBasicModal("Aww, it got away! Drink 1.", returnControlToPlayer);
+            GUIController.Instance.DisplayDialog("Aww, it got away! Drink 1.", returnControlToPlayer);
         }
     }
 

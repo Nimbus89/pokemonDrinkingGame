@@ -16,7 +16,7 @@ public class DicerollController {
         currentRandomRollText = "You rolled a \b!";
         currentRealRollText = "What did you roll?";
 		callback = cb;
-        GUIController.Instance.DisplayBasicModal(message, handleDiceRoll);
+        GUIController.Instance.DisplayDialog(message, handleDiceRoll);
 	}
 	
 	public void doNormalDiceRoll(DicerollCallbackDelegate cb){

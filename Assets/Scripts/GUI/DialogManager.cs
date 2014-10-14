@@ -17,12 +17,15 @@ public class DialogManager : BaseGUIManager
     private int skipMultiplier = 4;
     private int scrollAnimationOffset = 0;
     private int arrowBlinkSpeed = 40;
+    private bool skipping = false;
+    private bool showingSkipButton = false;
 
     string currentTopLine;
     string currentBottomLine;
     string[] currentDialogLines;
 
     private Rect ModalWindowPosition = new Rect(0, virtualHeight - 100, virtualWidth, 100);
+    private Rect SkipButtonPosition = new Rect(virtualWidth - 100, 0, 100, 50);
 
     private bool pausedForInput = false;
     private bool arrowVisible = false;
@@ -52,30 +55,59 @@ public class DialogManager : BaseGUIManager
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public IEnumerator showDialog(string text, bool hideAfter = true, MultiDicerollCallbackDelegate cb = null)
+    public IEnumerator ShowDialogs(string[] texts, bool hideAfter = true, MultiDicerollCallbackDelegate cb = null, bool showSkip = false)
     {
+        skipping = false;
+        showingSkipButton = showSkip;
         rollResults = new List<int>();
-        clearLines();
+        
         this.enabled = true;
-        currentDialogLines = StringUtils.splitIntoLines(text, lineLength);
-        yield return StartCoroutine(animateTopLine(currentDialogLines[0]));
-        if (currentDialogLines.Length > 1)
-        {
-            yield return StartCoroutine(animateBottomLine(currentDialogLines[1]));
-        }
-        yield return StartCoroutine(pauseForInput());
-        for (int i = 2; i < currentDialogLines.Length; i++) {
-            yield return StartCoroutine(shiftLinesUp());
-            yield return StartCoroutine(animateBottomLine(currentDialogLines[i]));
-            yield return StartCoroutine(pauseForInput());
+        foreach(string text in texts){
+            currentDialogLines = StringUtils.splitIntoLines(text, lineLength);
+            if (!skipping)
+            {
+                clearLines();
+                yield return StartCoroutine(animateTopLine(currentDialogLines[0]));
+                if (currentDialogLines.Length > 1)
+                {
+                    yield return StartCoroutine(animateBottomLine(currentDialogLines[1]));
+                }
+                yield return StartCoroutine(pauseForInput());
+                for (int i = 2; i < currentDialogLines.Length; i++)
+                {
+                    yield return StartCoroutine(shiftLinesUp());
+                    yield return StartCoroutine(animateBottomLine(currentDialogLines[i]));
+                    yield return StartCoroutine(pauseForInput());
+                }
+            }
+            else 
+            {
+                if (currentDialogLines.Length > 1)
+                {
+                    currentBottomLine = currentDialogLines[currentDialogLines.Length - 1];
+                    currentTopLine = currentDialogLines[currentDialogLines.Length - 2];
+                }
+                else
+                {
+                    currentBottomLine = "";
+                    currentTopLine = currentDialogLines[currentDialogLines.Length - 1];
+                }
+            }
         }
         if (hideAfter)
         {
             this.enabled = false;
         }
-        if (cb != null) {
+        showingSkipButton = false;
+        if (cb != null)
+        {
             cb(rollResults.ToArray());
         }
+    }
+
+    public IEnumerator ShowDialog(string text, bool hideAfter = true, MultiDicerollCallbackDelegate cb = null, bool showSkipButton = false)
+    {
+        return ShowDialogs(new string[] { text }, hideAfter, cb, showingSkipButton);
     }
 
     private void clearLines()
@@ -113,7 +145,9 @@ public class DialogManager : BaseGUIManager
                 yield return StartCoroutine(doDiceRoll(top));
             }
             addToLine(top, line[i++]);
-            yield return new WaitForSeconds(getWaitTime());
+            if (!skipping) {
+                yield return new WaitForSeconds(getWaitTime());
+            }
         }
     }
 
@@ -156,23 +190,29 @@ public class DialogManager : BaseGUIManager
 
     IEnumerator pauseForInput()
     {
-        pausedForInput = true;
-        var counter = 0;
-        arrowVisible = true;
-        while (pausedForInput) {
-            if (counter > arrowBlinkSpeed)
+        if (!skipping) {
+            pausedForInput = true;
+            var counter = 0;
+            arrowVisible = true;
+            while (pausedForInput && !skipping)
             {
-                counter = 0;
-                arrowVisible = !arrowVisible;
+                if (counter > arrowBlinkSpeed)
+                {
+                    counter = 0;
+                    arrowVisible = !arrowVisible;
+                }
+                else
+                {
+                    counter++;
+                }
+                yield return 0;
             }
-            else 
-            {
-                counter++;
+            arrowVisible = false;
+            if (!skipping) {
+                SFXManager.Instance.playBeep();
             }
-            yield return 0;
         }
-        arrowVisible = false;
-        SFXManager.Instance.playBeep();
+
     }
 
     void handleClick() {
@@ -204,6 +244,12 @@ public class DialogManager : BaseGUIManager
 
     override public void OnGUI(){
         base.OnGUI();
+        if (showingSkipButton) {
+            if (GUI.Button(SkipButtonPosition, "SKIP"))
+            {
+                skipping = true;
+            }
+        }
         GUI.Window(1, ModalWindowPosition, drawDialogBox, "");
     }
 

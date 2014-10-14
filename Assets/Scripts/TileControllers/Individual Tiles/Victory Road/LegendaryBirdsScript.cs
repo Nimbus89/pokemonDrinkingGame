@@ -26,12 +26,12 @@ public class LegendaryBirdsScript : DicerollTileController
     }
 
     private void throwGreatBall() {
-        GUIController.Instance.DisplayBasicModal("Why are you throwing Great Balls at it? Take a drink!", applyAfterEffect);
+        GUIController.Instance.DisplayDialog("Why are you throwing Great Balls at it? Take a drink!", applyAfterEffect);
     }
 
     private void throwUltraBall() {
         PlayerController player = gameController.getCurrentPlayer();
-        GUIController.Instance.DisplayBasicModal("You got one! Everyone drinks in celebration!", () => {
+        GUIController.Instance.DisplayDialog("You got one! Everyone drinks in celebration!", () => {
             player.legendaryBirds++;
             applyAfterEffect();
         });
@@ -42,7 +42,7 @@ public class LegendaryBirdsScript : DicerollTileController
         PlayerController player = gameController.getCurrentPlayer();
         if (player.legendaryBirds < 3)
         {
-            GUIController.Instance.DisplayBasicModal("You can't move on until you have caught all three!", () =>
+            GUIController.Instance.DisplayDialog("You can't move on until you have caught all three!", () =>
             {
                 player.rollReplaceAfterEffect = new DoOverAftereffectController(player, gameController);
                 returnControlToPlayer();
@@ -50,7 +50,7 @@ public class LegendaryBirdsScript : DicerollTileController
         }
         else 
         {
-            GUIController.Instance.DisplayBasicModal("You did it, you caught all three! Now, on toward the POKeMON League!", () =>
+            GUIController.Instance.DisplayDialog("You did it, you caught all three! Now, on toward the POKeMON League!", () =>
             {
                 player.rollReplaceAfterEffect = null;
                 returnControlToPlayer();

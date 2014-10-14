@@ -15,11 +15,11 @@ public class ChanseyScript : DicerollTileController, StartOfTurnEffectTileContro
     {
         if (rollResult < 4)
         {
-            GUIController.Instance.DisplayBasicModal("Chansey eludes you, drink 1.", returnControlToPlayer);
+            GUIController.Instance.DisplayDialog("Chansey eludes you, drink 1.", returnControlToPlayer);
         }
         else
         {
-            GUIController.Instance.DisplayBasicModal("You capture Chansey! Give 2 drinks.", returnControlToPlayer);
+            GUIController.Instance.DisplayDialog("You capture Chansey! Give 2 drinks.", returnControlToPlayer);
         }
     }
 

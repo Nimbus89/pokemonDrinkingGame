@@ -10,6 +10,6 @@ public class PersianScript : DicerollTileController {
 
     protected override void reactToDiceRoll(int rollResult)
     {
-        GUIController.Instance.DisplayBasicModal("Critical hit! Give " + rollResult*2 + " drinks.", returnControlToPlayer);
+        GUIController.Instance.DisplayDialog("Critical hit! Give " + rollResult*2 + " drinks.", returnControlToPlayer);
     }
 }

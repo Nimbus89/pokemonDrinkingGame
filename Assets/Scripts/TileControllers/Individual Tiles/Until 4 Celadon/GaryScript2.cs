@@ -14,7 +14,7 @@ public class GaryScript2 : DicerollTileController {
         }
         drinks -= 2;
 
-        GUIController.Instance.DisplayBasicModal("Give 2 drinks, take " + drinks + " drinks.", returnControlToPlayer);
+        GUIController.Instance.DisplayDialog("Give 2 drinks, take " + drinks + " drinks.", returnControlToPlayer);
 	}
 	
 }

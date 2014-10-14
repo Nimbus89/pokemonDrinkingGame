@@ -8,7 +8,7 @@ public class MissingNoScript : TileController {
     protected override void doRules()
     {
         chances = 3;
-        GUIController.Instance.DisplayBasicModal("Shit, a Missingno. appeared! Better hope this doesn't fuck up your save file.", takeChance);
+        GUIController.Instance.DisplayDialog("Shit, a Missingno. appeared! Better hope this doesn't fuck up your save file.", takeChance);
     }
 
     private void takeChance() {
@@ -19,7 +19,7 @@ public class MissingNoScript : TileController {
                 if (chances > 1)
                 {
                     chances--;
-                    GUIController.Instance.DisplayBasicModal("Shit, it didn't work. Try again!", takeChance);
+                    GUIController.Instance.DisplayDialog("Shit, it didn't work. Try again!", takeChance);
                 }
                 else 
                 {
@@ -34,11 +34,11 @@ public class MissingNoScript : TileController {
     }
 
     private void win() {
-        GUIController.Instance.DisplayBasicModal("Looks like your save file is alright. Everybody drink in relief.", returnControlToPlayer);
+        GUIController.Instance.DisplayDialog("Looks like your save file is alright. Everybody drink in relief.", returnControlToPlayer);
     }
 
     private void lose() {
-        GUIController.Instance.DisplayBasicModal("Fuck! Your save file is corrupted. Better start a new file. Go back to Pallett Town! And drink the whole way there!", () => {
+        GUIController.Instance.DisplayDialog("Fuck! Your save file is corrupted. Better start a new file. Go back to Pallett Town! And drink the whole way there!", () => {
             currentPlayer.MoveTo(0, returnControlToPlayer); 
         });
     }

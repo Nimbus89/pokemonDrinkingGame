@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour {
         if (turnsToSkip > 0)
         {
             turnsToSkip--;
-            GUIController.Instance.DisplayBasicModal(turnSkipMessage, endTurn);
+            GUIController.Instance.DisplayDialog(turnSkipMessage, endTurn);
         }
         else {
             announceTurn();
@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	private void announceTurn(){
-        GUIController.Instance.DisplayBasicModal(getAnnounceTurnMessage(), checkForStartOfTurnEffectTile);
+        GUIController.Instance.DisplayDialog(getAnnounceTurnMessage(), checkForStartOfTurnEffectTile);
 	}
 
     private void checkForStartOfTurnEffectTile() {
@@ -190,7 +190,7 @@ public class PlayerController : MonoBehaviour {
 
     private IEnumerator doBattle(PlayerController otherPlayer)
     {
-        yield return StartCoroutine(GUIController.Instance.DisplayBasicDialog(
+        yield return StartCoroutine(GUIController.Instance.DisplayBasicDialog_CR(
             string.Format("{0} challenges {1} to a trainer battle!", this.playerName, otherPlayer.playerName)));
 
         if (this.GetPokemonType().IsWeakTo(otherPlayer.GetPokemonType()))
@@ -231,7 +231,7 @@ public class PlayerController : MonoBehaviour {
                 {
                     resultMessage = DRAW_MESSAGE;
                 }
-                GUIController.Instance.DisplayBasicModal(resultMessage, () =>
+                GUIController.Instance.DisplayDialog(resultMessage, () =>
                 {
                     finished = true;
                 });

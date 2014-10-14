@@ -11,9 +11,9 @@ public class PewterGymScript : DicerollTileController {
 	
 	protected override void reactToDiceRoll(int rollResult){
 		if((rollResult % 2) == 0){
-            GUIController.Instance.DisplayBasicModal("Give a drink.", returnControlToPlayer);
+            GUIController.Instance.DisplayDialog("Give a drink.", returnControlToPlayer);
 		} else {
-            GUIController.Instance.DisplayBasicModal("Take a drink.", returnControlToPlayer);
+            GUIController.Instance.DisplayDialog("Take a drink.", returnControlToPlayer);
 		}
 		
 	}

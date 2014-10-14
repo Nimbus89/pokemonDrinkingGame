@@ -17,7 +17,7 @@ public class FearowScript : BasicModalTileController {
         TileController tile = previousPlayer.getCurrentTile();
         if (!tile.CAN_BE_COPIED)
         {
-            GUIController.Instance.DisplayBasicModal("But it failed! Take 3 drinks instead.", returnControlToPlayer);
+            GUIController.Instance.DisplayDialog("But it failed! Take 3 drinks instead.", returnControlToPlayer);
         }
         else 
         {

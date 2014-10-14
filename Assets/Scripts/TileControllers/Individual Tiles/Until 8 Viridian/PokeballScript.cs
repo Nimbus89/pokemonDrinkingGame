@@ -11,17 +11,17 @@ public class PokeballScript : TileController
                  roller.doNormalDiceRollWithMessage("Awesome, throw a POKeBALL and roll a die.", (int rollResult) => {
                      if (rollResult < 4)
                      {
-                         GUIController.Instance.DisplayBasicModal("Damn, should've used an Ultra Ball. It burst out. Drink 3.", returnControlToPlayer);
+                         GUIController.Instance.DisplayDialog("Damn, should've used an Ultra Ball. It burst out. Drink 3.", returnControlToPlayer);
                      }
                      else 
                      {
-                         GUIController.Instance.DisplayBasicModal("Badass, you caught it! Everybody drinks in celebration!", returnControlToPlayer);
+                         GUIController.Instance.DisplayDialog("Badass, you caught it! Everybody drinks in celebration!", returnControlToPlayer);
                      }
                  });
              }
              else 
              {
-                 GUIController.Instance.DisplayBasicModal("Seriously? All the best ones are here. Whatever, drink 3.", returnControlToPlayer);
+                 GUIController.Instance.DisplayDialog("Seriously? All the best ones are here. Whatever, drink 3.", returnControlToPlayer);
              }
          });
      }

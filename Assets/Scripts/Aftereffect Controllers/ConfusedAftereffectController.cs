@@ -17,11 +17,11 @@ public class ConfusedAftereffectController : AftereffectController
             if (result >= 4)
             {
                 player.startOfTurnEffects.Remove(this);
-                GUIController.Instance.DisplayBasicModal("Your POKeMON recovered from it's confusion! Now roll to move.", player.handleNextStartOfTurnEffect);
+                GUIController.Instance.DisplayDialog("Your POKeMON recovered from it's confusion! Now roll to move.", player.handleNextStartOfTurnEffect);
             }
             else 
             {
-                GUIController.Instance.DisplayBasicModal("Your POKeMON hurt itself in it's confusion! Drink 1 and miss a turn.", player.endTurn);
+                GUIController.Instance.DisplayDialog("Your POKeMON hurt itself in it's confusion! Drink 1 and miss a turn.", player.endTurn);
             }
         });
 	}

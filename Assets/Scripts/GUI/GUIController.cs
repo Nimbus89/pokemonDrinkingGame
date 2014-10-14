@@ -22,7 +22,7 @@ public class GUIController : BaseGUIManager
     private GUIState state;
 
     public void DoSingleDiceRoll(string text, DicerollCallbackDelegate cb) {
-        StartCoroutine(DialogManager.Instance.showDialog(text, true, (int[] results) =>
+        StartCoroutine(DialogManager.Instance.ShowDialog(text, true, (int[] results) =>
         {
             cb(results[0]);
         }));
@@ -30,7 +30,7 @@ public class GUIController : BaseGUIManager
 
     public IEnumerator DoMultiDiceRoll(string text, MultiDicerollCallbackDelegate cb)
     {
-        yield return StartCoroutine(DialogManager.Instance.showDialog(text, true, (int[] results) =>
+        yield return StartCoroutine(DialogManager.Instance.ShowDialog(text, true, (int[] results) =>
         {
             cb(results);
         }));
@@ -41,9 +41,9 @@ public class GUIController : BaseGUIManager
         StartCoroutine(NumberButtonsManager.Instance.ShowButtons(cb));
     }
 
-    public void DisplayBasicModal(string text, CallbackDelegate cb)
+    public void DisplayDialog(string text, CallbackDelegate cb)
     {
-        StartCoroutine(displayBasicModal(text, cb));
+        StartCoroutine(DisplayDialog_CR(text, cb));
     }
 
     public void DisplayBasicButton(string text, CallbackDelegate cb)
@@ -53,9 +53,9 @@ public class GUIController : BaseGUIManager
         state = GUIState.DISPLAYING_BUTTON;
     }
 
-    public IEnumerator DisplayDialogThenStarterPicker(string text, PokemonCallbackDelegate cb)
+    public IEnumerator DisplayDialogThenStarterPicker_CR(string text, PokemonCallbackDelegate cb)
     {
-        yield return StartCoroutine(DialogManager.Instance.showDialog(text, false));
+        yield return StartCoroutine(DialogManager.Instance.ShowDialog(text, false));
         yield return StartCoroutine(PokemonSelectorManager.Instance.ShowButtons((Pokemon selected) => {
             DialogManager.Instance.enabled = false;
             cb(selected);
@@ -64,11 +64,12 @@ public class GUIController : BaseGUIManager
 
     public void DisplayDialogThenYesNoButtons(string text, BooleanCallbackDelegate cb)
     {
-        StartCoroutine(displayDialogThenYesNoButtons(text, cb));
+        StartCoroutine(DisplayDialogThenYesNoButtons_CR(text, cb));
     }
-    private IEnumerator displayDialogThenYesNoButtons(string text, BooleanCallbackDelegate cb)
+
+    public IEnumerator DisplayDialogThenYesNoButtons_CR(string text, BooleanCallbackDelegate cb)
     {
-        yield return StartCoroutine(DialogManager.Instance.showDialog(text, false));
+        yield return StartCoroutine(DialogManager.Instance.ShowDialog(text, false));
         yield return StartCoroutine( YesNoButtonManager.Instance.ShowButtons((bool result) =>
         {
             DialogManager.Instance.enabled = false;
@@ -77,27 +78,53 @@ public class GUIController : BaseGUIManager
     }
 
     public void DisplayDialogThenNumberPicker(string text, DicerollCallbackDelegate cb) {
-        StartCoroutine(displayDialogThenNumberPicker(text, cb));
+        StartCoroutine(DisplayDialogThenNumberPicker_CR(text, cb));
     }
-    private IEnumerator displayDialogThenNumberPicker(string text, DicerollCallbackDelegate cb)
+
+    private IEnumerator DisplayDialogThenNumberPicker_CR(string text, DicerollCallbackDelegate cb)
     {
-        yield return StartCoroutine(DialogManager.Instance.showDialog(text, false));
+        yield return StartCoroutine(DialogManager.Instance.ShowDialog(text, false));
         yield return StartCoroutine(NumberButtonsManager.Instance.ShowButtons((int result) => {
             DialogManager.Instance.enabled = false;
             cb(result);
         }));
     }
 
-    public IEnumerator DisplayBasicDialog(string text)
+    public IEnumerator DisplayBasicDialog_CR(string text)
     {
-        return DialogManager.Instance.showDialog(text);
+        return DialogManager.Instance.ShowDialog(text);
+    }
+
+    public void DisplayBasicSkippableDialogs(string[] texts, CallbackDelegate cb, bool hideAfter = true)
+    {
+        StartCoroutine(DisplayBasicSkippableDialogs_CR(texts, cb, hideAfter));
     }
 
     public void DisplayBasicDialogs(string[] texts, CallbackDelegate cb, bool hideAfter = true)
     {
-        StartCoroutine(displayBasicDialogs(texts, cb, hideAfter));
+        StartCoroutine(DisplayBasicDialogs_CR(texts, cb, hideAfter));
     }
 
+    public IEnumerator DisplayBasicDialogs_CR(string[] texts, CallbackDelegate cb, bool hideAfter = true)
+    {
+        yield return StartCoroutine(DialogManager.Instance.ShowDialogs(texts, hideAfter, null, false));
+        cb();
+    }
+
+    public IEnumerator DisplayBasicSkippableDialogs_CR(string[] texts, CallbackDelegate cb = null, bool hideAfter = true)
+    {
+        yield return StartCoroutine(DialogManager.Instance.ShowDialogs(texts, hideAfter, null, true));
+        if (cb != null) {
+            cb();
+        }
+    }
+
+    public IEnumerator DisplayDialog_CR(string text, CallbackDelegate cb)
+    {
+        yield return StartCoroutine(DialogManager.Instance.ShowDialog(text));
+        cb();
+    }
+	
 	void Awake (){
         state = GUIState.NONE;
         if (instance != null && instance != this)
@@ -112,7 +139,7 @@ public class GUIController : BaseGUIManager
         DontDestroyOnLoad(this.gameObject);
 	}
 
-    void OnGUI()
+    public override void OnGUI()
     {
         base.OnGUI();
 		switch(state){
@@ -126,20 +153,6 @@ public class GUIController : BaseGUIManager
 		}
 	}
 
-    private IEnumerator displayBasicDialogs(string[] texts, CallbackDelegate cb, bool hideAfter = true)
-    {
-        foreach(string text in texts){
-            yield return StartCoroutine(DialogManager.Instance.showDialog(text, hideAfter));
-        }
-        cb();
-    }
-
-    private IEnumerator displayBasicModal(string text, CallbackDelegate cb)
-    {
-        yield return StartCoroutine(DialogManager.Instance.showDialog(text));
-        cb();
-    }
-	
 	private void finsihed(){
 		state = GUIState.NONE;
         SFXManager.Instance.playBeep();

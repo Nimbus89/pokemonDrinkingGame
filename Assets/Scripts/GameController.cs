@@ -82,7 +82,7 @@ public class GameController : MonoBehaviour {
 	}
 
     public void endGame() {
-        GUIController.Instance.DisplayBasicModal(getCurrentPlayer().getName() + " wins!", () => {
+        GUIController.Instance.DisplayDialog(getCurrentPlayer().getName() + " wins!", () => {
             Application.LoadLevel(0);
         });
     }

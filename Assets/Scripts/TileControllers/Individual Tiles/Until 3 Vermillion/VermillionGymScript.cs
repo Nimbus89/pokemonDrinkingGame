@@ -13,9 +13,9 @@ public class VermillionGymScript : DicerollTileController
 	protected override void reactToDiceRoll(int rollResult){
 		if((rollResult % 2) == 0){
             gameController.getCurrentPlayer().skipTurns(1, "Can't move due to paralysis!");
-            GUIController.Instance.DisplayBasicModal("You're paralyzed! Take 2 drinks and miss a turn.", returnControlToPlayer);
+            GUIController.Instance.DisplayDialog("You're paralyzed! Take 2 drinks and miss a turn.", returnControlToPlayer);
 		} else {
-            GUIController.Instance.DisplayBasicModal("Take a drink.", returnControlToPlayer);
+            GUIController.Instance.DisplayDialog("Take a drink.", returnControlToPlayer);
 		}
 	}
 }

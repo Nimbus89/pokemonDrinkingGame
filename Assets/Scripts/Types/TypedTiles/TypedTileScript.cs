@@ -8,6 +8,6 @@ public abstract class TypedTileScript : MonoBehaviour
     public abstract void ApplyTypeRules(PokemonType type, CallbackDelegate cb);
 
     public void showMessage(CallbackDelegate cb) {
-        GUIController.Instance.DisplayBasicModal(MESSAGE, cb);
+        GUIController.Instance.DisplayDialog(MESSAGE, cb);
     }
 }

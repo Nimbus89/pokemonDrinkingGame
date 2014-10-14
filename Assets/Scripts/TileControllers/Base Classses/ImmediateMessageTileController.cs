@@ -4,7 +4,8 @@ using System.Collections;
 public abstract class ImmediateMessageTileController : BasicModalTileController {
 
     public IEnumerator showImmediatedMessage() {
-        return GUIController.Instance.DisplayBasicDialog(getImmediateMessage());
+        PlayMyMusic();
+        return GUIController.Instance.DisplayBasicSkippableDialogs_CR(new string[] {getImmediateMessage()});
     }
 
     public abstract string getImmediateMessage();

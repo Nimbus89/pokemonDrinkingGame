@@ -87,7 +87,7 @@ public class PokemonController {
         }
         else if (level == 0) 
         {
-            gui.DisplayBasicModal("Your POKeMON can't evolve any further. Sadly drink 3.", callback);
+            gui.DisplayDialog("Your POKeMON can't evolve any further. Sadly drink 3.", callback);
         }
 
         refreshSprite();

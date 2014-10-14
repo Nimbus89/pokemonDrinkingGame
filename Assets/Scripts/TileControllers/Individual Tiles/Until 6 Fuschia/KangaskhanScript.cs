@@ -15,11 +15,11 @@ public class KangaskhanScript : DicerollTileController, StartOfTurnEffectTileCon
     {
         if (rollResult < 6)
         {
-            GUIController.Instance.DisplayBasicModal("Shit! Kangaskhan got away! Drink 3 in depression.", returnControlToPlayer);
+            GUIController.Instance.DisplayDialog("Shit! Kangaskhan got away! Drink 3 in depression.", returnControlToPlayer);
         }
         else
         {
-            GUIController.Instance.DisplayBasicModal("Hell yes! You caught him! Give 3 drinks.", returnControlToPlayer);
+            GUIController.Instance.DisplayDialog("Hell yes! You caught him! Give 3 drinks.", returnControlToPlayer);
         }
     }
 

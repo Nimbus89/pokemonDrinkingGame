@@ -14,15 +14,15 @@ public class SafariZoneScript : BasicModalTileController, StartOfTurnEffectTileC
         roller.doNormalDiceRollWithMessage("You encounter a wild POKeMON in the Safari Zone! Quick, roll a die!", (int result) => {
             if (result < 3) 
             {
-                GUIController.Instance.DisplayBasicModal("You throw bait. Give 1 drink to someone. Now roll to move.", cb);
+                GUIController.Instance.DisplayDialog("You throw bait. Give 1 drink to someone. Now roll to move.", cb);
             }
             else if (result < 5)
             {
-                GUIController.Instance.DisplayBasicModal("You throw a rock. Dick. Lose a turn and drink 2", player.endTurn);
+                GUIController.Instance.DisplayDialog("You throw a rock. Dick. Lose a turn and drink 2", player.endTurn);
             }
             else
             {
-                GUIController.Instance.DisplayBasicModal("You throw a Safari Ball. Drink 2, because Safari Balls are just awful. Now roll to move.", cb);
+                GUIController.Instance.DisplayDialog("You throw a Safari Ball. Drink 2, because Safari Balls are just awful. Now roll to move.", cb);
             }
         });
     }
