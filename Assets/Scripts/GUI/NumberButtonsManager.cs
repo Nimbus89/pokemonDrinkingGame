@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NumberButtonsManager : BaseGUIManager
+public class NumberButtonsManager : BaseGUIManager<NumberButtonsManager>
 {
 
     private int numberButtonInternalMargin;
@@ -11,26 +11,9 @@ public class NumberButtonsManager : BaseGUIManager
     private float numberButtonHorizontalMargin;
     private DicerollCallbackDelegate callback;
 
-    public static NumberButtonsManager Instance
+    public override void Awake()
     {
-        get { return instance; }
-    }
-
-    private static NumberButtonsManager instance;
-
-    public void Awake()
-    {
-        this.enabled = false;
-        if (instance != null && instance != this)
-        {
-            Destroy(this.gameObject);
-            return;
-        }
-        else
-        {
-            instance = this;
-        }
-        DontDestroyOnLoad(this.gameObject);
+        base.Awake();
         numberButtonInternalMargin = 10;
 	    numberButtonWidth = 100;
 	    numberButtonHeight = 100;

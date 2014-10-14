@@ -1,16 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum GUIState { DISPLAYING_BUTTON, NONE};
-
-public class GUIController : BaseGUIManager
+public class GUIController : BaseGUIManager<GUIController>
 {
-
-    public static GUIController Instance{
-        get { return instance; }
-    }
-
-    private static GUIController instance;
 
     public GUISkin skin;
 
@@ -18,8 +10,6 @@ public class GUIController : BaseGUIManager
 	
 	private string buttonText = "";
 	private CallbackDelegate callback;
-
-    private GUIState state;
 
     public void DoSingleDiceRoll(string text, DicerollCallbackDelegate cb) {
         StartCoroutine(DialogManager.Instance.ShowDialog(text, true, (int[] results) =>
@@ -44,13 +34,6 @@ public class GUIController : BaseGUIManager
     public void DisplayDialog(string text, CallbackDelegate cb)
     {
         StartCoroutine(DisplayDialog_CR(text, cb));
-    }
-
-    public void DisplayBasicButton(string text, CallbackDelegate cb)
-    {
-        buttonText = text;
-        callback = cb;
-        state = GUIState.DISPLAYING_BUTTON;
     }
 
     public IEnumerator DisplayDialogThenStarterPicker_CR(string text, PokemonCallbackDelegate cb)
@@ -125,37 +108,7 @@ public class GUIController : BaseGUIManager
         cb();
     }
 	
-	void Awake (){
-        state = GUIState.NONE;
-        if (instance != null && instance != this)
-        {
-            Destroy(this.gameObject);
-            return;
-        }
-        else
-        {
-            instance = this;
-        }
-        DontDestroyOnLoad(this.gameObject);
+	public override void Awake (){
+        base.Awake();
 	}
-
-    public override void OnGUI()
-    {
-        base.OnGUI();
-		switch(state){
-			case(GUIState.DISPLAYING_BUTTON):
-				if(GUI.Button(BottomOfScreenButtonPosition, buttonText)){
-					finsihed();
-				}
-				break;
-			default:
-				break;
-		}
-	}
-
-	private void finsihed(){
-		state = GUIState.NONE;
-        SFXManager.Instance.playBeep();
-		callback();
-	}		
 }

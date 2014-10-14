@@ -37,7 +37,7 @@ public class GameController : MonoBehaviour {
             playerNames = new string[] { "Player X", "Player X", "Player X", "Player X", "Player X" };
         }
         setupPlayers(starters, playerNames);
-        GUIController.Instance.DisplayBasicButton("Start Game", startGame);
+        startGame();
 	}
 
     void setupPlayers(Pokemon[] starters, string[] playerNames)

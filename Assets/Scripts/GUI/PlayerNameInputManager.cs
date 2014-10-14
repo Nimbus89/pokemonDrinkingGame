@@ -1,31 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerNameInputManager : BaseGUIManager
+public class PlayerNameInputManager : BaseGUIManager<PlayerNameInputManager>
 {
-
-    public static PlayerNameInputManager Instance
-    {
-        get { return instance; }
-    }
-
-    private static PlayerNameInputManager instance;
-
-    public void Awake()
-    {
-        this.enabled = false;
-        if (instance != null && instance != this)
-        {
-            Destroy(this.gameObject);
-            return;
-        }
-        else
-        {
-            instance = this;
-        }
-        DontDestroyOnLoad(this.gameObject);
-    }
-
     private string currentText = "";
 
     public string GetText() {

@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PokemonSelectorManager : BaseGUIManager
+public class PokemonSelectorManager : BaseGUIManager<PokemonSelectorManager>
 {
-
-    private static PokemonSelectorManager instance;
 
     private static int BUTTON_INTERNAL_MARGIN = 30;
     private static int BUTTON_WIDTH = 100;
@@ -14,26 +12,11 @@ public class PokemonSelectorManager : BaseGUIManager
 
     private PokemonCallbackDelegate callback;
 
-    public static PokemonSelectorManager Instance
-    {
-        get { return instance; }
-    }
-
-    public void Awake()
+    public override void Awake()
     {
         BUTTON_VERTICAL_MARGIN = (virtualHeight - (BUTTON_HEIGHT)) / 2;
         BUTTON_HORIZONTAL_MARGIN = (virtualWidth - (BUTTON_WIDTH * 3)) / 2 - BUTTON_INTERNAL_MARGIN;
-        this.enabled = false;
-        if (instance != null && instance != this)
-        {
-            Destroy(this.gameObject);
-            return;
-        }
-        else
-        {
-            instance = this;
-        }
-        DontDestroyOnLoad(this.gameObject);
+        base.Awake();
     }
 
     public IEnumerator ShowButtons(PokemonCallbackDelegate cb){

@@ -2,10 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class DialogManager : BaseGUIManager
+public class DialogManager : BaseGUIManager<DialogManager>
 {
-
-    private static DialogManager instance;
 
     public static Texture2D downArrowImage;
 
@@ -34,25 +32,11 @@ public class DialogManager : BaseGUIManager
 
     private static char DICEROLL_CHAR = '\b';
 
-    public static DialogManager Instance
-    {
-        get { return instance; }
-    }
 
-    void Awake()
+    public override void Awake()
     {
         downArrowImage = Resources.Load<Texture2D>("graphics/DownFacingArrow");
-        this.enabled = false;
-        if (instance != null && instance != this)
-        {
-            Destroy(this.gameObject);
-            return;
-        }
-        else
-        {
-            instance = this;
-        }
-        DontDestroyOnLoad(this.gameObject);
+        base.Awake();
     }
 
     public IEnumerator ShowDialogs(string[] texts, bool hideAfter = true, MultiDicerollCallbackDelegate cb = null, bool showSkip = false)

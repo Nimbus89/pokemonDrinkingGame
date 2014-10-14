@@ -37,12 +37,6 @@ public class CameraController : MonoBehaviour {
 	private GameObject target;
 	private float targetSize;
 
-	// Use this for initialization
-	void Start () {
-		targetSize = READ_RULES_SIZE;
-		target = rulesTarget;
-	}
-	
 	// Update is called once per frame
 	void Update () {
 		Vector3 targetPosition = new Vector3(target.transform.position.x, target.transform.position.y, MY_Z_POSITION);

@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class YesNoButtonManager : BaseGUIManager
+public class YesNoButtonManager : BaseGUIManager<YesNoButtonManager>
 {
-
-    private static YesNoButtonManager instance;
 
     private static int BUTTON_INTERNAL_MARGIN = 30;
     private static int BUTTON_WIDTH = 100;
@@ -14,26 +12,11 @@ public class YesNoButtonManager : BaseGUIManager
 
     private BooleanCallbackDelegate callback;
 
-    public static YesNoButtonManager Instance
-    {
-        get { return instance; }
-    }
-
-    public void Awake()
+    public override void Awake()
     {
         BUTTON_VERTICAL_MARGIN = ((virtualHeight - 100) - (BUTTON_HEIGHT)) / 2;
         BUTTON_HORIZONTAL_MARGIN = (virtualWidth - (BUTTON_WIDTH * 2)) / 2 - BUTTON_INTERNAL_MARGIN/2;
-        this.enabled = false;
-        if (instance != null && instance != this)
-        {
-            Destroy(this.gameObject);
-            return;
-        }
-        else
-        {
-            instance = this;
-        }
-        DontDestroyOnLoad(this.gameObject);
+        base.Awake();
     }
 
     public IEnumerator ShowButtons(BooleanCallbackDelegate cb)

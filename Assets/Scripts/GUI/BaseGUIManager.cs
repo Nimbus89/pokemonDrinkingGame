@@ -1,7 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BaseGUIManager : MonoBehaviour {
+public class BaseGUIManager<T> : MonoBehaviour where T : MonoBehaviour
+{
+
+    private static MonoBehaviour _instance;
+
+    public static T Instance
+    {
+        get { return (T) _instance; }
+    }
+
+    public virtual void Awake() {
+        this.enabled = false;
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            _instance = this;
+        }
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     protected const float virtualWidth = 480.0f;
     protected const float virtualHeight = 320.0f;

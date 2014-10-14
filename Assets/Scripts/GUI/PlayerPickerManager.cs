@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerPickerManager : BaseGUIManager
+public class PlayerPickerManager : BaseGUIManager<PlayerPickerManager>
 {
 
     private int scrollAreaMargins = 50;
@@ -14,32 +14,14 @@ public class PlayerPickerManager : BaseGUIManager
     private Vector2 scrollPosition = Vector2.zero;
     private PlayerCallbackDelegate callback;
 
-    public static PlayerPickerManager Instance
+    public override void Awake()
     {
-        get { return instance; }
-    }
+        scrollAreaLeft = scrollAreaMargins;
+        scrollAreaTop = scrollAreaMargins;
+        scrollAreaWidth = virtualWidth - scrollAreaMargins * 2;
+        scrollAreaHeight = virtualHeight - (scrollAreaMargins * 2 + 100);
 
-    private static PlayerPickerManager instance;
-
-    public void Awake()
-    {
-
-    scrollAreaLeft = scrollAreaMargins;
-    scrollAreaTop = scrollAreaMargins;
-    scrollAreaWidth = virtualWidth - scrollAreaMargins * 2;
-    scrollAreaHeight = virtualHeight - (scrollAreaMargins * 2 + 100);
-
-        this.enabled = false;
-        if (instance != null && instance != this)
-        {
-            Destroy(this.gameObject);
-            return;
-        }
-        else
-        {
-            instance = this;
-        }
-        DontDestroyOnLoad(this.gameObject);
+        base.Awake();
     }
 
     public IEnumerator ShowButtons(PlayerCallbackDelegate cb, PlayerController[] players)
