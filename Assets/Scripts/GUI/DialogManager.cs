@@ -234,7 +234,10 @@ public class DialogManager : BaseGUIManager<DialogManager>
                 skipping = true;
             }
         }
-        GUI.Window(1, ModalWindowPosition, drawDialogBox, "");
+        if (Time.timeScale != 0.0f) {
+            GUI.Window(1, ModalWindowPosition, drawDialogBox, "");
+        }
+        
     }
 
     private void drawDialogBox(int windowID)

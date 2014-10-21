@@ -117,6 +117,14 @@ public class GameController : MonoBehaviour {
     public int GetNumberOfPlayers() {
         return this.players.Length;
     }
+
+    public void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            StartMenuManager.Instance.TogglePause();
+        }
+    }
 	
 }
 
