@@ -83,7 +83,7 @@ public class GameController : MonoBehaviour {
 
     public void endGame() {
         GUIController.Instance.DisplayDialog(getCurrentPlayer().getName() + " wins!", () => {
-            Application.LoadLevel(0);
+            Application.LoadLevel(3);
         });
     }
 

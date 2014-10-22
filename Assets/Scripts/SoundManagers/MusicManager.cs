@@ -41,16 +41,20 @@ public class MusicManager : MonoBehaviour
         source = GetComponents<AudioSource>()[1];
     }
 
+    public void PlayInstantly(AudioClip clip)
+    {
+        source.clip = clip;
+        source.Play();
+    }
+
     public void playTitleMusic()
     {
-        source.clip = titleMusic2;
-        source.Play();
+        PlayInstantly(titleMusic2);
     }
 
     public void playSpeechMusic()
     {
-        source.clip = profSpeechMusic;
-        source.Play();
+        PlayInstantly(profSpeechMusic);
     }
 
     public void PlayTileMusic(AudioClip tileMusic) {

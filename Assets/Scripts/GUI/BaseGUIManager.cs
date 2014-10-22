@@ -5,6 +5,7 @@ public class BaseGUIManager<T> : MonoBehaviour where T : MonoBehaviour
 {
 
     private static MonoBehaviour _instance;
+    private static GUISkin DEFAULT_SKIN;
 
     public static T Instance
     {
@@ -13,6 +14,11 @@ public class BaseGUIManager<T> : MonoBehaviour where T : MonoBehaviour
 
     public virtual void Awake() {
         this.enabled = false;
+
+        if (DEFAULT_SKIN == null) { 
+            DEFAULT_SKIN = Resources.Load<GUISkin>("Skin");
+        }
+
         if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
@@ -22,13 +28,12 @@ public class BaseGUIManager<T> : MonoBehaviour where T : MonoBehaviour
         {
             _instance = this;
         }
-        DontDestroyOnLoad(this.gameObject);
     }
 
     protected const float virtualWidth = 480.0f;
     protected const float virtualHeight = 320.0f;
     public static Matrix4x4 MATRIX;
-    void Start()
+    public virtual void Start()
     {
         UpdateMatrix();
     }
@@ -40,6 +45,6 @@ public class BaseGUIManager<T> : MonoBehaviour where T : MonoBehaviour
     virtual public void OnGUI()
     {
         GUI.matrix = MATRIX;
-        GUI.skin = GUIController.Instance.skin;
+        GUI.skin = DEFAULT_SKIN;
     }
 }

@@ -57,6 +57,7 @@
     <Compile Include="Assets\Scripts\Aftereffect Controllers\ZubatsAftereffectController.cs" />
     <Compile Include="Assets\Scripts\Callback.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\CreditScript.cs" />
     <Compile Include="Assets\Scripts\DicerollController.cs" />
     <Compile Include="Assets\Scripts\GUI\BaseGUIManager.cs" />
     <Compile Include="Assets\Scripts\GUI\DialogManager.cs" />
