@@ -17,6 +17,7 @@ public class StartMenuManager : BaseGUIManager<StartMenuManager>
     }   
 
     public void Pause(){
+        SFXManager.Instance.playClack();
         Time.timeScale = 0.0f;
         this.enabled = true;
     }

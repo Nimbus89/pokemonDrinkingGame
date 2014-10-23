@@ -5,6 +5,7 @@ public class SFXManager : MonoBehaviour
 {
 
     private static AudioClip ButtonPressBeep;
+    private static AudioClip MenuClack;
     private static SFXManager instance = null;
 
     private AudioSource source;
@@ -17,6 +18,7 @@ public class SFXManager : MonoBehaviour
     {
 
         ButtonPressBeep = Resources.Load<AudioClip>("sounds/ButtonPressBeep");
+        MenuClack = Resources.Load<AudioClip>("sounds/clack");
 
         if (instance != null && instance != this)
         {
@@ -36,5 +38,9 @@ public class SFXManager : MonoBehaviour
         source.Play();
     }
 
-    // any other methods you need
+    public void playClack()
+    {
+        source.clip = MenuClack;
+        source.Play();
+    }
 }

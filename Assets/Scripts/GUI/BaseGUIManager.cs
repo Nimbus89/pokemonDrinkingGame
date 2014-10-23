@@ -5,7 +5,7 @@ public class BaseGUIManager<T> : MonoBehaviour where T : MonoBehaviour
 {
 
     private static MonoBehaviour _instance;
-    private static GUISkin DEFAULT_SKIN;
+    public static GUISkin DEFAULT_SKIN;
 
     public static T Instance
     {

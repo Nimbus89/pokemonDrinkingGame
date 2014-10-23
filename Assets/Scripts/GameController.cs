@@ -38,6 +38,7 @@ public class GameController : MonoBehaviour {
         }
         setupPlayers(starters, playerNames);
         startGame();
+        PauseButtonManager.Instance.enabled = true;
 	}
 
     void setupPlayers(Pokemon[] starters, string[] playerNames)
@@ -55,6 +56,7 @@ public class GameController : MonoBehaviour {
 	void startGame(){
 		currentPlayerNumber = 1;
 		startTurn ();
+        
 	}
 	
 	void startTurn(){
