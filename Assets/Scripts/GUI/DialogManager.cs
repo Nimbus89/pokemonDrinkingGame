@@ -220,33 +220,33 @@ public class DialogManager : BaseGUIManager<DialogManager>
 
     public void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && GUIUtility.hotControl == 0)
         {
             handleClick();
         }
     }
 
     override public void OnGUI(){
+        GUI.depth = -10;
         base.OnGUI();
-        if (showingSkipButton) {
-            if (GUI.Button(SkipButtonPosition, "SKIP"))
+        if (Time.timeScale != 0.0f)
+        {
+            if (showingSkipButton) {
+                if (GUI.Button(SkipButtonPosition, "SKIP"))
+                {
+                    skipping = true;
+                }
+            }
+            //GUI.Window(1, ModalWindowPosition, drawDialogBox, "");
+            GUI.Box(ModalWindowPosition, "");
+            GUI.Label(new Rect(textLeftMargin + ModalWindowPosition.xMin, ModalWindowPosition.yMin + topLineOffset + scrollAnimationOffset, ModalWindowPosition.width, ModalWindowPosition.height / 2), currentTopLine);
+            GUI.Label(new Rect(textLeftMargin + ModalWindowPosition.xMin, ModalWindowPosition.yMin + bottomLineOffset + scrollAnimationOffset, ModalWindowPosition.width, ModalWindowPosition.height / 2), currentBottomLine);
+            if (arrowVisible)
             {
-                skipping = true;
+                GUI.DrawTexture(new Rect(ModalWindowPosition.width - 50, ModalWindowPosition.yMin + ModalWindowPosition.height - 35, 28, 20), downArrowImage);
             }
         }
-        if (Time.timeScale != 0.0f) {
-            GUI.Window(1, ModalWindowPosition, drawDialogBox, "");
-        }
         
-    }
-
-    private void drawDialogBox(int windowID)
-    {
-        GUI.Box(new Rect(textLeftMargin, topLineOffset + scrollAnimationOffset, ModalWindowPosition.width, ModalWindowPosition.height / 2), currentTopLine);
-        GUI.Box(new Rect(textLeftMargin, bottomLineOffset + scrollAnimationOffset, ModalWindowPosition.width, ModalWindowPosition.height / 2), currentBottomLine);
-        if (arrowVisible) {
-            GUI.DrawTexture(new Rect(ModalWindowPosition.width - 50, ModalWindowPosition.height - 35, 28, 20), downArrowImage);
-        }
     }
 
 }

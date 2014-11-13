@@ -17,7 +17,7 @@ public class PauseButtonManager : BaseGUIManager<PauseButtonManager>
     }
 
     public void OnGUI()
-    {
+    {        
         base.OnGUI();
         if (Time.timeScale > 0.0f) {
             if (GUI.Button(new Rect(0, 0, BUTTON_WIDTH, BUTTON_HEIGHT), "PAUSE"))

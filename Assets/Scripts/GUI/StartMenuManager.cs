@@ -5,8 +5,22 @@ public class StartMenuManager : BaseGUIManager<StartMenuManager>
 {
 
     private Rect windowRect = new Rect(virtualWidth - virtualWidth/4, 0, virtualWidth/4, virtualHeight);
-    private int buttonHeight = 70;
+    const int buttonHeight = 70;
+    const int buttonLeft = 10;
+    private GUIStyle buttonStyle;
 
+    public override void Awake()
+    {
+
+        base.Awake();
+        GUISkin skin = Resources.Load<GUISkin>("Skin");
+        buttonStyle = new GUIStyle(skin.button);
+        buttonStyle.normal.background = null;
+        buttonStyle.focused.background = null;
+        buttonStyle.active.background = null;
+        buttonStyle.hover.background = null;
+        buttonStyle.alignment = TextAnchor.MiddleLeft;
+    }
 
     public void TogglePause() {
         if (this.enabled) {
@@ -34,24 +48,28 @@ public class StartMenuManager : BaseGUIManager<StartMenuManager>
     }
 
     private void drawWindow(int id) {
-        if (GUI.Button(new Rect(0, buttonHeight*0, windowRect.width, buttonHeight), "Resume"))
+        if (GUI.Button(new Rect(buttonLeft, buttonHeight * 0, windowRect.width, buttonHeight), "Resume", buttonStyle))
         {
+            Debug.Log("Resume");
             this.UnPause();
         }
-        if (GUI.Button(new Rect(0, buttonHeight*1, windowRect.width, buttonHeight), "Quit"))
+        if (GUI.Button(new Rect(buttonLeft, buttonHeight * 1, windowRect.width, buttonHeight), "Quit", buttonStyle))
         {
+            Debug.Log("Quit");
             Application.LoadLevel(0);
             UnPause();
         }
-        if (GUI.Button(new Rect(0, buttonHeight * 2, windowRect.width, buttonHeight), "Mute"))
+        if (GUI.Button(new Rect(buttonLeft, buttonHeight * 2, windowRect.width, buttonHeight), "Mute", buttonStyle))
         {
+            Debug.Log("Mute");
             MusicManager manager = MusicManager.Instance;
             if (manager) {
                 manager.ToggleMute();
             }
         }
-        if (GUI.Button(new Rect(0, buttonHeight * 3, windowRect.width, buttonHeight), "Fullscreen"))
+        if (GUI.Button(new Rect(buttonLeft, buttonHeight * 3, windowRect.width, buttonHeight), "FScr.", buttonStyle))
         {
+            Debug.Log("FS");
             Screen.fullScreen = !Screen.fullScreen;
         }
     }
