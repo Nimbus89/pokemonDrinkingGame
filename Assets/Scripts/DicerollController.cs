@@ -5,13 +5,11 @@ using UnityEngine;
 public class DicerollController {
 	
 	private DicerollCallbackDelegate callback;
-	private bool realMode;
     private string currentRandomRollText;
     private string currentRealRollText;
     private string secondRealRollText;
 	
 	public DicerollController(GameController game){
-		this.realMode = game.realMode;
 	}
 	
 	public void doNormalDiceRollWithMessage(string message, DicerollCallbackDelegate cb){
@@ -29,7 +27,8 @@ public class DicerollController {
 	}
 	
 	private void handleDiceRoll(){
-		if(realMode){
+        if (GameController.realMode)
+        {
             GUIController.Instance.DisplayDialogThenNumberPicker(currentRealRollText, callback);
 		} else {
             GUIController.Instance.DoSingleDiceRoll(currentRandomRollText, callback);
@@ -38,7 +37,7 @@ public class DicerollController {
 
     private void handleDoubleDiceRoll()
     {
-        if (realMode)
+        if (GameController.realMode)
         {
             GUIController.Instance.DisplayDialogThenNumberPicker(currentRealRollText, (int firstResult) => {
                 GUIController.Instance.DisplayDialogThenNumberPicker(secondRealRollText, (int secondResult) =>
@@ -65,8 +64,8 @@ public class DicerollController {
     public void doDoubleBattleRoll(string name, DicerollCallbackDelegate cb)
     {
         currentRandomRollText = string.Format("{0} rolls a \b, then a \b!", name);
-        currentRealRollText = string.Format("What did {0} roll one die 1?", name);
-        secondRealRollText = string.Format("What did {0} roll one die 2?", name);
+        currentRealRollText = string.Format("What did {0} roll for die 1?", name);
+        secondRealRollText = string.Format("What did {0} roll for die 2?", name);
         callback = cb;
         handleDoubleDiceRoll();
     }

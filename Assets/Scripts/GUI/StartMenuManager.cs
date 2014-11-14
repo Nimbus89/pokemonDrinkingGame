@@ -5,7 +5,7 @@ public class StartMenuManager : BaseGUIManager<StartMenuManager>
 {
 
     private Rect windowRect = new Rect(virtualWidth - virtualWidth/4, 0, virtualWidth/4, virtualHeight);
-    const int buttonHeight = 70;
+    const int buttonHeight = 60;
     const int buttonLeft = 10;
     private GUIStyle buttonStyle;
 
@@ -20,6 +20,7 @@ public class StartMenuManager : BaseGUIManager<StartMenuManager>
         buttonStyle.active.background = null;
         buttonStyle.hover.background = null;
         buttonStyle.alignment = TextAnchor.MiddleLeft;
+        buttonStyle.fontSize = 12;
     }
 
     public void TogglePause() {
@@ -72,6 +73,21 @@ public class StartMenuManager : BaseGUIManager<StartMenuManager>
             Debug.Log("FS");
             Screen.fullScreen = !Screen.fullScreen;
         }
+        string rdmtext;
+        if (GameController.realMode)
+        {
+            rdmtext = "RDM ON";
+        }
+        else {
+            rdmtext = "RDM OFF";
+        }
+        if (GUI.Button(new Rect(buttonLeft, buttonHeight * 4, windowRect.width, buttonHeight), rdmtext, buttonStyle))
+        {
+            Debug.Log("RDM.");
+            GameController.realMode = !GameController.realMode;
+        }
+
+
     }
 
 }

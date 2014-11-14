@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour {
 	
 
     //Debug variables
-    public bool realMode;
+    public static bool realMode;
     public int startingTileNumber;
     //Debug variables
 
@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour {
 	void Start () {
 		Pokemon[] starters = PlayerSetupController.starters;
         string[] playerNames = PlayerSetupController.playerNames;
+        realMode = false;
         int count = 0;
         foreach (TileController tile in squares)
         {
