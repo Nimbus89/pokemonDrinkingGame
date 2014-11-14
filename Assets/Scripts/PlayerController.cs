@@ -207,8 +207,35 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private IEnumerator doLopsidedBattle(PlayerController strongPlayer, PlayerController weakPlayer) { 
-        return doEvenBattle(strongPlayer, weakPlayer);
+    private IEnumerator doLopsidedBattle(PlayerController strongPlayer, PlayerController weakPlayer) {
+        bool finished = false;
+        roller.doDoubleBattleRoll(strongPlayer.playerName, (int player1Roll) =>
+        {
+            roller.doBattleRoll(weakPlayer.playerName, (int player2Roll) =>
+            {
+                string resultMessage;
+                if (player1Roll > player2Roll)
+                {
+                    resultMessage = string.Format(WINNER_MESSAGE, strongPlayer.playerName, weakPlayer.playerName);
+                }
+                else if (player2Roll > player1Roll)
+                {
+                    resultMessage = string.Format(WINNER_MESSAGE, weakPlayer.playerName, strongPlayer.playerName);
+                }
+                else
+                {
+                    resultMessage = DRAW_MESSAGE;
+                }
+                GUIController.Instance.DisplayDialog(resultMessage, () =>
+                {
+                    finished = true;
+                });
+            });
+        });
+        while (!finished)
+        {
+            yield return 0;
+        }
     }
 
     private IEnumerator doEvenBattle(PlayerController player1, PlayerController player2)

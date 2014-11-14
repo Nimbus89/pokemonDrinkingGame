@@ -5,8 +5,6 @@ public class GUIController : BaseGUIManager<GUIController>
 {
 
     public GUISkin skin;
-
-	private Rect BottomOfScreenButtonPosition = new Rect(50, virtualHeight - 50, virtualWidth - 100, 50);
 	
 	private string buttonText = "";
 	private CallbackDelegate callback;
@@ -18,9 +16,9 @@ public class GUIController : BaseGUIManager<GUIController>
         }));
     }
 
-    public IEnumerator DoMultiDiceRoll(string text, MultiDicerollCallbackDelegate cb)
+    public void DoMultiDiceRoll(string text, MultiDicerollCallbackDelegate cb)
     {
-        yield return StartCoroutine(DialogManager.Instance.ShowDialog(text, true, (int[] results) =>
+        StartCoroutine(DialogManager.Instance.ShowDialog(text, true, (int[] results) =>
         {
             cb(results);
         }));

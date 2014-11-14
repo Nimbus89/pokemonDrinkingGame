@@ -50,7 +50,8 @@ public class CreditScript : BaseGUIManager<CreditScript>
         this.enabled = true;
     }
 
-    void OnGUI() { 
+    public override void OnGUI()
+    { 
         base.OnGUI();
         for (int i = 0; i < 4; i++) {
             GUI.Label(new Rect(0, borderHeight + labelHeight * i, virtualWidth, labelHeight), lines[i], labelStyle);

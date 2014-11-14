@@ -154,16 +154,16 @@ public class DialogManager : BaseGUIManager<DialogManager>
         }
         else
         {
-            currentBottomLine = currentBottomLine.Remove(currentTopLine.Length - 1);
+            currentBottomLine = currentBottomLine.Remove(currentBottomLine.Length - 1);
         }
     }
 
     IEnumerator doDiceRoll(bool top) {
-        int result = Random.Range(1, 6);
+        int result = Random.Range(1, 7);
         addToLine(top, result.ToString()[0]);
         pausedForInput = true;
         while (pausedForInput) {
-            result = Random.Range(1, 6);
+            result = Random.Range(1, 7);
             removeLastCharOfLine(top);
             addToLine(top, result.ToString()[0]);
             yield return 0;

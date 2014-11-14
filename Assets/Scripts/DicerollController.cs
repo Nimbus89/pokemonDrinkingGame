@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class DicerollController {
 	private bool realMode;
     private string currentRandomRollText;
     private string currentRealRollText;
+    private string secondRealRollText;
 	
 	public DicerollController(GameController game){
 		this.realMode = game.realMode;
@@ -30,12 +32,27 @@ public class DicerollController {
 		if(realMode){
             GUIController.Instance.DisplayDialogThenNumberPicker(currentRealRollText, callback);
 		} else {
-            doRandomRoll();
+            GUIController.Instance.DoSingleDiceRoll(currentRandomRollText, callback);
 		}
 	}
 
-    private void doRandomRoll() {
-        GUIController.Instance.DoSingleDiceRoll(currentRandomRollText, callback);
+    private void handleDoubleDiceRoll()
+    {
+        if (realMode)
+        {
+            GUIController.Instance.DisplayDialogThenNumberPicker(currentRealRollText, (int firstResult) => {
+                GUIController.Instance.DisplayDialogThenNumberPicker(secondRealRollText, (int secondResult) =>
+                {
+                    callback(Mathf.Max(firstResult, secondResult));
+                });
+            });
+        }
+        else
+        {
+            GUIController.Instance.DoMultiDiceRoll(currentRandomRollText, (int[] results) => {
+                callback(results.Max());
+            });
+        }
     }
 
     public void doBattleRoll(string name, DicerollCallbackDelegate cb) {
@@ -43,5 +60,14 @@ public class DicerollController {
         currentRealRollText = string.Format("What did {0} roll?", name);
         callback = cb;
         handleDiceRoll();
+    }
+
+    public void doDoubleBattleRoll(string name, DicerollCallbackDelegate cb)
+    {
+        currentRandomRollText = string.Format("{0} rolls a \b, then a \b!", name);
+        currentRealRollText = string.Format("What did {0} roll one die 1?", name);
+        secondRealRollText = string.Format("What did {0} roll one die 2?", name);
+        callback = cb;
+        handleDoubleDiceRoll();
     }
 }
