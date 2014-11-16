@@ -26,7 +26,7 @@ public class CreditScript : BaseGUIManager<CreditScript>
         new string[] { "BOARD DESIGN", "TREMBLEHORN", "", "" },
         new string[] { "LEAD TESTER", "JAMES COTTER", "", "" },
         new string[] { "TESTING", "JAMES KING", "NALA MURPHY", "JOANN KELLEHER" },
-        new string[] { "TESTING", "ROISIN MORAN", "PAUL BROUGHTON", "" },
+        new string[] { "TESTING", "ROISIN MORAN", "PAUL BROUGHTON", "MARC DERHAM" },
         new string[] { "ORIGINAL DESIGN", "TITAN413", "RAITH112358", "" },
         new string[] { "ACE PROTOEGE", "NALA MURPHY", "", "" },
         new string[] { "SPECIAL THANKS", "GAME FREAK", "", "" },
@@ -41,6 +41,7 @@ public class CreditScript : BaseGUIManager<CreditScript>
         labelHeight = (virtualHeight - borderHeight * 2) / NUMBER_OF_LABELS;
         labelStyle = new GUIStyle(DEFAULT_SKIN.label);
         labelStyle.normal.textColor = new Color(0, 0, 0, 0);
+        labelStyle.alignment = TextAnchor.MiddleCenter;
         StartCoroutine(doCredits());
 	}
 	
@@ -62,9 +63,9 @@ public class CreditScript : BaseGUIManager<CreditScript>
         foreach (string[] pageLines in pages) {
             lines = pageLines;
             yield return StartCoroutine(fadeIn());
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(4);
             yield return StartCoroutine(fadeOut());
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(1.5f);
         }
         Application.LoadLevel(0);
     }

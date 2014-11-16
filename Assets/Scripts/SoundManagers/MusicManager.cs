@@ -43,6 +43,7 @@ public class MusicManager : MonoBehaviour
 
     public void PlayInstantly(AudioClip clip)
     {
+        source.time = 0;
         source.clip = clip;
         source.Play();
     }

@@ -7,7 +7,6 @@ public class DicerollController {
 	private DicerollCallbackDelegate callback;
     private string currentRandomRollText;
     private string currentRealRollText;
-    private string secondRealRollText;
 	
 	public DicerollController(GameController game){
 	}
@@ -39,12 +38,7 @@ public class DicerollController {
     {
         if (GameController.realMode)
         {
-            GUIController.Instance.DisplayDialogThenNumberPicker(currentRealRollText, (int firstResult) => {
-                GUIController.Instance.DisplayDialogThenNumberPicker(secondRealRollText, (int secondResult) =>
-                {
-                    callback(Mathf.Max(firstResult, secondResult));
-                });
-            });
+            GUIController.Instance.DisplayDialogThenNumberPicker(currentRealRollText, callback);
         }
         else
         {
@@ -64,8 +58,7 @@ public class DicerollController {
     public void doDoubleBattleRoll(string name, DicerollCallbackDelegate cb)
     {
         currentRandomRollText = string.Format("{0} rolls a \b, then a \b!", name);
-        currentRealRollText = string.Format("What did {0} roll for die 1?", name);
-        secondRealRollText = string.Format("What did {0} roll for die 2?", name);
+        currentRealRollText = string.Format("{0}, roll 2 dice. Enter the higher roll.", name);
         callback = cb;
         handleDoubleDiceRoll();
     }
