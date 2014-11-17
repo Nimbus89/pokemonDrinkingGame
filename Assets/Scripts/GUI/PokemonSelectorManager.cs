@@ -37,13 +37,16 @@ public class PokemonSelectorManager : BaseGUIManager<PokemonSelectorManager>
     public void OnGUI()
     {
         base.OnGUI();
+        if (Time.timeScale > 0.0f)
+        {
+            Pokemon[] mons = new Pokemon[] { Pokemon.bulbasaur, Pokemon.charmander, Pokemon.squirtle };
 
-        Pokemon[] mons = new Pokemon[] { Pokemon.bulbasaur, Pokemon.charmander, Pokemon.squirtle };
-
-        for (int i = 0; i < 3; i++) {
-            if (GUI.Button(new Rect(BUTTON_HORIZONTAL_MARGIN + (BUTTON_WIDTH + BUTTON_INTERNAL_MARGIN) * i, BUTTON_VERTICAL_MARGIN, BUTTON_WIDTH, BUTTON_HEIGHT), PokemonSprites.getTexture(mons[i])))
+            for (int i = 0; i < 3; i++)
             {
-                choosePokemon(mons[i]);
+                if (GUI.Button(new Rect(BUTTON_HORIZONTAL_MARGIN + (BUTTON_WIDTH + BUTTON_INTERNAL_MARGIN) * i, BUTTON_VERTICAL_MARGIN, BUTTON_WIDTH, BUTTON_HEIGHT), PokemonSprites.getTexture(mons[i])))
+                {
+                    choosePokemon(mons[i]);
+                }
             }
         }
     }

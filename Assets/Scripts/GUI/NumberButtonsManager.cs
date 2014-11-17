@@ -15,8 +15,8 @@ public class NumberButtonsManager : BaseGUIManager<NumberButtonsManager>
     {
         base.Awake();
         numberButtonInternalMargin = 10;
-	    numberButtonWidth = 100;
-	    numberButtonHeight = 100;
+	    numberButtonWidth = 80;
+	    numberButtonHeight = 80;
         numberButtonVerticalMargin = ((virtualHeight-100) - (numberButtonHeight * 2)) / 2 - numberButtonInternalMargin/2;
         numberButtonHorizontalMargin = (virtualWidth - (numberButtonWidth * 3)) / 2 - numberButtonInternalMargin;
     }
@@ -39,16 +39,21 @@ public class NumberButtonsManager : BaseGUIManager<NumberButtonsManager>
 
     public void OnGUI() {
         base.OnGUI();
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 3; j++) {
-                int buttonNumber = (i * 3) + (j + 1);
-                
-                Rect position = new Rect(numberButtonHorizontalMargin + ((numberButtonWidth + numberButtonInternalMargin) * j),
-                    numberButtonVerticalMargin + ((numberButtonHeight + numberButtonInternalMargin) * i), numberButtonWidth, numberButtonHeight);
-
-                if (GUI.Button(position, "" + buttonNumber))
+        if (Time.timeScale > 0.0f)
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                for (int j = 0; j < 3; j++)
                 {
-                    numberClicked(buttonNumber);
+                    int buttonNumber = (i * 3) + (j + 1);
+
+                    Rect position = new Rect(numberButtonHorizontalMargin + ((numberButtonWidth + numberButtonInternalMargin) * j),
+                        numberButtonVerticalMargin + ((numberButtonHeight + numberButtonInternalMargin) * i), numberButtonWidth, numberButtonHeight);
+
+                    if (GUI.Button(position, "" + buttonNumber))
+                    {
+                        numberClicked(buttonNumber);
+                    }
                 }
             }
         }

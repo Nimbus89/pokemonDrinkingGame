@@ -229,7 +229,7 @@ public class DialogManager : BaseGUIManager<DialogManager>
     override public void OnGUI(){
         GUI.depth = -10;
         base.OnGUI();
-        if (Time.timeScale != 0.0f)
+        if (Time.timeScale > 0.0f)
         {
             if (showingSkipButton) {
                 if (GUI.Button(SkipButtonPosition, "SKIP"))

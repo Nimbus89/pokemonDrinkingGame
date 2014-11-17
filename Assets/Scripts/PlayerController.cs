@@ -117,15 +117,17 @@ public class PlayerController : MonoBehaviour {
 	
 	public void handleNextStartOfTurnEffect(){
 		if(currentStartOfTurnEffects.Count == 0){
-			roll ();
+			doMovementRoll ();
 		} else {
 			AftereffectController effect = currentStartOfTurnEffects.Pop();
 			effect.applyEffect();
 		}
 	}
 	
-	public void roll(){
-		if(rollReplaceAfterEffect == null){
+	public void doMovementRoll(){
+        if (gameController.GetTileByNum(currentTileNumber + 1).IS_GOLD) {
+            move(1);
+        } else if (rollReplaceAfterEffect == null){
 			roller.doNormalDiceRoll(move);
 		} else {
 			rollReplaceAfterEffect.applyEffect();
@@ -174,6 +176,7 @@ public class PlayerController : MonoBehaviour {
             }
 
         }
+        getCurrentTile().PlayMyMusic();
         foreach (PlayerController otherPlayer in getCurrentTile().GetPlayersOnMe()) {
             if (otherPlayer != this) {
                 yield return StartCoroutine(doBattle(otherPlayer));

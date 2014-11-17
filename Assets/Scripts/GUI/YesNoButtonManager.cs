@@ -40,14 +40,16 @@ public class YesNoButtonManager : BaseGUIManager<YesNoButtonManager>
     public void OnGUI()
     {
         base.OnGUI();
-
-        if (GUI.Button(new Rect(BUTTON_HORIZONTAL_MARGIN, BUTTON_VERTICAL_MARGIN, BUTTON_WIDTH, BUTTON_HEIGHT), "Yes"))
+        if (Time.timeScale > 0.0f)
         {
-            chooseAnswer(true);
-        }
-        if (GUI.Button(new Rect(BUTTON_HORIZONTAL_MARGIN + BUTTON_INTERNAL_MARGIN + BUTTON_WIDTH, BUTTON_VERTICAL_MARGIN, BUTTON_WIDTH, BUTTON_HEIGHT), "No"))
-        {
-            chooseAnswer(false);
+            if (GUI.Button(new Rect(BUTTON_HORIZONTAL_MARGIN, BUTTON_VERTICAL_MARGIN, BUTTON_WIDTH, BUTTON_HEIGHT), "Yes"))
+            {
+                chooseAnswer(true);
+            }
+            if (GUI.Button(new Rect(BUTTON_HORIZONTAL_MARGIN + BUTTON_INTERNAL_MARGIN + BUTTON_WIDTH, BUTTON_VERTICAL_MARGIN, BUTTON_WIDTH, BUTTON_HEIGHT), "No"))
+            {
+                chooseAnswer(false);
+            }
         }
     }
 }

@@ -29,7 +29,10 @@ public class PlayerNameInputManager : BaseGUIManager<PlayerNameInputManager>
 
     public void OnGUI() {
         base.OnGUI();
-        currentText = GUI.TextField(new Rect(0, 0, virtualWidth, 50), currentText);
+        if (Time.timeScale > 0.0f)
+        {
+            currentText = GUI.TextField(new Rect(0, 0, virtualWidth, 50), currentText);
+        }
     }
 
 

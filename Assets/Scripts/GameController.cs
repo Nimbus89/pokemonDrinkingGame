@@ -34,8 +34,8 @@ public class GameController : MonoBehaviour {
             count++;
         }
         if (starters == null || starters.Length == 0) {
-            starters = new Pokemon[] { Pokemon.charmander, Pokemon.bulbasaur, Pokemon.squirtle, Pokemon.charmander, Pokemon.bulbasaur };
-            playerNames = new string[] { "Player 1", "Player 2", "Player 3", "Player 4", "Player 5" };
+            starters = new Pokemon[] { Pokemon.charmander };
+            playerNames = new string[] { "Player 1" };
         }
         setupPlayers(starters, playerNames);
         startGame();

@@ -39,17 +39,22 @@ public class PlayerPickerManager : BaseGUIManager<PlayerPickerManager>
     void OnGUI()
     {
         base.OnGUI();
-        int numPlayers = players.Length;
-        scrollPosition = GUI.BeginScrollView(new Rect(scrollAreaLeft, scrollAreaTop, scrollAreaWidth, scrollAreaHeight), scrollPosition, new Rect(0, 0, 100, buttonHeight * numPlayers));
+        if (Time.timeScale > 0.0f)
+        {
+            int numPlayers = players.Length;
+            scrollPosition = GUI.BeginScrollView(new Rect(scrollAreaLeft, scrollAreaTop, scrollAreaWidth, scrollAreaHeight), scrollPosition, new Rect(0, 0, 100, buttonHeight * numPlayers));
 
-        int count = 0;
-        foreach(PlayerController player in players){
-            if (GUI.Button(new Rect(0, buttonHeight * count, scrollAreaWidth, buttonHeight), player.getName())) {
-                finished(player);
+            int count = 0;
+            foreach (PlayerController player in players)
+            {
+                if (GUI.Button(new Rect(0, buttonHeight * count, scrollAreaWidth, buttonHeight), player.getName()))
+                {
+                    finished(player);
+                }
+                count++;
             }
-            count++;
+            GUI.EndScrollView();
         }
-        GUI.EndScrollView();
     }
 
     private void finished(PlayerController player) {

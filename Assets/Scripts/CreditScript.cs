@@ -17,6 +17,8 @@ public class CreditScript : BaseGUIManager<CreditScript>
     private string[] lines;
 
     private GUIStyle labelStyle;
+    private static Texture2D staticRectTexture;
+    private static GUIStyle staticRectStyle;
 
     private string[][] pages = new string[][] {
         new string[] { "POKeMON", "BLACKOUT VERSION STAFF", "", "" },
@@ -49,11 +51,19 @@ public class CreditScript : BaseGUIManager<CreditScript>
     {
         base.Awake();
         this.enabled = true;
+
+        staticRectTexture = new Texture2D(1, 1);
+        staticRectStyle = new GUIStyle();
+        staticRectTexture.SetPixel(0, 0, Color.black);
+        staticRectTexture.Apply();
+        staticRectStyle.normal.background = staticRectTexture;
     }
 
     public override void OnGUI()
-    { 
+    {
         base.OnGUI();
+        GUI.Box(new Rect(0, 0, virtualWidth, virtualHeight / 5), GUIContent.none, staticRectStyle);
+        GUI.Box(new Rect(0, virtualHeight - virtualHeight/5, virtualWidth, virtualHeight / 5), GUIContent.none, staticRectStyle);
         for (int i = 0; i < 4; i++) {
             GUI.Label(new Rect(0, borderHeight + labelHeight * i, virtualWidth, labelHeight), lines[i], labelStyle);
         }
