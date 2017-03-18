@@ -22,7 +22,7 @@ public class CreditScript : BaseGUIManager<CreditScript>
 
     private string[][] pages = new string[][] {
         new string[] { "POKeMON", "BLACKOUT VERSION STAFF", "", "" },
-        new string[] { "LEAD DEVELOPER", "PAUL BROUGHTON", "", "" },
+        new string[] { "DEVELOPER", "PAUL BROUGHTON", "JAMES COTTER", "" },
         new string[] { "RULES DEVELOPMENT", "PAUL BROUGHTON", "JAMES COTTER", "" },
         new string[] { "LEAD WRITER", "JAMES COTTER", "", "" },
         new string[] { "BOARD DESIGN", "TREMBLEHORN", "", "" },

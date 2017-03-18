@@ -125,9 +125,7 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	public void doMovementRoll(){
-        if (gameController.GetTileByNum(currentTileNumber + 1).IS_GOLD) {
-            move(1);
-        } else if (rollReplaceAfterEffect == null){
+        if (rollReplaceAfterEffect == null){
 			roller.doNormalDiceRoll(move);
 		} else {
 			rollReplaceAfterEffect.applyEffect();
