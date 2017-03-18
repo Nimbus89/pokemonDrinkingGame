@@ -11,6 +11,15 @@ public class NumberButtonsManager : BaseGUIManager<NumberButtonsManager>
     private float numberButtonHorizontalMargin;
     private DicerollCallbackDelegate callback;
 
+	private KeyCode[] keyCodes = {
+		KeyCode.Alpha1,
+		KeyCode.Alpha2,
+		KeyCode.Alpha3,
+		KeyCode.Alpha4,
+		KeyCode.Alpha5,
+		KeyCode.Alpha6
+	};
+
     public override void Awake()
     {
         base.Awake();
@@ -47,6 +56,8 @@ public class NumberButtonsManager : BaseGUIManager<NumberButtonsManager>
                 {
                     int buttonNumber = (i * 3) + (j + 1);
 
+					KeyCode keyCode = keyCodes[buttonNumber - 1];
+
                     Rect position = new Rect(numberButtonHorizontalMargin + ((numberButtonWidth + numberButtonInternalMargin) * j),
                         numberButtonVerticalMargin + ((numberButtonHeight + numberButtonInternalMargin) * i), numberButtonWidth, numberButtonHeight);
 
@@ -54,6 +65,11 @@ public class NumberButtonsManager : BaseGUIManager<NumberButtonsManager>
                     {
                         numberClicked(buttonNumber);
                     }
+
+					if(Input.GetKeyUp(keyCode))
+					{
+						numberClicked(buttonNumber);
+					}
                 }
             }
         }
