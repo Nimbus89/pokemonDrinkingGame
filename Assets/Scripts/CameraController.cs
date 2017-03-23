@@ -40,7 +40,7 @@ public class CameraController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Vector3 targetPosition = new Vector3(target.transform.position.x, target.transform.position.y, MY_Z_POSITION);
-		camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, targetSize, Time.deltaTime * ZOOM_SPEED);
+		GetComponent<Camera>().orthographicSize = Mathf.Lerp(GetComponent<Camera>().orthographicSize, targetSize, Time.deltaTime * ZOOM_SPEED);
 		transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * MOVE_SPEED);
 	}
 	

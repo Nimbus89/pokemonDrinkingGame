@@ -19,7 +19,7 @@ public class PlayerSetupController : MonoBehaviour {
             "Myself... I like to use POKeMON as an opportunity to get wasted.",
             "First of all, how many of you are there?"
         }, () => {
-            oakSprite.renderer.enabled = false;
+            oakSprite.GetComponent<Renderer>().enabled = false;
             GUIController.Instance.DisplaySixNumberButtons(selectPlayerNumber);
         }, false);
     }
@@ -45,7 +45,7 @@ public class PlayerSetupController : MonoBehaviour {
             }));
         }
 
-        oakSprite.renderer.enabled = true;
+        oakSprite.GetComponent<Renderer>().enabled = true;
         GUIController.Instance.DisplayBasicSkippableDialogs(new string[]{
             "A world full of beer goggles and foggy memories awaits.",
             "Let's go!"
