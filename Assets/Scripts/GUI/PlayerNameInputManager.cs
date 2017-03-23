@@ -15,6 +15,7 @@ public class PlayerNameInputManager : BaseGUIManager<PlayerNameInputManager>
 
     public void Show() {
         this.enabled = true;
+        TouchScreenKeyboard.hideInput = true;
     }
 
     public void Show(string newText) {
