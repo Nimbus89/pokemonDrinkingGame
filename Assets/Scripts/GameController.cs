@@ -34,12 +34,13 @@ public class GameController : MonoBehaviour {
             count++;
         }
         if (starters == null || starters.Length == 0) {
-            starters = new Pokemon[] { Pokemon.charmander };
-            playerNames = new string[] { "Player 1" };
+            starters = new Pokemon[] { Pokemon.charmander, Pokemon.bulbasaur, Pokemon.squirtle };
+            playerNames = new string[] { "Test 1", "Test 2", "Test 3" };
         }
         setupPlayers(starters, playerNames);
         startGame();
         PauseButtonManager.Instance.enabled = true;
+        PlayerNameDisplayController.Instance.enabled = true;
 	}
 
     void setupPlayers(Pokemon[] starters, string[] playerNames)
@@ -56,12 +57,12 @@ public class GameController : MonoBehaviour {
 
 	void startGame(){
 		currentPlayerNumber = 1;
-		startTurn ();
-        
-	}
+        startTurn();
+    }
 	
 	void startTurn(){
 		CameraController.Instance.FocusOnPlayer(getCurrentPlayer());
+        PlayerNameDisplayController.Instance.setPlayerName(getCurrentPlayer().getName());
         getCurrentPlayer().getCurrentTile().PlayMyMusic();
 		getCurrentPlayer().takeTurn(nextPlayer);
 	}

@@ -4,12 +4,12 @@ using System.Collections;
 public class PlayerPickerManager : BaseGUIManager<PlayerPickerManager>
 {
 
-    private int scrollAreaMargins = 50;
+    private int scrollAreaMargins = 15;
     private int scrollAreaLeft;
     private int scrollAreaTop;
     private float scrollAreaWidth;
     private float scrollAreaHeight;
-    private int buttonHeight = 100;
+    private int buttonHeight = 40;
     private PlayerController[] players;
     private Vector2 scrollPosition = Vector2.zero;
     private PlayerCallbackDelegate callback;
@@ -17,9 +17,9 @@ public class PlayerPickerManager : BaseGUIManager<PlayerPickerManager>
     public override void Awake()
     {
         scrollAreaLeft = scrollAreaMargins;
-        scrollAreaTop = scrollAreaMargins;
+        scrollAreaTop = scrollAreaMargins + 50;
         scrollAreaWidth = virtualWidth - scrollAreaMargins * 2;
-        scrollAreaHeight = virtualHeight - (scrollAreaMargins * 2 + 100);
+        scrollAreaHeight = virtualHeight - (scrollAreaMargins * 2 + 150);
 
         base.Awake();
     }

@@ -26,7 +26,7 @@ public class NumberButtonsManager : BaseGUIManager<NumberButtonsManager>
         numberButtonInternalMargin = 10;
 	    numberButtonWidth = 80;
 	    numberButtonHeight = 80;
-        numberButtonVerticalMargin = ((virtualHeight-100) - (numberButtonHeight * 2)) / 2 - numberButtonInternalMargin/2;
+        numberButtonVerticalMargin = ((virtualHeight - 150) - (numberButtonHeight * 2)) / 2 - numberButtonInternalMargin / 2 + 50;
         numberButtonHorizontalMargin = (virtualWidth - (numberButtonWidth * 3)) / 2 - numberButtonInternalMargin;
     }
 

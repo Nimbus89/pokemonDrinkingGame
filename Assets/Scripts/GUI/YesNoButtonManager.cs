@@ -14,7 +14,7 @@ public class YesNoButtonManager : BaseGUIManager<YesNoButtonManager>
 
     public override void Awake()
     {
-        BUTTON_VERTICAL_MARGIN = ((virtualHeight - 100) - (BUTTON_HEIGHT)) / 2;
+        BUTTON_VERTICAL_MARGIN = ((virtualHeight - 150) - (BUTTON_HEIGHT)) / 2 + 50;
         BUTTON_HORIZONTAL_MARGIN = (virtualWidth - (BUTTON_WIDTH * 2)) / 2 - BUTTON_INTERNAL_MARGIN/2;
         base.Awake();
     }
