@@ -7,8 +7,8 @@ public class ElectrodeScript : BasicModalTileController
 
     override protected void doRules()
     {
-        hasExploded = true;
         base.doRules();
+        hasExploded = true;
     }
 
     protected override string getModalMessage()
