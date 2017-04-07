@@ -5,7 +5,7 @@ public class StartMenuManager : BaseGUIManager<StartMenuManager>
 {
 
     private Rect windowRect = new Rect(virtualWidth - virtualWidth/4, 0, virtualWidth/4, virtualHeight);
-    const int buttonHeight = 60;
+    const int buttonHeight = 50;
     const int buttonLeft = 10;
     private GUIStyle buttonStyle;
 
@@ -73,6 +73,7 @@ public class StartMenuManager : BaseGUIManager<StartMenuManager>
             Debug.Log("FS");
             Screen.fullScreen = !Screen.fullScreen;
         }
+
         string rdmtext;
         if (GameController.realMode)
         {
@@ -87,6 +88,20 @@ public class StartMenuManager : BaseGUIManager<StartMenuManager>
             GameController.realMode = !GameController.realMode;
         }
 
+        string dokkanText;
+        if (GameController.dokkanMode)
+        {
+            dokkanText = "DKN ON";
+        }
+        else
+        {
+            dokkanText = "DKN OFF";
+        }
+        if (GUI.Button(new Rect(buttonLeft, buttonHeight * 5, windowRect.width, buttonHeight), dokkanText, buttonStyle))
+        {
+            Debug.Log("DOKKAN.");
+            GameController.dokkanMode = !GameController.dokkanMode;
+        }
 
     }
 
