@@ -176,7 +176,7 @@ public class PlayerController : MonoBehaviour {
         }
         getCurrentTile().PlayMyMusic();
         foreach (PlayerController otherPlayer in getCurrentTile().GetPlayersOnMe()) {
-            if (otherPlayer != this) {
+            if (otherPlayer != this && !getCurrentTile().IS_GOLD) {
                 yield return StartCoroutine(doBattle(otherPlayer));
             }
         }
