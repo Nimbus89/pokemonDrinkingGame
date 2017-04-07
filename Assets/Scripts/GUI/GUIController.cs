@@ -16,6 +16,14 @@ public class GUIController : BaseGUIManager<GUIController>
         }));
     }
 
+    public void DoDokkanRoll(string text, PlayerController player, DicerollCallbackDelegate cb)
+    {
+        StartCoroutine(GUIController.Instance.DisplayDialogThenDokkanButtons_CR(text, player, (int result) =>
+        {
+            cb(result);
+        }));
+    }
+
     public void DoMultiDiceRoll(string text, MultiDicerollCallbackDelegate cb)
     {
         StartCoroutine(DialogManager.Instance.ShowDialog(text, true, (int[] results) =>
@@ -60,6 +68,15 @@ public class GUIController : BaseGUIManager<GUIController>
 
     public void DisplayDialogThenNumberPicker(string text, DicerollCallbackDelegate cb) {
         StartCoroutine(DisplayDialogThenNumberPicker_CR(text, cb));
+    }
+
+    private IEnumerator DisplayDialogThenDokkanButtons_CR(string text, PlayerController player, DicerollCallbackDelegate cb)
+    {
+        yield return StartCoroutine(DialogManager.Instance.ShowDialog(text, false));
+        yield return StartCoroutine(DokkanButtonsManager.Instance.ShowButtons(player, (int result) => {
+            DialogManager.Instance.enabled = false;
+            cb(result);
+        }));
     }
 
     private IEnumerator DisplayDialogThenNumberPicker_CR(string text, DicerollCallbackDelegate cb)

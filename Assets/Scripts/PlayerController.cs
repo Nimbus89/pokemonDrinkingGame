@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour {
 	public List<AftereffectController> beforeTurnEffects;
 	public AftereffectController rollReplaceAfterEffect;
 
+    private List<int> dokkanMoves; 
 
     private int extraTurns = 0;
     private int turnsToSkip = 0;
@@ -56,6 +57,10 @@ public class PlayerController : MonoBehaviour {
         turnSkipMessage = message;
     }
 
+    public int getDokkanMove(int position) {
+        return this.dokkanMoves[position];
+    }
+
 	void Start(){
         visitedTiles = new HashSet<TileController>();
         legendaryBirds = 0;
@@ -64,6 +69,13 @@ public class PlayerController : MonoBehaviour {
 		currentStartOfTurnEffects = new Stack<AftereffectController>();
 		startOfTurnEffects = new List<AftereffectController>();
 		beforeTurnEffects = new List<AftereffectController>();
+
+        dokkanMoves = new List<int>();
+
+        for (int i = 0; i < DokkanButtonsManager.DOKKAN_MOVES_AMOUNT; i++)
+        {
+            dokkanMoves.Add(Random.Range(1, 7));
+        }
 	}
 	
 	public void setup(GameController controller, int playerNumber, Pokemon pokemon, string name){
@@ -126,13 +138,19 @@ public class PlayerController : MonoBehaviour {
 	
 	public void doMovementRoll(){
         if (rollReplaceAfterEffect == null){
-			roller.doNormalDiceRoll(move);
+			roller.doMovementDiceroll(this, move);
 		} else {
 			rollReplaceAfterEffect.applyEffect();
 		}
 	}
 	
 	public void move(int rollResult){
+        if (GameController.dokkanMode) {
+            int dokkanRollResult = dokkanMoves[rollResult];
+            dokkanMoves[rollResult] = Random.Range(1, 7);
+            rollResult = dokkanRollResult;
+        }
+
 		int spacesToMove = modifyRoll(rollResult);
 		GoToTile(currentTileNumber + spacesToMove);
 	}

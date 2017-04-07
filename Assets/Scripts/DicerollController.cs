@@ -7,6 +7,7 @@ public class DicerollController {
 	private DicerollCallbackDelegate callback;
     private string currentRandomRollText;
     private string currentRealRollText;
+    private string currentDokkanRollText;
 	
 	public DicerollController(GameController game){
 	}
@@ -24,6 +25,17 @@ public class DicerollController {
 		callback = cb;
 		handleDiceRoll();
 	}
+
+    public void doMovementDiceroll(PlayerController currentPlayer, DicerollCallbackDelegate cb) {
+        if (GameController.dokkanMode)
+        {
+            currentDokkanRollText = "Move how many squares?";
+            GUIController.Instance.DoDokkanRoll(currentDokkanRollText, currentPlayer, cb);
+        }
+        else {
+            doNormalDiceRoll(cb);
+        }
+    }
 	
 	private void handleDiceRoll(){
         if (GameController.realMode)
