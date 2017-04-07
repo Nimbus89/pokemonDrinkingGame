@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour {
 	void Start () {
 		Pokemon[] starters = PlayerSetupController.starters;
         string[] playerNames = PlayerSetupController.playerNames;
-        realMode = true;
+        realMode = ;
         dokkanMode = true;
         int count = 0;
         foreach (TileController tile in squares)

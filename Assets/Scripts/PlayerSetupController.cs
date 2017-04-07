@@ -8,6 +8,8 @@ public class PlayerSetupController : MonoBehaviour {
     public static string[] playerNames;
 	private int pokemonChosen = 0;
     public GameObject oakSprite;
+    public static bool usePhysicalDice;
+    public static bool useDokkanMode;
 
     void Start() {
         MusicManager.Instance.playSpeechMusic();
@@ -44,6 +46,19 @@ public class PlayerSetupController : MonoBehaviour {
                 
             }));
         }
+
+
+
+        yield return StartCoroutine(GUIController.Instance.DisplayDialogThenYesNoButtons_CR("Do you want to use physical dice?", (bool answer) =>
+        {
+            usePhysicalDice = answer;
+        }));
+
+        yield return StartCoroutine(GUIController.Instance.DisplayDialogThenYesNoButtons_CR("Do you want to enable DOKKAN mode?", (bool answer) =>
+        {
+            useDokkanMode = answer;
+        }));
+
 
         oakSprite.GetComponent<Renderer>().enabled = true;
         GUIController.Instance.DisplayBasicSkippableDialogs(new string[]{
